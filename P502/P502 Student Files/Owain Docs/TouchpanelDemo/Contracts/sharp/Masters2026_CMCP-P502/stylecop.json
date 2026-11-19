@@ -1,0 +1,19 @@
+﻿{
+  "$schema": "https://raw.githubusercontent.com/DotNetAnalyzers/StyleCopAnalyzers/master/StyleCop.Analyzers/StyleCop.Analyzers/Settings/stylecop.schema.json",
+  "settings": {
+    "documentationRules": {
+      "companyName": "AVI-SPL Global LLC.",
+      "xmlHeader": true,
+      "fileNamingConvention": "stylecop",
+      "documentPrivateElements": true,
+      "documentPrivateFields": true,
+      "copyrightText": "Copyright (C) {companyName} All Rights Reserved.\u000aThe intellectual and technical concepts contained herein are proprietary to AVI-SPL Global LLC. and subject to AVI-SPL's standard software license agreement.\u000aThese materials may not be copied, reproduced, distributed or disclosed, in whole or in part, in any way without the written permission of an authorized\u000arepresentative of AVI-SPL. All references to AVI-SPL Global LLC. shall also be references to AVI-SPL Global LLC's affiliates."
+    },
+    "namingRules": {
+      "includeInferredTupleElementNames": true
+    },
+    "orderingRules": {
+      "usingDirectivesPlacement": "outsideNamespace"
+    }
+  }
+}

@@ -1,0 +1,31 @@
+# Build output
+[Bb]in/
+[Oo]bj/
+
+# IDE / editor
+.vs/
+.idea/
+.vscode/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Claude Code local settings
+.claude/
+
+# Generated documentation (kept local only)
+CwsDebug_Documentation.html
+CwsDebug_GettingStarted.html
+debugger_screenshot.png
+
+# Release artifacts (published via GitHub Releases, not committed)
+*.zip
+
+# OS
+Thumbs.db
+ehthumbs.db
+.DS_Store
+
+# Screenshots (kept local only)
+signals_screenshot.png

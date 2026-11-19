@@ -1,0 +1,42 @@
+[BEGIN]
+  ObjTp=FSgntr
+  Sgntr=ArchiveManifest
+  RelVrs=4.3200.02
+  IsProgram=1
+  TopLevelProgram=Student Import 2-  Hardware Samples.smw
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=Student Import 2-  Hardware Samples.smw
+  Scope=1
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=USP 2-3-4.ush
+  Scope=1
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=USP 3-4.ush
+  Scope=1
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=USP 3-4 Secured.ush
+  Scope=1
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=2-3-4 Macro.umc
+  Scope=1
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=3-4 Macro.umc
+  Scope=1
+[END]
+[BEGIN]
+  ObjTp=ArchiveItem
+  File=3-4 Macro Secured.umc
+  Scope=1
+[END]

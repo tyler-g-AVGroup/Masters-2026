@@ -1,0 +1,767 @@
+{
+  "name": "CMCP-P502",
+  "timestamp": "2026-09-21T15:16:13.9184868+00:00",
+  "version": "1.0.0.0",
+  "schema_version": 1,
+  "extra_value": "",
+  "signals": {
+    "states": {
+      "boolean": {
+        "1": {
+          "3": "EventViewerButton.EventViewerOpen.Selected"
+        },
+        "3": {
+          "1001": "PageSelection.PageNavigation.Button1ItemSelected",
+          "1002": "PageSelection.PageNavigation.Button2ItemSelected",
+          "1003": "PageSelection.PageNavigation.Button3ItemSelected",
+          "1004": "PageSelection.PageNavigation.Button4ItemSelected",
+          "1005": "PageSelection.PageNavigation.Button5ItemSelected",
+          "1006": "PageSelection.PageNavigation.Button6ItemSelected",
+          "1007": "PageSelection.PageNavigation.Button7ItemSelected"
+        },
+        "4": {
+          "3": "EventViewer.Clear.Selected",
+          "4": "EventViewer.EventViewerClose.Selected"
+        },
+        "5": {
+          "1": "EventViewer.EventList.List_Visible"
+        },
+        "6": {
+          "1": "Page02VisibilityJoin",
+          "3": "Page02.Preset25.Selected",
+          "4": "Page02.Preset50.Selected",
+          "5": "Page02.Preset75.Selected"
+        },
+        "7": {
+          "1": "Page02.EventViewerButton.Visibility_fb"
+        },
+        "8": {
+          "1": "Page02.EventViewerList.Visibility_fb"
+        },
+        "9": {
+          "1": "Page05VisibilityJoin"
+        },
+        "11": {
+          "1": "Page05.EventViewerButton.Visibility_fb"
+        },
+        "12": {
+          "1": "Page05.EventViewerList.Visibility_fb"
+        },
+        "13": {
+          "1": "Page03VisibilityJoin",
+          "3": "Page03.PowerOff.Selected",
+          "4": "Page03.PowerOn.Selected"
+        },
+        "14": {
+          "1": "Page03.EventViewerButton.Visibility_fb"
+        },
+        "15": {
+          "1": "Page03.EventViewerList.Visibility_fb"
+        },
+        "16": {
+          "1": "Page01.ButtonMain.Visibility_fb",
+          "2": "Page01VisibilityJoin",
+          "3": "Page01.ButtonMain.Enable",
+          "4": "Page01.ButtonEnableToggle.Selected",
+          "5": "Page01.ButtonMain.Selected",
+          "6": "Page01.ButtonVisibilityToggle.Selected"
+        },
+        "17": {
+          "1": "Page01.EventViewerButton.Visibility_fb"
+        },
+        "18": {
+          "1": "Page01.EventViewerList.Visibility_fb"
+        },
+        "19": {
+          "1": "Page04VisibilityJoin"
+        },
+        "21": {
+          "1": "Page04.EventViewerButton.Visibility_fb"
+        },
+        "22": {
+          "1": "Page04.EventViewerList.Visibility_fb"
+        },
+        "23": {
+          "1": "Page07VisibilityJoin"
+        },
+        "24": {
+          "601": "Page07.MicWidgetList.Items[0].MicrophoneControlCONTRACT.MicLevel.Enabled",
+          "602": "Page07.MicWidgetList.Items[1].MicrophoneControlCONTRACT.MicLevel.Enabled",
+          "603": "Page07.MicWidgetList.Items[2].MicrophoneControlCONTRACT.MicLevel.Enabled",
+          "604": "Page07.MicWidgetList.Items[3].MicrophoneControlCONTRACT.MicLevel.Enabled",
+          "605": "Page07.MicWidgetList.Items[4].MicrophoneControlCONTRACT.MicLevel.Enabled",
+          "606": "Page07.MicWidgetList.Items[5].MicrophoneControlCONTRACT.MicLevel.Enabled",
+          "607": "Page07.MicWidgetList.Items[6].MicrophoneControlCONTRACT.MicLevel.Enabled",
+          "608": "Page07.MicWidgetList.Items[7].MicrophoneControlCONTRACT.MicLevel.Enabled",
+          "609": "Page07.MicWidgetList.Items[8].MicrophoneControlCONTRACT.MicLevel.Enabled",
+          "610": "Page07.MicWidgetList.Items[9].MicrophoneControlCONTRACT.MicLevel.Enabled",
+          "611": "Page07.MicWidgetList.Items[10].MicrophoneControlCONTRACT.MicLevel.Enabled",
+          "612": "Page07.MicWidgetList.Items[11].MicrophoneControlCONTRACT.MicLevel.Enabled",
+          "613": "Page07.MicWidgetList.Items[12].MicrophoneControlCONTRACT.MicLevel.Enabled",
+          "614": "Page07.MicWidgetList.Items[13].MicrophoneControlCONTRACT.MicLevel.Enabled",
+          "615": "Page07.MicWidgetList.Items[14].MicrophoneControlCONTRACT.MicLevel.Enabled",
+          "616": "Page07.MicWidgetList.Items[15].MicrophoneControlCONTRACT.MicLevel.Enabled",
+          "617": "Page07.MicWidgetList.Items[16].MicrophoneControlCONTRACT.MicLevel.Enabled",
+          "618": "Page07.MicWidgetList.Items[17].MicrophoneControlCONTRACT.MicLevel.Enabled",
+          "619": "Page07.MicWidgetList.Items[18].MicrophoneControlCONTRACT.MicLevel.Enabled",
+          "620": "Page07.MicWidgetList.Items[19].MicrophoneControlCONTRACT.MicLevel.Enabled",
+          "621": "Page07.MicWidgetList.Items[0].MicrophoneControlCONTRACT.MicMute.Selected",
+          "622": "Page07.MicWidgetList.Items[1].MicrophoneControlCONTRACT.MicMute.Selected",
+          "623": "Page07.MicWidgetList.Items[2].MicrophoneControlCONTRACT.MicMute.Selected",
+          "624": "Page07.MicWidgetList.Items[3].MicrophoneControlCONTRACT.MicMute.Selected",
+          "625": "Page07.MicWidgetList.Items[4].MicrophoneControlCONTRACT.MicMute.Selected",
+          "626": "Page07.MicWidgetList.Items[5].MicrophoneControlCONTRACT.MicMute.Selected",
+          "627": "Page07.MicWidgetList.Items[6].MicrophoneControlCONTRACT.MicMute.Selected",
+          "628": "Page07.MicWidgetList.Items[7].MicrophoneControlCONTRACT.MicMute.Selected",
+          "629": "Page07.MicWidgetList.Items[8].MicrophoneControlCONTRACT.MicMute.Selected",
+          "630": "Page07.MicWidgetList.Items[9].MicrophoneControlCONTRACT.MicMute.Selected",
+          "631": "Page07.MicWidgetList.Items[10].MicrophoneControlCONTRACT.MicMute.Selected",
+          "632": "Page07.MicWidgetList.Items[11].MicrophoneControlCONTRACT.MicMute.Selected",
+          "633": "Page07.MicWidgetList.Items[12].MicrophoneControlCONTRACT.MicMute.Selected",
+          "634": "Page07.MicWidgetList.Items[13].MicrophoneControlCONTRACT.MicMute.Selected",
+          "635": "Page07.MicWidgetList.Items[14].MicrophoneControlCONTRACT.MicMute.Selected",
+          "636": "Page07.MicWidgetList.Items[15].MicrophoneControlCONTRACT.MicMute.Selected",
+          "637": "Page07.MicWidgetList.Items[16].MicrophoneControlCONTRACT.MicMute.Selected",
+          "638": "Page07.MicWidgetList.Items[17].MicrophoneControlCONTRACT.MicMute.Selected",
+          "639": "Page07.MicWidgetList.Items[18].MicrophoneControlCONTRACT.MicMute.Selected",
+          "640": "Page07.MicWidgetList.Items[19].MicrophoneControlCONTRACT.MicMute.Selected"
+        },
+        "25": {
+          "1": "Page07.EventViewerButton.Visibility_fb"
+        },
+        "26": {
+          "1": "Page07.EventViewerList.Visibility_fb"
+        },
+        "27": {
+          "1": "Page06VisibilityJoin"
+        },
+        "28": {
+          "1001": "Page06.ButtonList.Button1ItemSelected",
+          "1002": "Page06.ButtonList.Button2ItemSelected",
+          "1003": "Page06.ButtonList.Button3ItemSelected",
+          "1004": "Page06.ButtonList.Button4ItemSelected",
+          "1005": "Page06.ButtonList.Button5ItemSelected",
+          "1006": "Page06.ButtonList.Button6ItemSelected",
+          "1007": "Page06.ButtonList.Button7ItemSelected",
+          "1008": "Page06.ButtonList.Button8ItemSelected",
+          "1009": "Page06.ButtonList.Button9ItemSelected",
+          "1010": "Page06.ButtonList.Button10ItemSelected",
+          "1011": "Page06.ButtonList.Button11ItemSelected",
+          "1012": "Page06.ButtonList.Button12ItemSelected",
+          "1013": "Page06.ButtonList.Button13ItemSelected",
+          "1014": "Page06.ButtonList.Button14ItemSelected",
+          "1015": "Page06.ButtonList.Button15ItemSelected",
+          "1016": "Page06.ButtonList.Button16ItemSelected",
+          "1017": "Page06.ButtonList.Button17ItemSelected",
+          "1018": "Page06.ButtonList.Button18ItemSelected",
+          "1019": "Page06.ButtonList.Button19ItemSelected",
+          "1020": "Page06.ButtonList.Button20ItemSelected"
+        },
+        "29": {
+          "1": "Page06.EventViewerButton.Visibility_fb"
+        },
+        "30": {
+          "1": "Page06.EventViewerList.Visibility_fb"
+        }
+      },
+      "numeric": {
+        "5": {
+          "1": "EventViewer.EventList.Set_Number_Of_Items"
+        },
+        "6": {
+          "4": "Page02.Slider.LowerTouchfb"
+        },
+        "24": {
+          "2": "Page07.MicWidgetList.Set_Number_Of_Items",
+          "604": "Page07.MicWidgetList.Items[0].MicrophoneControlCONTRACT.MicLevel.LowerTouchfb",
+          "605": "Page07.MicWidgetList.Items[1].MicrophoneControlCONTRACT.MicLevel.LowerTouchfb",
+          "606": "Page07.MicWidgetList.Items[2].MicrophoneControlCONTRACT.MicLevel.LowerTouchfb",
+          "607": "Page07.MicWidgetList.Items[3].MicrophoneControlCONTRACT.MicLevel.LowerTouchfb",
+          "608": "Page07.MicWidgetList.Items[4].MicrophoneControlCONTRACT.MicLevel.LowerTouchfb",
+          "609": "Page07.MicWidgetList.Items[5].MicrophoneControlCONTRACT.MicLevel.LowerTouchfb",
+          "610": "Page07.MicWidgetList.Items[6].MicrophoneControlCONTRACT.MicLevel.LowerTouchfb",
+          "611": "Page07.MicWidgetList.Items[7].MicrophoneControlCONTRACT.MicLevel.LowerTouchfb",
+          "612": "Page07.MicWidgetList.Items[8].MicrophoneControlCONTRACT.MicLevel.LowerTouchfb",
+          "613": "Page07.MicWidgetList.Items[9].MicrophoneControlCONTRACT.MicLevel.LowerTouchfb",
+          "614": "Page07.MicWidgetList.Items[10].MicrophoneControlCONTRACT.MicLevel.LowerTouchfb",
+          "615": "Page07.MicWidgetList.Items[11].MicrophoneControlCONTRACT.MicLevel.LowerTouchfb",
+          "616": "Page07.MicWidgetList.Items[12].MicrophoneControlCONTRACT.MicLevel.LowerTouchfb",
+          "617": "Page07.MicWidgetList.Items[13].MicrophoneControlCONTRACT.MicLevel.LowerTouchfb",
+          "618": "Page07.MicWidgetList.Items[14].MicrophoneControlCONTRACT.MicLevel.LowerTouchfb",
+          "619": "Page07.MicWidgetList.Items[15].MicrophoneControlCONTRACT.MicLevel.LowerTouchfb",
+          "620": "Page07.MicWidgetList.Items[16].MicrophoneControlCONTRACT.MicLevel.LowerTouchfb",
+          "621": "Page07.MicWidgetList.Items[17].MicrophoneControlCONTRACT.MicLevel.LowerTouchfb",
+          "622": "Page07.MicWidgetList.Items[18].MicrophoneControlCONTRACT.MicLevel.LowerTouchfb",
+          "623": "Page07.MicWidgetList.Items[19].MicrophoneControlCONTRACT.MicLevel.LowerTouchfb"
+        },
+        "27": {
+          "4": "Page06.SetSize.LowerTouchfb"
+        },
+        "28": {
+          "1": "Page06.ButtonList.ListNumberOfItems"
+        }
+      },
+      "string": {
+        "5": {
+          "1": "EventViewer.EventList.Items[0].EventItemCONTRACT.Details.Indirect",
+          "2": "EventViewer.EventList.Items[0].EventItemCONTRACT.Name.Indirect",
+          "3": "EventViewer.EventList.Items[0].EventItemCONTRACT.TimeStamp.Indirect",
+          "4": "EventViewer.EventList.Items[1].EventItemCONTRACT.Details.Indirect",
+          "5": "EventViewer.EventList.Items[1].EventItemCONTRACT.Name.Indirect",
+          "6": "EventViewer.EventList.Items[1].EventItemCONTRACT.TimeStamp.Indirect",
+          "7": "EventViewer.EventList.Items[2].EventItemCONTRACT.Details.Indirect",
+          "8": "EventViewer.EventList.Items[2].EventItemCONTRACT.Name.Indirect",
+          "9": "EventViewer.EventList.Items[2].EventItemCONTRACT.TimeStamp.Indirect",
+          "10": "EventViewer.EventList.Items[3].EventItemCONTRACT.Details.Indirect",
+          "11": "EventViewer.EventList.Items[3].EventItemCONTRACT.Name.Indirect",
+          "12": "EventViewer.EventList.Items[3].EventItemCONTRACT.TimeStamp.Indirect",
+          "13": "EventViewer.EventList.Items[4].EventItemCONTRACT.Details.Indirect",
+          "14": "EventViewer.EventList.Items[4].EventItemCONTRACT.Name.Indirect",
+          "15": "EventViewer.EventList.Items[4].EventItemCONTRACT.TimeStamp.Indirect",
+          "16": "EventViewer.EventList.Items[5].EventItemCONTRACT.Details.Indirect",
+          "17": "EventViewer.EventList.Items[5].EventItemCONTRACT.Name.Indirect",
+          "18": "EventViewer.EventList.Items[5].EventItemCONTRACT.TimeStamp.Indirect",
+          "19": "EventViewer.EventList.Items[6].EventItemCONTRACT.Details.Indirect",
+          "20": "EventViewer.EventList.Items[6].EventItemCONTRACT.Name.Indirect",
+          "21": "EventViewer.EventList.Items[6].EventItemCONTRACT.TimeStamp.Indirect",
+          "22": "EventViewer.EventList.Items[7].EventItemCONTRACT.Details.Indirect",
+          "23": "EventViewer.EventList.Items[7].EventItemCONTRACT.Name.Indirect",
+          "24": "EventViewer.EventList.Items[7].EventItemCONTRACT.TimeStamp.Indirect",
+          "25": "EventViewer.EventList.Items[8].EventItemCONTRACT.Details.Indirect",
+          "26": "EventViewer.EventList.Items[8].EventItemCONTRACT.Name.Indirect",
+          "27": "EventViewer.EventList.Items[8].EventItemCONTRACT.TimeStamp.Indirect",
+          "28": "EventViewer.EventList.Items[9].EventItemCONTRACT.Details.Indirect",
+          "29": "EventViewer.EventList.Items[9].EventItemCONTRACT.Name.Indirect",
+          "30": "EventViewer.EventList.Items[9].EventItemCONTRACT.TimeStamp.Indirect",
+          "31": "EventViewer.EventList.Items[10].EventItemCONTRACT.Details.Indirect",
+          "32": "EventViewer.EventList.Items[10].EventItemCONTRACT.Name.Indirect",
+          "33": "EventViewer.EventList.Items[10].EventItemCONTRACT.TimeStamp.Indirect",
+          "34": "EventViewer.EventList.Items[11].EventItemCONTRACT.Details.Indirect",
+          "35": "EventViewer.EventList.Items[11].EventItemCONTRACT.Name.Indirect",
+          "36": "EventViewer.EventList.Items[11].EventItemCONTRACT.TimeStamp.Indirect",
+          "37": "EventViewer.EventList.Items[12].EventItemCONTRACT.Details.Indirect",
+          "38": "EventViewer.EventList.Items[12].EventItemCONTRACT.Name.Indirect",
+          "39": "EventViewer.EventList.Items[12].EventItemCONTRACT.TimeStamp.Indirect",
+          "40": "EventViewer.EventList.Items[13].EventItemCONTRACT.Details.Indirect",
+          "41": "EventViewer.EventList.Items[13].EventItemCONTRACT.Name.Indirect",
+          "42": "EventViewer.EventList.Items[13].EventItemCONTRACT.TimeStamp.Indirect",
+          "43": "EventViewer.EventList.Items[14].EventItemCONTRACT.Details.Indirect",
+          "44": "EventViewer.EventList.Items[14].EventItemCONTRACT.Name.Indirect",
+          "45": "EventViewer.EventList.Items[14].EventItemCONTRACT.TimeStamp.Indirect",
+          "46": "EventViewer.EventList.Items[15].EventItemCONTRACT.Details.Indirect",
+          "47": "EventViewer.EventList.Items[15].EventItemCONTRACT.Name.Indirect",
+          "48": "EventViewer.EventList.Items[15].EventItemCONTRACT.TimeStamp.Indirect",
+          "49": "EventViewer.EventList.Items[16].EventItemCONTRACT.Details.Indirect",
+          "50": "EventViewer.EventList.Items[16].EventItemCONTRACT.Name.Indirect",
+          "51": "EventViewer.EventList.Items[16].EventItemCONTRACT.TimeStamp.Indirect",
+          "52": "EventViewer.EventList.Items[17].EventItemCONTRACT.Details.Indirect",
+          "53": "EventViewer.EventList.Items[17].EventItemCONTRACT.Name.Indirect",
+          "54": "EventViewer.EventList.Items[17].EventItemCONTRACT.TimeStamp.Indirect",
+          "55": "EventViewer.EventList.Items[18].EventItemCONTRACT.Details.Indirect",
+          "56": "EventViewer.EventList.Items[18].EventItemCONTRACT.Name.Indirect",
+          "57": "EventViewer.EventList.Items[18].EventItemCONTRACT.TimeStamp.Indirect",
+          "58": "EventViewer.EventList.Items[19].EventItemCONTRACT.Details.Indirect",
+          "59": "EventViewer.EventList.Items[19].EventItemCONTRACT.Name.Indirect",
+          "60": "EventViewer.EventList.Items[19].EventItemCONTRACT.TimeStamp.Indirect"
+        },
+        "9": {
+          "1": "Page05.KeypadFeedback.Indirect"
+        },
+        "13": {
+          "1": "Page03.Textinput.IndirectText",
+          "2": "Page03.FormattedText.Indirect"
+        },
+        "16": {
+          "1": "Page01.ButtonMain.IndirectText"
+        },
+        "19": {
+          "1": "Page04.DPadFeedback.Indirect"
+        },
+        "24": {
+          "1": "Page07.MicWidgetList.Items[0].MicrophoneControlCONTRACT.MicLabel.Indirect",
+          "2": "Page07.MicWidgetList.Items[1].MicrophoneControlCONTRACT.MicLabel.Indirect",
+          "3": "Page07.MicWidgetList.Items[2].MicrophoneControlCONTRACT.MicLabel.Indirect",
+          "4": "Page07.MicWidgetList.Items[3].MicrophoneControlCONTRACT.MicLabel.Indirect",
+          "5": "Page07.MicWidgetList.Items[4].MicrophoneControlCONTRACT.MicLabel.Indirect",
+          "6": "Page07.MicWidgetList.Items[5].MicrophoneControlCONTRACT.MicLabel.Indirect",
+          "7": "Page07.MicWidgetList.Items[6].MicrophoneControlCONTRACT.MicLabel.Indirect",
+          "8": "Page07.MicWidgetList.Items[7].MicrophoneControlCONTRACT.MicLabel.Indirect",
+          "9": "Page07.MicWidgetList.Items[8].MicrophoneControlCONTRACT.MicLabel.Indirect",
+          "10": "Page07.MicWidgetList.Items[9].MicrophoneControlCONTRACT.MicLabel.Indirect",
+          "11": "Page07.MicWidgetList.Items[10].MicrophoneControlCONTRACT.MicLabel.Indirect",
+          "12": "Page07.MicWidgetList.Items[11].MicrophoneControlCONTRACT.MicLabel.Indirect",
+          "13": "Page07.MicWidgetList.Items[12].MicrophoneControlCONTRACT.MicLabel.Indirect",
+          "14": "Page07.MicWidgetList.Items[13].MicrophoneControlCONTRACT.MicLabel.Indirect",
+          "15": "Page07.MicWidgetList.Items[14].MicrophoneControlCONTRACT.MicLabel.Indirect",
+          "16": "Page07.MicWidgetList.Items[15].MicrophoneControlCONTRACT.MicLabel.Indirect",
+          "17": "Page07.MicWidgetList.Items[16].MicrophoneControlCONTRACT.MicLabel.Indirect",
+          "18": "Page07.MicWidgetList.Items[17].MicrophoneControlCONTRACT.MicLabel.Indirect",
+          "19": "Page07.MicWidgetList.Items[18].MicrophoneControlCONTRACT.MicLabel.Indirect",
+          "20": "Page07.MicWidgetList.Items[19].MicrophoneControlCONTRACT.MicLabel.Indirect"
+        },
+        "28": {
+          "1": "Page06.ButtonList.Button1Text",
+          "2": "Page06.ButtonList.Button2Text",
+          "3": "Page06.ButtonList.Button3Text",
+          "4": "Page06.ButtonList.Button4Text",
+          "5": "Page06.ButtonList.Button5Text",
+          "6": "Page06.ButtonList.Button6Text",
+          "7": "Page06.ButtonList.Button7Text",
+          "8": "Page06.ButtonList.Button8Text",
+          "9": "Page06.ButtonList.Button9Text",
+          "10": "Page06.ButtonList.Button10Text",
+          "11": "Page06.ButtonList.Button11Text",
+          "12": "Page06.ButtonList.Button12Text",
+          "13": "Page06.ButtonList.Button13Text",
+          "14": "Page06.ButtonList.Button14Text",
+          "15": "Page06.ButtonList.Button15Text",
+          "16": "Page06.ButtonList.Button16Text",
+          "17": "Page06.ButtonList.Button17Text",
+          "18": "Page06.ButtonList.Button18Text",
+          "19": "Page06.ButtonList.Button19Text",
+          "20": "Page06.ButtonList.Button20Text"
+        }
+      }
+    },
+    "events": {
+      "boolean": {
+        "EventViewerButton.EventViewerOpen.Press": {
+          "joinId": 3,
+          "smartObjectId": 1
+        },
+        "PageSelection.PageNavigation.Button1ItemPress": {
+          "joinId": 1001,
+          "smartObjectId": 3
+        },
+        "PageSelection.PageNavigation.Button2ItemPress": {
+          "joinId": 1002,
+          "smartObjectId": 3
+        },
+        "PageSelection.PageNavigation.Button3ItemPress": {
+          "joinId": 1003,
+          "smartObjectId": 3
+        },
+        "PageSelection.PageNavigation.Button4ItemPress": {
+          "joinId": 1004,
+          "smartObjectId": 3
+        },
+        "PageSelection.PageNavigation.Button5ItemPress": {
+          "joinId": 1005,
+          "smartObjectId": 3
+        },
+        "PageSelection.PageNavigation.Button6ItemPress": {
+          "joinId": 1006,
+          "smartObjectId": 3
+        },
+        "PageSelection.PageNavigation.Button7ItemPress": {
+          "joinId": 1007,
+          "smartObjectId": 3
+        },
+        "EventViewer.Clear.Press": {
+          "joinId": 3,
+          "smartObjectId": 4
+        },
+        "EventViewer.EventViewerClose.Press": {
+          "joinId": 4,
+          "smartObjectId": 4
+        },
+        "Page02.Preset25.Press": {
+          "joinId": 2,
+          "smartObjectId": 6
+        },
+        "Page02.Preset50.Press": {
+          "joinId": 3,
+          "smartObjectId": 6
+        },
+        "Page02.Preset75.Press": {
+          "joinId": 4,
+          "smartObjectId": 6
+        },
+        "Page02.EventViewerButton.Visibility": {
+          "joinId": 1,
+          "smartObjectId": 7
+        },
+        "Page05.Keypad.Press1": {
+          "joinId": 3,
+          "smartObjectId": 10
+        },
+        "Page05.Keypad.Press2": {
+          "joinId": 4,
+          "smartObjectId": 10
+        },
+        "Page05.Keypad.Press3": {
+          "joinId": 5,
+          "smartObjectId": 10
+        },
+        "Page05.Keypad.Press4": {
+          "joinId": 6,
+          "smartObjectId": 10
+        },
+        "Page05.Keypad.Press5": {
+          "joinId": 7,
+          "smartObjectId": 10
+        },
+        "Page05.Keypad.Press6": {
+          "joinId": 8,
+          "smartObjectId": 10
+        },
+        "Page05.Keypad.Press7": {
+          "joinId": 9,
+          "smartObjectId": 10
+        },
+        "Page05.Keypad.Press8": {
+          "joinId": 10,
+          "smartObjectId": 10
+        },
+        "Page05.Keypad.Press9": {
+          "joinId": 11,
+          "smartObjectId": 10
+        },
+        "Page05.Keypad.Press0": {
+          "joinId": 12,
+          "smartObjectId": 10
+        },
+        "Page05.Keypad.PressStar": {
+          "joinId": 13,
+          "smartObjectId": 10
+        },
+        "Page05.Keypad.PressHash": {
+          "joinId": 14,
+          "smartObjectId": 10
+        },
+        "Page05.Keypad.PressExtraButton": {
+          "joinId": 15,
+          "smartObjectId": 10
+        },
+        "Page05.EventViewerButton.Visibility": {
+          "joinId": 1,
+          "smartObjectId": 11
+        },
+        "Page03.PowerOff.Press": {
+          "joinId": 2,
+          "smartObjectId": 13
+        },
+        "Page03.PowerOn.Press": {
+          "joinId": 3,
+          "smartObjectId": 13
+        },
+        "Page03.Textinput.LostFocus": {
+          "joinId": 5,
+          "smartObjectId": 13
+        },
+        "Page03.EventViewerButton.Visibility": {
+          "joinId": 1,
+          "smartObjectId": 14
+        },
+        "Page01.ButtonEnableToggle.Press": {
+          "joinId": 1,
+          "smartObjectId": 16
+        },
+        "Page01.ButtonMain.Press": {
+          "joinId": 2,
+          "smartObjectId": 16
+        },
+        "Page01.ButtonVisibilityToggle.Press": {
+          "joinId": 3,
+          "smartObjectId": 16
+        },
+        "Page01.EventViewerButton.Visibility": {
+          "joinId": 1,
+          "smartObjectId": 17
+        },
+        "Page04.Dpad.Up": {
+          "joinId": 3,
+          "smartObjectId": 20
+        },
+        "Page04.Dpad.Down": {
+          "joinId": 4,
+          "smartObjectId": 20
+        },
+        "Page04.Dpad.Left": {
+          "joinId": 5,
+          "smartObjectId": 20
+        },
+        "Page04.Dpad.Right": {
+          "joinId": 6,
+          "smartObjectId": 20
+        },
+        "Page04.Dpad.Center": {
+          "joinId": 7,
+          "smartObjectId": 20
+        },
+        "Page04.EventViewerButton.Visibility": {
+          "joinId": 1,
+          "smartObjectId": 21
+        },
+        "Page07.MicWidgetList.Items[0].MicrophoneControlCONTRACT.MicMute.Press": {
+          "joinId": 601,
+          "smartObjectId": 24
+        },
+        "Page07.MicWidgetList.Items[1].MicrophoneControlCONTRACT.MicMute.Press": {
+          "joinId": 602,
+          "smartObjectId": 24
+        },
+        "Page07.MicWidgetList.Items[2].MicrophoneControlCONTRACT.MicMute.Press": {
+          "joinId": 603,
+          "smartObjectId": 24
+        },
+        "Page07.MicWidgetList.Items[3].MicrophoneControlCONTRACT.MicMute.Press": {
+          "joinId": 604,
+          "smartObjectId": 24
+        },
+        "Page07.MicWidgetList.Items[4].MicrophoneControlCONTRACT.MicMute.Press": {
+          "joinId": 605,
+          "smartObjectId": 24
+        },
+        "Page07.MicWidgetList.Items[5].MicrophoneControlCONTRACT.MicMute.Press": {
+          "joinId": 606,
+          "smartObjectId": 24
+        },
+        "Page07.MicWidgetList.Items[6].MicrophoneControlCONTRACT.MicMute.Press": {
+          "joinId": 607,
+          "smartObjectId": 24
+        },
+        "Page07.MicWidgetList.Items[7].MicrophoneControlCONTRACT.MicMute.Press": {
+          "joinId": 608,
+          "smartObjectId": 24
+        },
+        "Page07.MicWidgetList.Items[8].MicrophoneControlCONTRACT.MicMute.Press": {
+          "joinId": 609,
+          "smartObjectId": 24
+        },
+        "Page07.MicWidgetList.Items[9].MicrophoneControlCONTRACT.MicMute.Press": {
+          "joinId": 610,
+          "smartObjectId": 24
+        },
+        "Page07.MicWidgetList.Items[10].MicrophoneControlCONTRACT.MicMute.Press": {
+          "joinId": 611,
+          "smartObjectId": 24
+        },
+        "Page07.MicWidgetList.Items[11].MicrophoneControlCONTRACT.MicMute.Press": {
+          "joinId": 612,
+          "smartObjectId": 24
+        },
+        "Page07.MicWidgetList.Items[12].MicrophoneControlCONTRACT.MicMute.Press": {
+          "joinId": 613,
+          "smartObjectId": 24
+        },
+        "Page07.MicWidgetList.Items[13].MicrophoneControlCONTRACT.MicMute.Press": {
+          "joinId": 614,
+          "smartObjectId": 24
+        },
+        "Page07.MicWidgetList.Items[14].MicrophoneControlCONTRACT.MicMute.Press": {
+          "joinId": 615,
+          "smartObjectId": 24
+        },
+        "Page07.MicWidgetList.Items[15].MicrophoneControlCONTRACT.MicMute.Press": {
+          "joinId": 616,
+          "smartObjectId": 24
+        },
+        "Page07.MicWidgetList.Items[16].MicrophoneControlCONTRACT.MicMute.Press": {
+          "joinId": 617,
+          "smartObjectId": 24
+        },
+        "Page07.MicWidgetList.Items[17].MicrophoneControlCONTRACT.MicMute.Press": {
+          "joinId": 618,
+          "smartObjectId": 24
+        },
+        "Page07.MicWidgetList.Items[18].MicrophoneControlCONTRACT.MicMute.Press": {
+          "joinId": 619,
+          "smartObjectId": 24
+        },
+        "Page07.MicWidgetList.Items[19].MicrophoneControlCONTRACT.MicMute.Press": {
+          "joinId": 620,
+          "smartObjectId": 24
+        },
+        "Page07.EventViewerButton.Visibility": {
+          "joinId": 1,
+          "smartObjectId": 25
+        },
+        "Page06.SetSize.Visibility": {
+          "joinId": 1,
+          "smartObjectId": 27
+        },
+        "Page06.ButtonList.Button1ItemPress": {
+          "joinId": 1001,
+          "smartObjectId": 28
+        },
+        "Page06.ButtonList.Button2ItemPress": {
+          "joinId": 1002,
+          "smartObjectId": 28
+        },
+        "Page06.ButtonList.Button3ItemPress": {
+          "joinId": 1003,
+          "smartObjectId": 28
+        },
+        "Page06.ButtonList.Button4ItemPress": {
+          "joinId": 1004,
+          "smartObjectId": 28
+        },
+        "Page06.ButtonList.Button5ItemPress": {
+          "joinId": 1005,
+          "smartObjectId": 28
+        },
+        "Page06.ButtonList.Button6ItemPress": {
+          "joinId": 1006,
+          "smartObjectId": 28
+        },
+        "Page06.ButtonList.Button7ItemPress": {
+          "joinId": 1007,
+          "smartObjectId": 28
+        },
+        "Page06.ButtonList.Button8ItemPress": {
+          "joinId": 1008,
+          "smartObjectId": 28
+        },
+        "Page06.ButtonList.Button9ItemPress": {
+          "joinId": 1009,
+          "smartObjectId": 28
+        },
+        "Page06.ButtonList.Button10ItemPress": {
+          "joinId": 1010,
+          "smartObjectId": 28
+        },
+        "Page06.ButtonList.Button11ItemPress": {
+          "joinId": 1011,
+          "smartObjectId": 28
+        },
+        "Page06.ButtonList.Button12ItemPress": {
+          "joinId": 1012,
+          "smartObjectId": 28
+        },
+        "Page06.ButtonList.Button13ItemPress": {
+          "joinId": 1013,
+          "smartObjectId": 28
+        },
+        "Page06.ButtonList.Button14ItemPress": {
+          "joinId": 1014,
+          "smartObjectId": 28
+        },
+        "Page06.ButtonList.Button15ItemPress": {
+          "joinId": 1015,
+          "smartObjectId": 28
+        },
+        "Page06.ButtonList.Button16ItemPress": {
+          "joinId": 1016,
+          "smartObjectId": 28
+        },
+        "Page06.ButtonList.Button17ItemPress": {
+          "joinId": 1017,
+          "smartObjectId": 28
+        },
+        "Page06.ButtonList.Button18ItemPress": {
+          "joinId": 1018,
+          "smartObjectId": 28
+        },
+        "Page06.ButtonList.Button19ItemPress": {
+          "joinId": 1019,
+          "smartObjectId": 28
+        },
+        "Page06.ButtonList.Button20ItemPress": {
+          "joinId": 1020,
+          "smartObjectId": 28
+        },
+        "Page06.EventViewerButton.Visibility": {
+          "joinId": 1,
+          "smartObjectId": 29
+        }
+      },
+      "numeric": {
+        "Page02.Slider.LowerTouch": {
+          "joinId": 4,
+          "smartObjectId": 6
+        },
+        "Page07.MicWidgetList.Items[0].MicrophoneControlCONTRACT.MicLevel.LowerTouch": {
+          "joinId": 1801,
+          "smartObjectId": 24
+        },
+        "Page07.MicWidgetList.Items[1].MicrophoneControlCONTRACT.MicLevel.LowerTouch": {
+          "joinId": 1802,
+          "smartObjectId": 24
+        },
+        "Page07.MicWidgetList.Items[2].MicrophoneControlCONTRACT.MicLevel.LowerTouch": {
+          "joinId": 1803,
+          "smartObjectId": 24
+        },
+        "Page07.MicWidgetList.Items[3].MicrophoneControlCONTRACT.MicLevel.LowerTouch": {
+          "joinId": 1804,
+          "smartObjectId": 24
+        },
+        "Page07.MicWidgetList.Items[4].MicrophoneControlCONTRACT.MicLevel.LowerTouch": {
+          "joinId": 1805,
+          "smartObjectId": 24
+        },
+        "Page07.MicWidgetList.Items[5].MicrophoneControlCONTRACT.MicLevel.LowerTouch": {
+          "joinId": 1806,
+          "smartObjectId": 24
+        },
+        "Page07.MicWidgetList.Items[6].MicrophoneControlCONTRACT.MicLevel.LowerTouch": {
+          "joinId": 1807,
+          "smartObjectId": 24
+        },
+        "Page07.MicWidgetList.Items[7].MicrophoneControlCONTRACT.MicLevel.LowerTouch": {
+          "joinId": 1808,
+          "smartObjectId": 24
+        },
+        "Page07.MicWidgetList.Items[8].MicrophoneControlCONTRACT.MicLevel.LowerTouch": {
+          "joinId": 1809,
+          "smartObjectId": 24
+        },
+        "Page07.MicWidgetList.Items[9].MicrophoneControlCONTRACT.MicLevel.LowerTouch": {
+          "joinId": 1810,
+          "smartObjectId": 24
+        },
+        "Page07.MicWidgetList.Items[10].MicrophoneControlCONTRACT.MicLevel.LowerTouch": {
+          "joinId": 1811,
+          "smartObjectId": 24
+        },
+        "Page07.MicWidgetList.Items[11].MicrophoneControlCONTRACT.MicLevel.LowerTouch": {
+          "joinId": 1812,
+          "smartObjectId": 24
+        },
+        "Page07.MicWidgetList.Items[12].MicrophoneControlCONTRACT.MicLevel.LowerTouch": {
+          "joinId": 1813,
+          "smartObjectId": 24
+        },
+        "Page07.MicWidgetList.Items[13].MicrophoneControlCONTRACT.MicLevel.LowerTouch": {
+          "joinId": 1814,
+          "smartObjectId": 24
+        },
+        "Page07.MicWidgetList.Items[14].MicrophoneControlCONTRACT.MicLevel.LowerTouch": {
+          "joinId": 1815,
+          "smartObjectId": 24
+        },
+        "Page07.MicWidgetList.Items[15].MicrophoneControlCONTRACT.MicLevel.LowerTouch": {
+          "joinId": 1816,
+          "smartObjectId": 24
+        },
+        "Page07.MicWidgetList.Items[16].MicrophoneControlCONTRACT.MicLevel.LowerTouch": {
+          "joinId": 1817,
+          "smartObjectId": 24
+        },
+        "Page07.MicWidgetList.Items[17].MicrophoneControlCONTRACT.MicLevel.LowerTouch": {
+          "joinId": 1818,
+          "smartObjectId": 24
+        },
+        "Page07.MicWidgetList.Items[18].MicrophoneControlCONTRACT.MicLevel.LowerTouch": {
+          "joinId": 1819,
+          "smartObjectId": 24
+        },
+        "Page07.MicWidgetList.Items[19].MicrophoneControlCONTRACT.MicLevel.LowerTouch": {
+          "joinId": 1820,
+          "smartObjectId": 24
+        },
+        "Page06.SetSize.LowerTouch": {
+          "joinId": 4,
+          "smartObjectId": 27
+        }
+      },
+      "string": {
+        "Page03.Textinput.OutputText": {
+          "joinId": 1,
+          "smartObjectId": 13
+        }
+      }
+    }
+  }
+}

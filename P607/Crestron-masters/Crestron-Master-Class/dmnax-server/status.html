@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dmnax-server status</title>
+<style>
+  :root {
+    --bg: #f5f7fb; --card: #ffffff; --ink: #1f2937; --muted: #6b7280; --line: #e5e7eb;
+    --brand: #2563eb; --play: #16a34a; --pause: #d97706; --stop: #9ca3af; --bad: #dc2626;
+  }
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  body { margin: 0; font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; background: var(--bg); color: var(--ink); }
+  header { background: #111827; color: #fff; padding: 14px 24px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  header h1 { font-size: 18px; margin: 0; }
+  .pill { padding: 3px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; }
+  .pill.ok { background: #dcfce7; color: #166534; }
+  .pill.warn { background: #fee2e2; color: #991b1b; }
+  header .meta { color: #9ca3af; font-size: 13px; margin-left: auto; }
+  main { max-width: 1200px; margin: 0 auto; padding: 20px 24px 40px; display: grid; gap: 20px; }
+  .banner { background: #fef2f2; border: 1px solid #fecaca; color: #991b1b; border-radius: 10px; padding: 10px 14px; display: flex; align-items: center; gap: 12px; }
+  .banner button { margin-left: auto; }
+  h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 0 0 10px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 12px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px; border-left: 4px solid var(--stop); min-width: 0; }
+  .card.playing { border-left-color: var(--play); }
+  .card.paused { border-left-color: var(--pause); }
+  .card .top { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .card strong { font-size: 15px; }
+  .state { font-size: 11px; font-weight: 700; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; color: #fff; background: var(--stop); }
+  .playing .state { background: var(--play); }
+  .paused .state { background: var(--pause); }
+  .title { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .sub { color: var(--muted); font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .bar { height: 6px; background: var(--line); border-radius: 3px; margin: 10px 0 4px; overflow: hidden; }
+  .bar > span { display: block; height: 100%; background: var(--brand); }
+  .vol { display: flex; align-items: center; gap: 8px; margin: 10px 0 6px; }
+  .vol .bar { flex: 1; margin: 0; }
+  .vol b { width: 40px; text-align: right; }
+  .muted .bar > span { background: var(--stop); }
+  .muted-tag { font-size: 11px; font-weight: 700; color: var(--bad); }
+  .notice { font-size: 12px; color: var(--bad); margin-top: 6px; }
+  .faults { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 6px 14px; }
+  .fault { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--line); cursor: pointer; }
+  .fault .what { flex: 1; }
+  .fault .what small { display: block; color: var(--muted); }
+  .switch { position: relative; width: 40px; height: 22px; flex: none; }
+  .switch input { opacity: 0; width: 0; height: 0; }
+  .switch span { position: absolute; inset: 0; background: #d1d5db; border-radius: 999px; transition: .2s; }
+  .switch span::before { content: ""; position: absolute; width: 16px; height: 16px; left: 3px; top: 3px; background: #fff; border-radius: 50%; transition: .2s; }
+  .switch input:checked + span { background: var(--bad); }
+  .switch input:checked + span::before { transform: translateX(18px); }
+  .switch input:focus-visible + span { outline: 2px solid var(--brand); outline-offset: 2px; }
+  .fault input[type=number] { width: 64px; padding: 4px 6px; border: 1px solid var(--line); border-radius: 6px; font: inherit; }
+  .actions { display: flex; gap: 10px; flex-wrap: wrap; padding: 10px 0; }
+  button { font: inherit; border: 1px solid var(--line); background: #fff; border-radius: 8px; padding: 6px 12px; cursor: pointer; }
+  button:hover { border-color: var(--brand); color: var(--brand); }
+  button.danger { color: var(--bad); border-color: #fecaca; }
+  .two { display: grid; grid-template-columns: 1fr 1.4fr; gap: 20px; }
+  @media (max-width: 860px) { .two { grid-template-columns: 1fr; } }
+  .log { background: #0f172a; color: #e2e8f0; border-radius: 12px; padding: 10px 0; font: 12px/1.6 ui-monospace, Consolas, monospace; max-height: 340px; overflow: auto; }
+  .log div { padding: 0 14px; white-space: pre-wrap; word-break: break-word; }
+  .log time { color: #64748b; margin-right: 8px; }
+  .tag { display: inline-block; width: 46px; font-weight: 700; }
+  .tag.MP2 { color: #c4b5fd; } .tag.REST { color: #67e8f9; } .tag.FAULT { color: #fca5a5; }
+  .filters { display: flex; gap: 6px; margin-bottom: 8px; }
+  .filters button.on { background: var(--brand); color: #fff; border-color: var(--brand); }
+</style>
+</head>
+<body>
+<header>
+  <h1>DM-NAX-4ZSA demo</h1>
+  <span class="pill ok" id="online">connecting…</span>
+  <span class="pill warn" id="faultPill" hidden></span>
+  <span class="pill warn" id="postError" hidden></span>
+  <span class="meta" id="meta"></span>
+</header>
+<main>
+  <div class="banner" id="banner" hidden>
+    <span id="bannerText"></span>
+    <button data-reset>Turn all faults off</button>
+  </div>
+  <section><h2>Players</h2><div class="grid" id="players"></div></section>
+  <section><h2>Zones</h2><div class="grid" id="zones"></div></section>
+  <div class="two">
+    <section>
+      <h2>Fault injection</h2>
+      <div class="faults">
+        <label class="fault"><span class="what">Refuse LoadSource<small>Play requests are refused</small></span><span class="switch"><input type="checkbox" data-fault="refuse_load"><span></span></span></label>
+        <label class="fault"><span class="what">Silent player<small>Player ignores commands, no reply</small></span><span class="switch"><input type="checkbox" data-fault="silent_player"><span></span></span></label>
+        <label class="fault"><span class="what">Reject MP2 login<small>New player connections fail</small></span><span class="switch"><input type="checkbox" data-fault="reject_mp2_login"><span></span></span></label>
+        <label class="fault"><span class="what">Reject REST login<small>Zone logins fail</small></span><span class="switch"><input type="checkbox" data-fault="reject_rest_login"><span></span></span></label>
+        <label class="fault"><span class="what">Reply delay<small>Seconds added to every reply (clients wait 12 s)</small></span><input type="number" min="0" max="30" step="0.5" data-fault="reply_delay"> s</label>
+        <div class="actions">
+          <button class="danger" data-action="drop_connections">Drop WebSocket connections</button>
+          <button class="danger" data-action="expire_rest_sessions">Expire REST sessions</button>
+          <button data-reset>Turn all faults off</button>
+        </div>
+      </div>
+    </section>
+    <section>
+      <h2>Request log</h2>
+      <div class="filters">
+        <button class="on" data-filter="ALL">All</button><button data-filter="MP2">MP2</button><button data-filter="REST">REST</button><button data-filter="FAULT">Faults</button>
+      </div>
+      <div class="log" id="log"></div>
+    </section>
+  </div>
+</main>
+<script>
+const $ = (id) => document.getElementById(id);
+const el = (tag, cls, text) => {
+  const node = document.createElement(tag);
+  if (cls) node.className = cls;
+  if (text !== undefined) node.textContent = text;
+  return node;
+};
+const clock = (s) => s < 0 ? "--:--" : Math.floor(s / 60) + ":" + String(Math.floor(s % 60)).padStart(2, "0");
+const FAULT_NAMES = {refuse_load: "refuse LoadSource", silent_player: "silent player",
+  reject_mp2_login: "reject MP2 login", reject_rest_login: "reject REST login", reply_delay: "reply delay"};
+let filter = "ALL";
+
+function bar(percent) {
+  const outer = el("div", "bar"), fill = el("span");
+  fill.style.width = Math.max(0, Math.min(100, percent)) + "%";
+  outer.append(fill);
+  return outer;
+}
+
+function playerCard(p) {
+  const card = el("div", "card " + p.state);
+  const top = el("div", "top");
+  top.append(el("strong", "", p.player), el("span", "state", p.state));
+  card.append(top);
+  if (!p.title && !p.station) {
+    card.append(el("div", "sub", "Nothing playing"));
+  } else {
+    // A live station's title is its on-air line, so lead with the station name.
+    const what = p.station && p.station !== p.title ? p.station + " · " + p.title : p.title;
+    const title = el("div", "title", what);
+    title.title = what;
+    card.append(title);
+    if (p.duration > 0) {
+      card.append(bar(100 * p.position / p.duration), el("div", "sub", clock(p.position) + " / " + clock(p.duration)));
+    } else if (p.duration === 0) {
+      card.append(el("div", "sub", "LIVE · " + clock(p.position)));
+    }
+  }
+  if (p.notification) card.append(el("div", "notice", "⚠ " + p.notification));
+  return card;
+}
+
+function zoneCard(z, byInput) {
+  const player = byInput[z.source];
+  const card = el("div", "card " + (player ? player.state : "stopped") + (z.muted ? " muted" : ""));
+  const top = el("div", "top");
+  top.append(el("strong", "", z.name), el("span", "sub", player ? player.player : (z.source_name || "No source")));
+  const vol = el("div", "vol");
+  vol.append(bar(z.volume), el("b", "", z.volume + "%"));
+  card.append(top, vol);
+  if (z.muted) card.append(el("div", "muted-tag", "MUTED"));
+  return card;
+}
+
+function renderLog(lines) {
+  $("log").replaceChildren(...lines.slice().reverse()
+    .filter((l) => filter === "ALL" || l.channel === filter)
+    .map((l) => {
+      const row = el("div");
+      row.append(el("time", "", new Date(l.t * 1000).toLocaleTimeString([], {hour12: false})),
+                 el("span", "tag " + l.channel, l.channel), document.createTextNode(l.message));
+      return row;
+    }));
+}
+
+let editing = false, lastLog = [];
+async function refresh() {
+  try {
+    const response = await fetch("/dmnax/api/state", {cache: "no-store"});
+    const s = await response.json();
+    $("online").textContent = "Online";
+    $("online").className = "pill ok";
+    $("meta").textContent = "up " + clock(s.uptime) + " · " + s.sessions.length + " MP2 session(s) · " +
+      s.rest_sessions + " REST session(s)";
+    const byInput = Object.fromEntries(s.players.map((p) => [p.input, p]));
+    $("players").replaceChildren(...s.players.map(playerCard));
+    $("zones").replaceChildren(...s.zones.map((z) => zoneCard(z, byInput)));
+    const active = Object.keys(s.faults).filter((k) => s.faults[k]);
+    $("faultPill").hidden = $("banner").hidden = active.length === 0;
+    $("faultPill").textContent = active.length + " fault" + (active.length > 1 ? "s" : "") + " on";
+    $("bannerText").textContent = "Fault active: " + active.map((k) => k === "reply_delay"
+      ? "reply delay " + s.faults[k] + " s" : FAULT_NAMES[k] || k).join(", ") + ".";
+    if (!editing) {
+      document.querySelectorAll("[data-fault]").forEach((input) => {
+        const value = s.faults[input.dataset.fault];
+        if (input.type === "checkbox") input.checked = !!value; else input.value = value;
+      });
+    }
+    lastLog = s.log;
+    renderLog(lastLog);
+  } catch (error) {
+    $("online").textContent = "Server not reachable";
+    $("online").className = "pill warn";
+  }
+}
+
+let postErrorTimer;
+async function post(body) {
+  try {
+    const response = await fetch("/dmnax/api/faults", {method: "POST", headers: {"Content-Type": "application/json"},
+                                                      body: JSON.stringify(body)});
+    if (!response.ok) throw new Error("HTTP " + response.status);
+  } catch (error) {
+    $("postError").textContent = "Fault change failed (" + error.message + ")";
+    $("postError").hidden = false;
+    clearTimeout(postErrorTimer);
+    postErrorTimer = setTimeout(() => { $("postError").hidden = true; }, 5000);
+  }
+  editing = false;
+  refresh();
+}
+document.querySelectorAll("[data-fault]").forEach((input) => {
+  input.addEventListener("focus", () => { editing = true; });
+  input.addEventListener("blur", () => { editing = false; });
+  input.addEventListener("change", () => post({[input.dataset.fault]:
+    input.type === "checkbox" ? input.checked : Number(input.value) || 0}));
+});
+document.querySelectorAll("[data-action]").forEach((button) =>
+  button.addEventListener("click", () => post({action: button.dataset.action})));
+document.querySelectorAll("[data-reset]").forEach((button) => button.addEventListener("click", () =>
+  post({refuse_load: false, silent_player: false, reply_delay: 0, reject_mp2_login: false, reject_rest_login: false})));
+document.querySelectorAll("[data-filter]").forEach((button) => button.addEventListener("click", () => {
+  filter = button.dataset.filter;
+  document.querySelectorAll("[data-filter]").forEach((b) => b.classList.toggle("on", b === button));
+  renderLog(lastLog);
+}));
+refresh();
+setInterval(refresh, 1000);
+</script>
+</body>
+</html>

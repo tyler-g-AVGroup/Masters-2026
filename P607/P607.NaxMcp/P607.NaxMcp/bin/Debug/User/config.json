@@ -1,0 +1,15 @@
+{
+  "device_ip": "192.168.1.55:8443",
+  "client_id": "classroom",
+  "client_secret": "FaYiUQ3qF0TB6fsxOp/qU8bK+aT5Q/mXSE0j9PA/jGM=",
+  "player": "Player01",
+  "zone": null,
+  "service": "Internet Radio",
+  "folder": "Popular stations",
+  "admin_user": "participant",
+  "admin_password": "EOjRFjO8Lk4o",
+  "verify_tls": false,
+  "initial_seconds": 30,
+  "resume_seconds": 5,
+  "timeout": 12
+}

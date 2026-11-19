@@ -1,0 +1,20 @@
+{
+  "_fileMetadata": {
+    "_schema": "1.0.0.0",
+    "_createdByAppHost": "2.2000.8.0",
+    "_created": "2026-11-12T11:21:26.4539309-06:00",
+    "_lastModifiedByAppHost": "2.2000.8.0",
+    "_minimumAppHost": "2.1900.0",
+    "_modified": "2026-11-12T11:21:26.4539207-06:00"
+  },
+  "_solution": {
+    "_name": "MastersSolution555",
+    "_projects": [
+      {
+        "_name": "MastersSolution555",
+        "_filename": "MastersSolution555/MastersSolution555.cspp",
+        "_datetime": "2026-11-12T17:21:24.5843124Z"
+      }
+    ]
+  }
+}

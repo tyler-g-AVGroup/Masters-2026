@@ -1,0 +1,81 @@
+{
+  "FileMetadata": {
+    "_createdByProjectApp": "1.4501.42.0",
+    "_lastModifiedByProjectApp": "1.4501.42.0",
+    "_schema": "1.0.0.0",
+    "_createdByAppHost": "2.901.21.0",
+    "_created": "2026-08-14T11:36:06.8532466-07:00",
+    "_lastModifiedByAppHost": "2.901.21.0",
+    "_minimumAppHost": "2.901.0",
+    "_modified": "2026-08-14T11:36:06.8532426-07:00"
+  },
+  "HardButtons": [
+    {
+      "DeviceSpecId": "Project Level",
+      "Name": "Project Level",
+      "Logic": {
+        "Project Level": [
+          {
+            "ButtonIndex": 1,
+            "ButtonLabel": "Power",
+            "SendEventOnClick": "",
+            "PageFlip": "",
+            "IconTag": "fa-power-off",
+            "Type": 1,
+            "HasModifications": false
+          },
+          {
+            "ButtonIndex": 2,
+            "ButtonLabel": "Home",
+            "SendEventOnClick": "",
+            "PageFlip": "",
+            "IconTag": "fa-home",
+            "Type": 1,
+            "HasModifications": false
+          },
+          {
+            "ButtonIndex": 3,
+            "ButtonLabel": "Lights",
+            "SendEventOnClick": "",
+            "PageFlip": "",
+            "IconTag": "fa-lightbulb-o",
+            "Type": 1,
+            "HasModifications": false
+          },
+          {
+            "ButtonIndex": 4,
+            "ButtonLabel": "Up",
+            "SendEventOnClick": "",
+            "PageFlip": "",
+            "IconTag": "fa-arrow-up",
+            "Type": 1,
+            "HasModifications": false
+          },
+          {
+            "ButtonIndex": 5,
+            "ButtonLabel": "Down",
+            "SendEventOnClick": "",
+            "PageFlip": "",
+            "IconTag": "fa-arrow-down",
+            "Type": 1,
+            "HasModifications": false
+          },
+          {
+            "ButtonIndex": 6,
+            "ButtonLabel": "Mic",
+            "SendEventOnClick": "",
+            "PageFlip": "",
+            "IconTag": "fa-microphone",
+            "Type": 1,
+            "HasModifications": false
+          }
+        ]
+      }
+    },
+    {
+      "DeviceSpecId": "92812502993D9A39",
+      "Name": "TST-1080",
+      "Logic": null
+    }
+  ]
+}

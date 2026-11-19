@@ -1,0 +1,4 @@
+VC-4 Masters Default login
+
+USER: crestron
+PASS: #1Student!

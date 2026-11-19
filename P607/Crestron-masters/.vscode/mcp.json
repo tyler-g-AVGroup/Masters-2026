@@ -1,0 +1,13 @@
+{
+  "servers": {
+    "crestron-demo": {
+      "type": "stdio",
+      "command": "${workspaceFolder}\\Crestron-Master-Class\\.venv\\Scripts\\python.exe",
+      "args": [
+        "${workspaceFolder}\\Crestron-Master-Class\\demo_mcp_sdk\\server.py",
+        "--config",
+        "${workspaceFolder}\\Crestron-Master-Class\\dmnax-server\\client-config.json"
+      ]
+    }
+  }
+}

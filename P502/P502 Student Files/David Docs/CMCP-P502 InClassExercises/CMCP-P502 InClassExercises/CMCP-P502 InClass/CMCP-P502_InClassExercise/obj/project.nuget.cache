@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "VQmuDlrZLMw=",
+  "success": true,
+  "projectFilePath": "C:\\GIT\\Masters-2026\\P502\\P502 Student Files\\David Docs\\CMCP-P502 InClassExercises\\CMCP-P502 InClassExercises\\CMCP-P502 InClass\\CMCP-P502_InClassExercise\\CMCP-P502_InClassExercise.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\tyler\\.nuget\\packages\\crestron.simplsharp.sdk.library\\2.22.40\\crestron.simplsharp.sdk.library.2.22.40.nupkg.sha512",
+    "C:\\Users\\tyler\\.nuget\\packages\\crestron.simplsharp.sdk.program\\2.22.40\\crestron.simplsharp.sdk.program.2.22.40.nupkg.sha512",
+    "C:\\Users\\tyler\\.nuget\\packages\\crestron.simplsharp.sdk.programlibrary\\2.22.40\\crestron.simplsharp.sdk.programlibrary.2.22.40.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,0 +1,125 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\GIT\\Masters-2026\\P502\\P502 Student Files\\Owain Docs\\TouchpanelDemo\\Contracts\\sharp\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{4AC345EB-73FD-4F7E-9351-C6AC4CB2FFFF}|Masters2026_CMCP-P502\\CMCP-P502.csproj|c:\\git\\masters-2026\\p502\\p502 student files\\owain docs\\touchpaneldemo\\contracts\\sharp\\masters2026_cmcp-p502\\xpanel\\page07widgetlist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4AC345EB-73FD-4F7E-9351-C6AC4CB2FFFF}|Masters2026_CMCP-P502\\CMCP-P502.csproj|solutionrelative:masters2026_cmcp-p502\\xpanel\\page07widgetlist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4AC345EB-73FD-4F7E-9351-C6AC4CB2FFFF}|Masters2026_CMCP-P502\\CMCP-P502.csproj|c:\\git\\masters-2026\\p502\\p502 student files\\owain docs\\touchpaneldemo\\contracts\\sharp\\masters2026_cmcp-p502\\xpanel\\demopanel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4AC345EB-73FD-4F7E-9351-C6AC4CB2FFFF}|Masters2026_CMCP-P502\\CMCP-P502.csproj|solutionrelative:masters2026_cmcp-p502\\xpanel\\demopanel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4AC345EB-73FD-4F7E-9351-C6AC4CB2FFFF}|Masters2026_CMCP-P502\\CMCP-P502.csproj|c:\\git\\masters-2026\\p502\\p502 student files\\owain docs\\touchpaneldemo\\contracts\\sharp\\masters2026_cmcp-p502\\standardjoins\\advancedtouchpanel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4AC345EB-73FD-4F7E-9351-C6AC4CB2FFFF}|Masters2026_CMCP-P502\\CMCP-P502.csproj|solutionrelative:masters2026_cmcp-p502\\standardjoins\\advancedtouchpanel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4AC345EB-73FD-4F7E-9351-C6AC4CB2FFFF}|Masters2026_CMCP-P502\\CMCP-P502.csproj|c:\\git\\masters-2026\\p502\\p502 student files\\owain docs\\touchpaneldemo\\contracts\\sharp\\masters2026_cmcp-p502\\standardjoins\\basictouchpanel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4AC345EB-73FD-4F7E-9351-C6AC4CB2FFFF}|Masters2026_CMCP-P502\\CMCP-P502.csproj|solutionrelative:masters2026_cmcp-p502\\standardjoins\\basictouchpanel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4AC345EB-73FD-4F7E-9351-C6AC4CB2FFFF}|Masters2026_CMCP-P502\\CMCP-P502.csproj|c:\\git\\masters-2026\\p502\\p502 student files\\owain docs\\touchpaneldemo\\contracts\\sharp\\masters2026_cmcp-p502\\controlsystem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4AC345EB-73FD-4F7E-9351-C6AC4CB2FFFF}|Masters2026_CMCP-P502\\CMCP-P502.csproj|solutionrelative:masters2026_cmcp-p502\\controlsystem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 138,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Page07WidgetList.cs",
+              "DocumentMoniker": "C:\\GIT\\Masters-2026\\P502\\P502 Student Files\\Owain Docs\\TouchpanelDemo\\Contracts\\sharp\\Masters2026_CMCP-P502\\Xpanel\\Page07WidgetList.cs",
+              "RelativeDocumentMoniker": "Masters2026_CMCP-P502\\Xpanel\\Page07WidgetList.cs",
+              "ToolTip": "C:\\GIT\\Masters-2026\\P502\\P502 Student Files\\Owain Docs\\TouchpanelDemo\\Contracts\\sharp\\Masters2026_CMCP-P502\\Xpanel\\Page07WidgetList.cs",
+              "RelativeToolTip": "Masters2026_CMCP-P502\\Xpanel\\Page07WidgetList.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAIwDEAAABOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-11T17:58:39.982Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "DemoPanel.cs",
+              "DocumentMoniker": "C:\\GIT\\Masters-2026\\P502\\P502 Student Files\\Owain Docs\\TouchpanelDemo\\Contracts\\sharp\\Masters2026_CMCP-P502\\Xpanel\\DemoPanel.cs",
+              "RelativeDocumentMoniker": "Masters2026_CMCP-P502\\Xpanel\\DemoPanel.cs",
+              "ToolTip": "C:\\GIT\\Masters-2026\\P502\\P502 Student Files\\Owain Docs\\TouchpanelDemo\\Contracts\\sharp\\Masters2026_CMCP-P502\\Xpanel\\DemoPanel.cs",
+              "RelativeToolTip": "Masters2026_CMCP-P502\\Xpanel\\DemoPanel.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAQwB0AAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-11T17:51:32.047Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{57d563b6-44a5-47df-85be-f4199ad6b651}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{55f480fa-fbef-4386-8c1c-ea8d10c9f542}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{87654321-4321-4321-4321-987654321cba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AdvancedTouchPanel.cs",
+              "DocumentMoniker": "C:\\GIT\\Masters-2026\\P502\\P502 Student Files\\Owain Docs\\TouchpanelDemo\\Contracts\\sharp\\Masters2026_CMCP-P502\\StandardJoins\\AdvancedTouchPanel.cs",
+              "RelativeDocumentMoniker": "Masters2026_CMCP-P502\\StandardJoins\\AdvancedTouchPanel.cs",
+              "ToolTip": "C:\\GIT\\Masters-2026\\P502\\P502 Student Files\\Owain Docs\\TouchpanelDemo\\Contracts\\sharp\\Masters2026_CMCP-P502\\StandardJoins\\AdvancedTouchPanel.cs",
+              "RelativeToolTip": "Masters2026_CMCP-P502\\StandardJoins\\AdvancedTouchPanel.cs",
+              "ViewState": "AgIAADAAAAAAAAAAAAAowCcAAAA+AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-11T17:46:42.64Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "BasicTouchPanel.cs",
+              "DocumentMoniker": "C:\\GIT\\Masters-2026\\P502\\P502 Student Files\\Owain Docs\\TouchpanelDemo\\Contracts\\sharp\\Masters2026_CMCP-P502\\StandardJoins\\BasicTouchPanel.cs",
+              "RelativeDocumentMoniker": "Masters2026_CMCP-P502\\StandardJoins\\BasicTouchPanel.cs",
+              "ToolTip": "C:\\GIT\\Masters-2026\\P502\\P502 Student Files\\Owain Docs\\TouchpanelDemo\\Contracts\\sharp\\Masters2026_CMCP-P502\\StandardJoins\\BasicTouchPanel.cs",
+              "RelativeToolTip": "Masters2026_CMCP-P502\\StandardJoins\\BasicTouchPanel.cs",
+              "ViewState": "AgIAADkAAAAAAAAAAAAowAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-11T17:40:25.153Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ControlSystem.cs",
+              "DocumentMoniker": "C:\\GIT\\Masters-2026\\P502\\P502 Student Files\\Owain Docs\\TouchpanelDemo\\Contracts\\sharp\\Masters2026_CMCP-P502\\ControlSystem.cs",
+              "RelativeDocumentMoniker": "Masters2026_CMCP-P502\\ControlSystem.cs",
+              "ToolTip": "C:\\GIT\\Masters-2026\\P502\\P502 Student Files\\Owain Docs\\TouchpanelDemo\\Contracts\\sharp\\Masters2026_CMCP-P502\\ControlSystem.cs",
+              "RelativeToolTip": "Masters2026_CMCP-P502\\ControlSystem.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-11T17:38:49.295Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\GIT\\Masters-2026\\P502\\P502 Student Files\\David Docs\\CMCP-P502 InClassExercises\\CMCP-P502 InClassExercises\\CMCP-P502 InClass\\CMCP-P502_InClassExercise\\CMCP-P502_InClassExercise.csproj": {}
+  },
+  "projects": {
+    "C:\\GIT\\Masters-2026\\P502\\P502 Student Files\\David Docs\\CMCP-P502 InClassExercises\\CMCP-P502 InClassExercises\\CMCP-P502 InClass\\CMCP-P502_InClassExercise\\CMCP-P502_InClassExercise.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\GIT\\Masters-2026\\P502\\P502 Student Files\\David Docs\\CMCP-P502 InClassExercises\\CMCP-P502 InClassExercises\\CMCP-P502 InClass\\CMCP-P502_InClassExercise\\CMCP-P502_InClassExercise.csproj",
+        "projectName": "CMCP-P502_InClassExercise",
+        "projectPath": "C:\\GIT\\Masters-2026\\P502\\P502 Student Files\\David Docs\\CMCP-P502 InClassExercises\\CMCP-P502 InClassExercises\\CMCP-P502 InClass\\CMCP-P502_InClassExercise\\CMCP-P502_InClassExercise.csproj",
+        "packagesPath": "C:\\Users\\tyler\\.nuget\\packages\\",
+        "outputPath": "C:\\GIT\\Masters-2026\\P502\\P502 Student Files\\David Docs\\CMCP-P502 InClassExercises\\CMCP-P502 InClassExercises\\CMCP-P502 InClass\\CMCP-P502_InClassExercise\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\tyler\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Users\\tyler\\.nuget\\packages": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.pkg.github.com/Aligned-Vision-Group-Programming/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "framework": "net8.0",
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "10.0.400"
+      },
+      "frameworks": {
+        "net8.0": {
+          "framework": "net8.0",
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Crestron.SimplSharp.SDK.Library": {
+              "target": "Package",
+              "version": "[2.22.40, )"
+            },
+            "Crestron.SimplSharp.SDK.Program": {
+              "target": "Package",
+              "version": "[2.22.40, )"
+            },
+            "Crestron.SimplSharp.SDK.ProgramLibrary": {
+              "target": "Package",
+              "version": "[2.22.40, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.403/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

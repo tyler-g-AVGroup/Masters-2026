@@ -1,0 +1,64 @@
+Build a simple web demo client for the DM-NAX demo server in this repo (dmnax-server/). Work through the whole task without stopping to ask questions. This is a live demo, so build no unit or automated tests. Work from the Crestron-Master-Class folder.
+
+## Sources you may use
+
+- Skills: .claude/skills/crestron-mediaplayer-2 and .claude/skills/crestron-nax-rest. Follow each SKILL.md "Start here" section. Read BOTH skills' copies of feature-matrix.md, api-gotchas.md and client-essentials.md. From mediaplayer-2 also read ui-patterns/dark-library.md, plus the "Control to API mapping" table in ui-patterns/light-list.md (dark-library points to it). Treat the skills as the source of truth for API shapes, HMAC login, XSRF handling, SignedData, paging, profile and provider discovery, and the browser-bridge rule.
+- Fetch the official doc pages the skills list. Record the source URLs, the What's New revision and the retrieval date in demo_web/README.md. If a fetch fails, say so in one line and continue with the skill references.
+- docs/GETTING-STARTED.md and dmnax-server/README.md, for running the server and for the demo data.
+- dmnax-server/client-config.json, which the server writes on start. Read it at runtime, after the server has started. Take its path from a --config argument, defaulting to dmnax-server/client-config.json. Keys: device_ip (already "host:port"; use it as-is in URLs and in the HMAC uri), client_id, client_secret, admin_user, admin_password, verify_tls. Do not create a separate config file. Never copy secrets into source files, logs or chat output.
+
+## Do NOT read
+
+- Any source code in crestron/, demo_python/, demo_mcp/, demo_mcp_sdk/, demo_mcp_http/, tests/ or dmnax-server/*.py.
+
+## Demo data (from the docs)
+
+- Players Player01-Player05. Player01 plays in the zone named "Kitchen". Find zones by their REST Name; never hardcode zone keys.
+- Profile "Main House".
+- Live station: service "Internet Radio" > "Popular stations" (24 items, so it pages) > "Harbor FM".
+- Playlist: service "DemoStream" > "Playlists" > "Big Mix". Open it and play a song inside it, because a playlist can't be loaded with LoadSource.
+- Discover profiles, services and menus through the API as the skills describe. Use the names above only to verify.
+
+## What to build: demo_web/
+
+1. demo_web/bridge.py, a single Python file using only aiohttp (already in requirements.txt). It must:
+- bind to 127.0.0.1:8444, serve demo_web/static/, and expose a WebSocket at /ws;
+- reject /ws upgrades whose Origin isn't [http://127.0.0.1:8444](http://127.0.0.1:8444/) or [http://localhost:8444](http://localhost:8444/);
+- hold ONE long-lived MP2 WebSocket to wss://<device_ip>/subscriptionmgr, using the CrestronAuth-SHA256 Authorization header from the skill, plus ONE REST session (form login, cookies, X-CREST-XSRF-TOKEN on every write);
+- honor verify_tls from the config (false for the demo server's self-signed certificate);
+- accept only a fixed allowlist of commands from the page: select player, transport actions, browse/open/page, search, list favorites, load item, set zone volume, set zone mute, and refresh. No generic read or write passthrough;
+- push now-playing state from MP2 subscriptions to the page;
+- poll the zones over REST every 3 s and re-read after each write;
+- reconnect with backoff, and send separate error messages to the page for an unreachable host, bad credentials (treat both a 401 and a failed handshake as bad credentials) and a lost connection;
+- never send Stop (use Pause), and use ProviderSave: false.
+2. demo_web/static/index.html: one file with vanilla JS and CSS and no build step. Use the dark library layout, labeled "dark library", with your own neutral accent color and no third-party branding. Include:
+- a connection status pill, and a player picker (Player01-05);
+- a now-playing bar: artwork if present, title, artist, station or album, state, and a progress bar when Duration > 0;
+- transport controls: Play/Pause, Previous and Next follow AvailableActions; Shuffle and Repeat are always enabled, as the skill says;
+- a library pane: home/browse menus with breadcrumbs and paging (20 per page), search (song, album, playlist, station) and favorites (list and play only). Clicking a playable item loads it; clicking a folder opens it;
+- a modal for device prompts, closed when a {"Notification": {}} push arrives;
+- a zones panel: one row per zone with its Name, a volume slider (debounced, sending percent ×10 clamped to MinVolume/MaxVolume), a mute toggle, and the routed source (read-only: the input's Name from AvMatrixRouting Routes/<zone>/AudioSource, or "none");
+- skip the full-screen Now Playing view and the responsive breakpoints.
+3. demo_web/README.md: how to run it, the verify_tls note, and the doc sources described above.
+
+- Keep it small and readable: aim for about 400 lines in bridge.py and about 500 in index.html. Add no other dependencies.
+
+## Skill rules that this demo overrides
+
+- The skill testing sections are replaced by the end-to-end check below.
+- The live-system rules (approval, a quiet level before playing, mute and save/restore, cleanup Pause) don't apply: this is the demo server. Leave the state as the check ends.
+
+## Run and verify end to end
+
+1. Create the virtual environment if .venv is missing: `py -3.10 -m venv .venv; .venv\Scripts\python.exe -m pip install -r requirements.txt`. If 3.10 isn't installed, use any Python 3.10 or newer.
+2. Start `.venv\Scripts\python.exe dmnax-server\server.py` as a background terminal. Wait until it prints the status page URL ([https://127.0.0.1:8443/](https://127.0.0.1:8443/)).
+3. Start `.venv\Scripts\python.exe demo_web\bridge.py` as a second background terminal.
+4. In the VS Code integrated browser:
+- open [https://127.0.0.1:8443/](https://127.0.0.1:8443/) (accept the certificate) and [http://127.0.0.1:8444/](http://127.0.0.1:8444/) in separate tabs. If the certificate can't be accepted, fetch [https://127.0.0.1:8443/dmnax/api/state](https://127.0.0.1:8443/dmnax/api/state) from Python instead, and say so;
+- in the app, select Player01, browse Internet Radio > Popular stations, page to page 2 and back, and play Harbor FM. Confirm that now-playing updates in the app and that the status page shows Player01 playing Harbor FM;
+- press Pause and confirm the state is paused in both places;
+- browse DemoStream > Playlists > Big Mix, play the first song and press Next. Confirm the track changes in both places;
+- set the Kitchen slider to 10%, then toggle mute on and off. Confirm the status page matches each step;
+- take screenshots of the app and the status page and show them inline (don't save files).
+5. Fix anything that fails and repeat step 4 until it passes.
+6. Leave both processes running. Finish with a short summary: the two URLs, how to restart each process, and anything that didn't work.

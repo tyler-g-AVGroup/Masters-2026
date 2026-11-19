@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "RQQEcs9gK+c=",
+  "success": true,
+  "projectFilePath": "C:\\GIT\\Masters-2026\\P502\\P502 Student Files\\Owain Docs\\TouchpanelDemo\\Contracts\\sharp\\Masters2026_CMCP-P502\\CMCP-P502.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\tyler\\.nuget\\packages\\crestron.simplsharp.sdk.library\\2.22.40\\crestron.simplsharp.sdk.library.2.22.40.nupkg.sha512",
+    "C:\\Users\\tyler\\.nuget\\packages\\crestron.simplsharp.sdk.program\\2.22.40\\crestron.simplsharp.sdk.program.2.22.40.nupkg.sha512",
+    "C:\\Users\\tyler\\.nuget\\packages\\crestron.simplsharp.sdk.programlibrary\\2.22.40\\crestron.simplsharp.sdk.programlibrary.2.22.40.nupkg.sha512",
+    "C:\\Users\\tyler\\.nuget\\packages\\stylecop.analyzers\\1.3.180\\stylecop.analyzers.1.3.180.nupkg.sha512"
+  ],
+  "logs": []
+}

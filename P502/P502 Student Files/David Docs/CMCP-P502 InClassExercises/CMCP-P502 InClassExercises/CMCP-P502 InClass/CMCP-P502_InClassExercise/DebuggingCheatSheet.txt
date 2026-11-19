@@ -1,0 +1,5 @@
+Connect via SSH to your VC-4 instance.
+Use the following command to open live debugging on your room.
+
+sudo tail -f /var/log/messages | grep "Room Name"
+ 

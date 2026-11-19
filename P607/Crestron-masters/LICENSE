@@ -1,0 +1,23 @@
+Crestron Master Class - Workshop Materials
+
+Copyright (c) 2026 Crestron Electronics, Inc. All rights reserved.
+
+These materials (source code, documentation and sample configuration) are
+provided to workshop attendees for training and evaluation use only.
+
+You may use and modify them on your own computer to take part in the workshop
+and to learn from them. You may not redistribute, publish or sell them, in whole
+or in part, without written permission from Crestron Electronics, Inc.
+
+The demo server and sample programs are not production software. The credentials
+they contain (for example the dmnax-server demo client secret and admin
+password) are public demo values and protect nothing real. Do not reuse them on
+real devices or networks.
+
+THE MATERIALS ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED. IN NO EVENT SHALL CRESTRON ELECTRONICS, INC. BE LIABLE FOR ANY CLAIM OR
+DAMAGES ARISING FROM THEIR USE.
+
+Third-party libraries listed in requirements.txt (aiohttp, websockets,
+cryptography, mcp and others) are not covered by this notice; each is licensed
+by its own authors under its own terms.

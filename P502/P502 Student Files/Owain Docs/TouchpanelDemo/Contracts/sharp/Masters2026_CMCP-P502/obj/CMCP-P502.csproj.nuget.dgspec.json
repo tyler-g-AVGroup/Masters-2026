@@ -1,0 +1,72 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\GIT\\Masters-2026\\P502\\P502 Student Files\\Owain Docs\\TouchpanelDemo\\Contracts\\sharp\\Masters2026_CMCP-P502\\CMCP-P502.csproj": {}
+  },
+  "projects": {
+    "C:\\GIT\\Masters-2026\\P502\\P502 Student Files\\Owain Docs\\TouchpanelDemo\\Contracts\\sharp\\Masters2026_CMCP-P502\\CMCP-P502.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\GIT\\Masters-2026\\P502\\P502 Student Files\\Owain Docs\\TouchpanelDemo\\Contracts\\sharp\\Masters2026_CMCP-P502\\CMCP-P502.csproj",
+        "projectName": "CMCP-P502",
+        "projectPath": "C:\\GIT\\Masters-2026\\P502\\P502 Student Files\\Owain Docs\\TouchpanelDemo\\Contracts\\sharp\\Masters2026_CMCP-P502\\CMCP-P502.csproj",
+        "packagesPath": "C:\\Users\\tyler\\.nuget\\packages\\",
+        "outputPath": "C:\\GIT\\Masters-2026\\P502\\P502 Student Files\\Owain Docs\\TouchpanelDemo\\Contracts\\sharp\\Masters2026_CMCP-P502\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\tyler\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net472"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Users\\tyler\\.nuget\\packages": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.pkg.github.com/Aligned-Vision-Group-Programming/index.json": {}
+        },
+        "frameworks": {
+          "net472": {
+            "framework": "net472",
+            "targetAlias": "net472",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "10.0.400"
+      },
+      "frameworks": {
+        "net472": {
+          "framework": "net472",
+          "targetAlias": "net472",
+          "dependencies": {
+            "Crestron.SimplSharp.SDK.Program": {
+              "target": "Package",
+              "version": "[2.22.40, )"
+            },
+            "StyleCop.Analyzers": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[1.3.180, )"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.403\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

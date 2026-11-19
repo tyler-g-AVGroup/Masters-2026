@@ -1,0 +1,10 @@
+VC-4 Masters URL's
+
+https://vc-4-cti-masters-<Your VC4 Instance ID>/VirtualControl/config/settings/
+	-or-
+https://<Your VC4 Instance IP Address>/VirtualControl/config/settings/
+
+Cockpit URL:
+https://vc-4-cti-masters-<Your VC4 Instance ID>:9090
+	-or-
+https://<Your VC4 Instance IP Address>:9090

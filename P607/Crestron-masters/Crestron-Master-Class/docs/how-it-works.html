@@ -1,0 +1,1282 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How It Works</title>
+<meta name="description" content="Crestron Master Class: animated walk-throughs of the demo DM-NAX server, Media Player 2.0, REST, the Python demo and the MCP servers.">
+<style>
+/* ---------- tokens: Crestron Blue (#004A80, from the crestron.com logo), charcoal, white ---------- */
+:root {
+  color-scheme: light;
+  --bg: #ffffff;
+  --surface: #f5f6f7;
+  --surface2: #eceef0;
+  --card: #ffffff;
+  --line: #dcdfe2;
+  --line-strong: #b9bec4;
+  --ink: #32363a;
+  --muted: #5f6368;
+  --brand: #004a80;          /* Crestron Blue */
+  --brand-ink: #ffffff;
+  --brand-soft: #e6eef5;
+  --link: #004a80;
+  --c-mp2: #004a80;          /* Media Player 2.0 WebSocket */
+  --c-rest: #0091e6;         /* DM-NAX REST over HTTPS */
+  --c-mcp: #157f9e;          /* MCP over stdio */
+  --c-http: #5f6368;         /* MCP over HTTP */
+  --c-admin: #d99a00;        /* you / approval */
+  --c-file: #8a9096;         /* inside one program */
+  --gold: #f7ba1e;
+  --code-bg: #f5f6f7;
+  --code-ink: #23272b;
+  --dot: rgba(50, 54, 58, 0.10);
+  --shadow: 0 1px 2px rgba(0,0,0,.06), 0 8px 24px -12px rgba(0,0,0,.18);
+  --radius: 10px;
+  --mono: ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas, monospace;
+  --sans: "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #17191c; --surface: #1f2226; --surface2: #272b30; --card: #1f2226;
+    --line: #34393f; --line-strong: #4a5057; --ink: #e8eaed; --muted: #a8adb3;
+    --brand: #5faae5; --brand-ink: #0d1b26; --brand-soft: #1b2d3c; --link: #7cbcf0;
+    --c-mp2: #5faae5; --c-rest: #33b6ff; --c-mcp: #3fb8d9; --c-http: #a8adb3;
+    --c-admin: #f7ba1e; --c-file: #8a9096; --code-bg: #121417; --code-ink: #dce3ea;
+    --dot: rgba(232, 234, 237, 0.07); --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 30px -12px rgba(0,0,0,.6);
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #17191c; --surface: #1f2226; --surface2: #272b30; --card: #1f2226;
+  --line: #34393f; --line-strong: #4a5057; --ink: #e8eaed; --muted: #a8adb3;
+  --brand: #5faae5; --brand-ink: #0d1b26; --brand-soft: #1b2d3c; --link: #7cbcf0;
+  --c-mp2: #5faae5; --c-rest: #33b6ff; --c-mcp: #3fb8d9; --c-http: #a8adb3;
+  --c-admin: #f7ba1e; --c-file: #8a9096; --code-bg: #121417; --code-ink: #dce3ea;
+  --dot: rgba(232, 234, 237, 0.07); --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 30px -12px rgba(0,0,0,.6);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.6 var(--sans); }
+a { color: var(--link); }
+code { font-family: var(--mono); font-size: 0.88em; background: var(--surface2); padding: 0.08em 0.35em; border-radius: 4px; }
+:focus-visible { outline: 3px solid var(--c-rest); outline-offset: 2px; border-radius: 4px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* ---------- header ---------- */
+.brandbar { background: var(--brand); color: var(--brand-ink); }
+.brandbar .in { max-width: 1400px; margin: 0 auto; padding: 10px 20px; display: flex; align-items: center; gap: 14px; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; font-weight: 600; }
+.hero { border-bottom: 1px solid var(--line); background: var(--surface); }
+.hero .in { max-width: 1400px; margin: 0 auto; padding: 44px 20px 36px; }
+.hero h1 { font-size: clamp(30px, 4.4vw, 46px); line-height: 1.12; margin: 0 0 12px; color: var(--brand); font-weight: 700; letter-spacing: -.01em; }
+.hero p.lead { max-width: 820px; margin: 0; color: var(--muted); font-size: 18px; }
+.map { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 28px 0 0; }
+.map a { display: block; text-decoration: none; color: var(--ink); background: var(--card); border: 1px solid var(--line); border-top: 3px solid var(--k); border-radius: var(--radius); padding: 14px 16px; transition: border-color .15s, box-shadow .15s; }
+.map a:hover { box-shadow: var(--shadow); border-color: var(--line-strong); border-top-color: var(--k); }
+.map .n { font: 700 12px var(--mono); color: var(--muted); letter-spacing: .08em; }
+.map b { display: block; font-size: 16px; margin: 2px 0 2px; }
+.map small { color: var(--muted); font-size: 14px; line-height: 1.45; display: block; }
+.map code { white-space: nowrap; }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 22px; font-size: 14px; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 8px; }
+.legend svg { width: 34px; height: 8px; flex: none; }
+
+/* ---------- nav ---------- */
+nav.top { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--bg) 94%, transparent); border-bottom: 1px solid var(--line); backdrop-filter: blur(6px); }
+nav.top .in { max-width: 1400px; margin: 0 auto; padding: 6px 12px; display: flex; gap: 2px; align-items: center; overflow-x: auto; }
+nav.top a { color: var(--muted); text-decoration: none; padding: 7px 11px; border-radius: 6px; font-size: 14px; white-space: nowrap; }
+nav.top a:hover { color: var(--brand); background: var(--brand-soft); }
+nav.top .theme { margin-left: auto; font: 600 13px var(--sans); color: var(--muted); background: none; border: 1px solid var(--line); border-radius: 6px; padding: 6px 10px; cursor: pointer; white-space: nowrap; }
+nav.top .theme:hover { color: var(--brand); border-color: var(--brand); }
+
+/* ---------- chapters ---------- */
+main { max-width: 1400px; margin: 0 auto; padding: 0 20px 80px; }
+.chapter { padding-top: 64px; scroll-margin-top: 40px; }
+.kicker { font: 700 12px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 10px; }
+.kicker::before { content: ""; width: 26px; height: 3px; background: var(--k); border-radius: 2px; }
+.chapter h2 { font-size: clamp(24px, 3vw, 34px); margin: 8px 0 10px; line-height: 1.2; color: var(--brand); }
+.chapter h3.sub { font-size: 19px; margin: 34px 0 6px; }
+.lead { color: var(--muted); max-width: 900px; font-size: 17px; margin: 0 0 16px; }
+.run { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 0 0 18px; }
+.run code { font-size: 13.5px; padding: 6px 10px; border: 1px solid var(--line); background: var(--surface); }
+.run .lbl { font-size: 13px; color: var(--muted); font-weight: 600; }
+.av { display: flex; gap: 14px; max-width: 960px; background: var(--surface); border-left: 3px solid var(--gold); border-radius: 0 8px 8px 0; padding: 10px 16px; margin: 0 0 20px; font-size: 15.5px; }
+.av b { white-space: nowrap; color: var(--ink); }
+
+/* ---------- variant switch ---------- */
+.seg { display: inline-flex; flex-wrap: wrap; gap: 4px; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 4px; margin: 0 0 14px; }
+.seg button { font: 600 14px var(--sans); color: var(--muted); background: none; border: 0; padding: 7px 13px; border-radius: 6px; cursor: pointer; min-height: 38px; }
+.seg button:hover { color: var(--brand); }
+.seg button[aria-pressed="true"] { background: var(--brand); color: var(--brand-ink); }
+.seg-label { font-size: 13px; color: var(--muted); font-weight: 600; margin: 0 0 6px; }
+
+/* ---------- stage ---------- */
+.stage { display: grid; grid-template-columns: minmax(0, 1.75fr) minmax(340px, 1fr); background: var(--card); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); }
+.diagram { padding: 12px; overflow-x: auto; background: radial-gradient(circle at 1px 1px, var(--dot) 1px, transparent 0) 0 0 / 20px 20px, var(--surface); }
+.diagram svg { display: block; width: 100%; min-width: 660px; height: auto; }
+.narr { padding: 20px 20px 16px; border-left: 1px solid var(--line); display: flex; flex-direction: column; min-width: 0; }
+.narr .count { font: 600 12px var(--mono); color: var(--muted); letter-spacing: .08em; text-transform: uppercase; }
+.narr h3 { margin: 4px 0 8px; font-size: 20px; line-height: 1.28; color: var(--ink); }
+.narr .body { font-size: 15.5px; }
+.narr .body p { margin: 0 0 10px; }
+.narr .body ul { margin: 0 0 10px; padding-left: 20px; }
+.narr .body li { margin: 2px 0; }
+.box-label { font: 700 11px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin: 10px 0 4px; }
+.narr pre { margin: 0; padding: 10px 12px; background: var(--code-bg); border: 1px solid var(--line); border-radius: 8px; font: 12.5px/1.55 var(--mono); color: var(--code-ink); white-space: pre; max-height: 300px; overflow: auto; }
+.see { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.see div { display: grid; grid-template-columns: 92px 1fr; font: 12.5px/1.5 var(--mono); border-top: 1px solid var(--line); }
+.see div:first-child { border-top: 0; }
+.see i { font-style: normal; font: 700 10.5px/1.5 var(--sans); letter-spacing: .04em; text-transform: uppercase; color: var(--muted); background: var(--surface); padding: 6px 8px; border-right: 1px solid var(--line); }
+.see span { padding: 5px 10px; white-space: pre-wrap; word-break: break-word; color: var(--code-ink); background: var(--code-bg); }
+.hidden { display: none !important; }
+.controls { display: flex; align-items: center; gap: 8px; padding: 10px 14px; border-top: 1px solid var(--line); background: var(--surface); grid-column: 1 / -1; flex-wrap: wrap; }
+.controls button { font: 600 14px var(--sans); color: var(--ink); background: var(--card); border: 1px solid var(--line-strong); border-radius: 6px; padding: 7px 14px; cursor: pointer; min-height: 38px; }
+.controls button:hover:not(:disabled) { border-color: var(--brand); color: var(--brand); }
+.controls button:disabled { opacity: .4; cursor: default; }
+.controls .play { background: var(--brand); color: var(--brand-ink); border-color: var(--brand); min-width: 84px; }
+.controls .play:hover:not(:disabled) { color: var(--brand-ink); filter: brightness(1.1); }
+.dots { display: flex; gap: 5px; flex-wrap: wrap; margin-left: auto; }
+.dots button { width: 28px; height: 28px; min-height: 28px; padding: 0; border-radius: 50%; font: 600 11px var(--mono); color: var(--muted); }
+.dots button[aria-current="step"] { background: var(--brand); color: var(--brand-ink); border-color: var(--brand); }
+.swipe { display: none; font-size: 13px; color: var(--muted); padding: 6px 14px 0; background: var(--surface); }
+
+/* ---------- svg ---------- */
+.grp { fill: color-mix(in srgb, var(--brand) 4%, transparent); stroke: var(--line-strong); stroke-dasharray: 5 5; }
+.grp-label { fill: var(--muted); font: 700 12px var(--mono); letter-spacing: .06em; text-transform: uppercase; }
+.node rect.box { fill: var(--card); stroke: var(--line-strong); stroke-width: 1.2; transition: fill .3s, stroke .3s; }
+.node .t { fill: var(--ink); font: 700 15px var(--sans); }
+.node .s { fill: var(--muted); font: 12px var(--sans); }
+.node .bar { fill: var(--k); opacity: .45; transition: opacity .3s; }
+.node.on rect.box { fill: color-mix(in srgb, var(--k) 9%, var(--card)); stroke: var(--k); stroke-width: 2.2; }
+.node.on .bar { opacity: 1; }
+.node.dim { opacity: .55; transition: opacity .3s; }
+.wire { fill: none; stroke: var(--line-strong); stroke-width: 2; stroke-linejoin: round; transition: stroke .2s; }
+.wire.on { stroke: var(--k); stroke-width: 3; }
+.wire.k-mp2 { stroke-dasharray: none; }
+.wire.k-rest { stroke-dasharray: 10 5; }
+.wire.k-mcp { stroke-dasharray: 2 5; stroke-linecap: round; }
+.wire.k-http { stroke-dasharray: 12 4 3 4; }
+.wire.k-admin { stroke-dasharray: none; }
+.wire.k-file { stroke-dasharray: 4 4; }
+.wire-label { fill: var(--muted); font: 600 11px var(--mono); }
+.pkt circle { fill: var(--k); stroke: var(--card); stroke-width: 2; }
+.pkt rect { fill: var(--card); stroke: var(--k); stroke-width: 1.5; }
+.pkt text { fill: var(--ink); font: 600 11.5px var(--mono); }
+.pkt.old { opacity: .35; }
+.pkt.old rect, .pkt.old text { display: none; }
+
+/* ---------- static figures, tables, cards ---------- */
+.figure { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px; margin-top: 18px; overflow-x: auto; }
+.figure svg { display: block; width: 100%; min-width: 640px; height: auto; }
+.figure figcaption { font-size: 14px; color: var(--muted); margin-top: 8px; }
+.st rect { fill: var(--card); stroke: var(--k, var(--line-strong)); stroke-width: 1.6; }
+.st .t { fill: var(--ink); font: 700 15px var(--sans); }
+.st .s { fill: var(--muted); font: 11.5px var(--mono); }
+.arr { fill: none; stroke: var(--muted); stroke-width: 1.6; }
+.arr-l { fill: var(--ink); font: 600 11.5px var(--mono); }
+.arr-l.bg { stroke: var(--card); stroke-width: 5; paint-order: stroke; }
+.tablewrap { overflow-x: auto; margin-top: 20px; }
+table { width: 100%; border-collapse: collapse; background: var(--card); border: 1px solid var(--line); font-size: 15px; }
+th, td { text-align: left; padding: 10px 13px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { background: var(--surface); font-size: 12.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+tbody th { text-transform: none; letter-spacing: 0; font-size: 14.5px; color: var(--ink); }
+tr:last-child td, tr:last-child th { border-bottom: 0; }
+dl.gloss { display: grid; grid-template-columns: max-content 1fr; gap: 8px 20px; margin: 18px 0 0; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px; }
+dl.gloss dt { font-weight: 700; }
+dl.gloss dd { margin: 0; color: var(--muted); }
+footer { border-top: 1px solid var(--line); background: var(--surface); }
+footer .in { max-width: 1400px; margin: 0 auto; padding: 26px 20px 50px; color: var(--muted); font-size: 15px; }
+
+@media (max-width: 1180px) {
+  .stage { grid-template-columns: 1fr; }
+  .narr { border-left: 0; border-top: 1px solid var(--line); }
+}
+@media (max-width: 960px) {
+  .map { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .swipe { display: block; }
+  .dots { margin-left: 0; width: 100%; }
+  dl.gloss { grid-template-columns: 1fr; }
+  dl.gloss dd { margin-bottom: 8px; }
+}
+@media (max-width: 560px) {
+  .hero .in, main, footer .in { padding-left: 16px; padding-right: 16px; }
+  .map { grid-template-columns: 1fr; }
+  .av { flex-direction: column; gap: 2px; }
+  .see div { grid-template-columns: 1fr; }
+  .see i { border-right: 0; border-bottom: 1px solid var(--line); }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .map a, .node rect.box, .node .bar, .node.dim { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="brandbar"><div class="in">Crestron Master Class &middot; visual guide</div></div>
+
+<header class="hero">
+  <div class="in">
+    <h1>How the pieces talk</h1>
+    <p class="lead">Every program in this class, shown as animated steps with the real messages they send. Press <b>Play</b> on a chapter, or step with <b>Next</b> or the arrow keys. You can follow the whole system here without running a single command. When you do want to run it, the commands are in <a href="GETTING-STARTED.md">Getting started</a>.</p>
+    <div class="map">
+      <a href="#start" style="--k: var(--c-file)"><span class="n">00</span><b>The demo DM-NAX starts</b><small>What <code>dmnax-server</code> builds and serves on one port.</small></a>
+      <a href="#mp2" style="--k: var(--c-mp2)"><span class="n">01</span><b>Inside Media Player 2.0</b><small>Login, session, browse, play, and the pushes that prove it.</small></a>
+      <a href="#rest" style="--k: var(--c-rest)"><span class="n">02</span><b>DM-NAX REST</b><small>Login token, read a zone, write volume, read it back.</small></a>
+      <a href="#py" style="--k: var(--c-admin)"><span class="n">03</span><b>The Python demo</b><small><code>--check</code>, the yes prompt and <code>--execute</code>, step by step.</small></a>
+      <a href="#mcp" style="--k: var(--c-mcp)"><span class="n">04</span><b>MCP over stdio</b><small>Hand-written and SDK servers: tools, preview, approval.</small></a>
+      <a href="#http" style="--k: var(--c-http)"><span class="n">05</span><b>MCP over HTTP</b><small>One server, many sessions, connected by URL.</small></a>
+      <a href="#faults" style="--k: var(--gold)"><span class="n">06</span><b>When things go wrong</b><small>Each fault switch, traced to the message you read.</small></a>
+      <a href="#words" style="--k: var(--c-file)"><span class="n">&nbsp;</span><b>Glossary</b><small>RcSessionId, SignedData, XSRF and the rest.</small></a>
+    </div>
+    <div class="legend" aria-label="Line legend">
+      <span><svg viewBox="0 0 34 8" aria-hidden="true"><line x1="1" y1="4" x2="33" y2="4" stroke="var(--c-mp2)" stroke-width="3"/></svg>MP2 WebSocket (player)</span>
+      <span><svg viewBox="0 0 34 8" aria-hidden="true"><line x1="1" y1="4" x2="33" y2="4" stroke="var(--c-rest)" stroke-width="3" stroke-dasharray="10 5"/></svg>REST over HTTPS (zones)</span>
+      <span><svg viewBox="0 0 34 8" aria-hidden="true"><line x1="2" y1="4" x2="33" y2="4" stroke="var(--c-mcp)" stroke-width="3" stroke-dasharray="2 5" stroke-linecap="round"/></svg>MCP over stdio</span>
+      <span><svg viewBox="0 0 34 8" aria-hidden="true"><line x1="1" y1="4" x2="33" y2="4" stroke="var(--c-http)" stroke-width="3" stroke-dasharray="12 4 3 4"/></svg>MCP over HTTP</span>
+      <span><svg viewBox="0 0 34 8" aria-hidden="true"><line x1="1" y1="4" x2="33" y2="4" stroke="var(--c-admin)" stroke-width="3"/></svg>You (approve, type, switch)</span>
+      <span><svg viewBox="0 0 34 8" aria-hidden="true"><line x1="1" y1="4" x2="33" y2="4" stroke="var(--c-file)" stroke-width="3" stroke-dasharray="4 4"/></svg>Inside one program</span>
+    </div>
+  </div>
+</header>
+
+<nav class="top" aria-label="Chapters"><div class="in">
+  <a href="#start">00 Server</a><a href="#mp2">01 Media Player 2.0</a><a href="#rest">02 REST</a><a href="#py">03 Python demo</a><a href="#mcp">04 MCP stdio</a><a href="#http">05 MCP HTTP</a><a href="#faults">06 Faults</a><a href="#words">Glossary</a>
+  <button type="button" class="theme" id="theme" aria-label="Switch colour theme">Dark</button>
+</div></nav>
+
+<main>
+
+<!-- 00 -->
+<section class="chapter" id="start" style="--k: var(--c-file)">
+  <div class="kicker">Chapter 00</div>
+  <h2>The demo DM-NAX starts</h2>
+  <p class="lead"><code>dmnax-server</code> stands in for a real DM-NAX-4ZSA. Everything starts here: it builds a pretend device in memory, writes the settings file every client reads, and answers Media Player 2.0, REST and a status page on one TLS port.</p>
+  <div class="run"><span class="lbl">Terminal 1</span><code>python dmnax-server/server.py</code><span class="lbl">options</span><code>--port 8443 --players 5 --zones 5 --fault NAME --quiet</code></div>
+  <div class="av"><b>In AV terms</b><span>It is a bench processor with a loaded program: five media players, five zones, a fixed input table and a front-panel status page, plus switches to make it misbehave on purpose.</span></div>
+  <div class="flow" data-flow="start"></div>
+</section>
+
+<!-- 01 -->
+<section class="chapter" id="mp2" style="--k: var(--c-mp2)">
+  <div class="kicker">Chapter 01</div>
+  <h2>Inside Media Player 2.0</h2>
+  <p class="lead">Media Player 2.0 (MP2) is the DM-NAX's streaming player API: JSON over one secure WebSocket, <code>wss://&lt;device&gt;/subscriptionmgr</code>. Every request has the same wrapper, <code>{"Device": {"&lt;CommandSet&gt;": {"RequestAction": {...}}}}</code>, and replies and pushes come back shaped like the part of the device that changed. The messages below are real, captured from <code>crestron/mp2.py</code> talking to dmnax-server.</p>
+  <div class="av"><b>In AV terms</b><span>Register is like a panel joining the program; subscribe is like turning on feedback for a join. After that the device sends changes on its own, and a command only counts once the feedback says it happened.</span></div>
+  <div class="flow" data-flow="mp2"></div>
+
+  <h3 class="sub">The player's states and the actions it offers</h3>
+  <p class="lead">Each push carries <code>PlayerState</code> and <code>AvailableActions</code>. Clients only send an action the player offers right now; anything else comes back as a refusal Notification. <code>LoadSource</code> is always accepted.</p>
+  <figure class="figure">
+    <svg viewBox="0 0 1000 300" role="img" aria-labelledby="stt">
+      <title id="stt">Player state diagram. Empty (no source) goes to playing with LoadSource. Playing goes to paused with Pause and to stopped with Stop or at the end of the queue. Paused goes to playing with Play and to stopped with Stop. Stopped goes to playing with Play. LoadSource from any state starts a new source playing. NextTrack and PreviousTrack keep it playing. A ready player is an unused slot.</title>
+      <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="var(--muted)"/></marker></defs>
+      <g class="st" style="--k: var(--line-strong)"><rect x="20" y="110" width="170" height="86" rx="10"/><text class="t" x="36" y="140">empty</text><text class="s" x="36" y="162">no source loaded</text><text class="s" x="36" y="180">actions: []</text></g>
+      <g class="st" style="--k: var(--c-mp2)"><rect x="330" y="20" width="250" height="110" rx="10"/><text class="t" x="346" y="50">playing</text><text class="s" x="346" y="72">live: Pause, Stop</text><text class="s" x="346" y="90">song: + Seek, Ffwd, Rewind,</text><text class="s" x="346" y="108">  Shuffle, Repeat, Next/Prev</text></g>
+      <g class="st" style="--k: var(--c-rest)"><rect x="760" y="20" width="220" height="110" rx="10"/><text class="t" x="776" y="50">paused</text><text class="s" x="776" y="72">Play, Stop</text><text class="s" x="776" y="90">(song: + Seek, Shuffle,</text><text class="s" x="776" y="108">  Repeat, Next/Prev)</text></g>
+      <g class="st" style="--k: var(--c-file)"><rect x="330" y="190" width="250" height="90" rx="10"/><text class="t" x="346" y="220">stopped</text><text class="s" x="346" y="242">Play</text><text class="s" x="346" y="260">position back to 0</text></g>
+      <g class="st" style="--k: var(--line)"><rect x="760" y="190" width="220" height="90" rx="10"/><text class="t" x="776" y="220">ready</text><text class="s" x="776" y="242">unused player slot</text><text class="s" x="776" y="260">demos refuse it</text></g>
+      <path class="arr" d="M190 135 L330 80" marker-end="url(#ah)"/><text class="arr-l bg" x="206" y="96">LoadSource</text>
+      <path class="arr" d="M580 62 L760 62" marker-end="url(#ah)"/><text class="arr-l bg" x="640" y="54">Pause</text>
+      <path class="arr" d="M760 96 L580 96" marker-end="url(#ah)"/><text class="arr-l bg" x="646" y="116">Play</text>
+      <path class="arr" d="M430 130 L430 190" marker-end="url(#ah)"/><text class="arr-l bg" x="300" y="166">Stop, end of queue</text>
+      <path class="arr" d="M500 190 L500 130" marker-end="url(#ah)"/><text class="arr-l bg" x="508" y="166">Play</text>
+      <path class="arr" d="M800 130 L580 205" marker-end="url(#ah)"/><text class="arr-l bg" x="676" y="186">Stop</text>
+      <path class="arr" d="M400 20 C 400 -8, 470 -8, 470 20" marker-end="url(#ah)" transform="translate(0,2)"/><text class="arr-l" x="482" y="14">Next / Prev</text>
+    </svg>
+    <figcaption>From <code>dmnax-server/device_model.py</code> (<code>actions()</code>). A real DM-NAX offers the same names; which ones depend on the service and what is loaded.</figcaption>
+  </figure>
+
+  <div class="tablewrap"><table>
+    <thead><tr><th>Command set</th><th>What it does</th><th>Used by</th></tr></thead>
+    <tbody>
+      <tr><th scope="row"><code>SubscriptionMgr</code></th><td><code>RegisterClient</code> (get an <code>RcSessionId</code>), <code>GetCresNextObject</code> (read once), <code>SubscribeToObject</code> (pushes from now on)</td><td>every client, first</td></tr>
+      <tr><th scope="row"><code>MediaNavigation</code></th><td>Menus: <code>ProviderBrowseMenu</code>, <code>SearchMenu</code>, <code>HomeScreenMenu</code>. Replies echo your <code>MsgId</code></td><td>browse, search, home_screen</td></tr>
+      <tr><th scope="row"><code>MediaPlayerNeXt</code></th><td>Player actions: <code>LoadSource</code>, <code>Play</code>, <code>Pause</code>, <code>Stop</code>, <code>NextTrack</code>, <code>Seek</code>, <code>Shuffle</code>, <code>Repeat</code>...</td><td>play_item, player_action, pause</td></tr>
+      <tr><th scope="row"><code>MediaFavorites</code></th><td><code>ListFavorites</code> for one profile</td><td>list_favorites</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- 02 -->
+<section class="chapter" id="rest" style="--k: var(--c-rest)">
+  <div class="kicker">Chapter 02</div>
+  <h2>DM-NAX REST: zones, volume and routing</h2>
+  <p class="lead">The player is MP2; everything about rooms is REST, the DM-NAX's CresNext JSON over HTTPS. You log in once, read with <code>GET</code>, write with <code>POST /Device</code>. Nothing is pushed, so every write is checked by reading it back. Client code: <code>crestron/rest.py</code>; server side: <code>dmnax-server/rest_api.py</code>.</p>
+  <div class="av"><b>In AV terms</b><span>Like sending a level to a DSP and then polling the level back, because this interface has no feedback channel. "OK" means accepted, not done.</span></div>
+  <div class="flow" data-flow="rest"></div>
+</section>
+
+<!-- 03 -->
+<section class="chapter" id="py" style="--k: var(--c-admin)">
+  <div class="kicker">Chapter 03</div>
+  <h2>The Python demo: plan, then prove every step</h2>
+  <p class="lead"><code>demo_python/main.py</code> runs a fixed script on Player01 and its zone, Kitchen, using chapters 01 and 02 underneath. It only reads until you allow a change, and each change passes only when the device shows it happened. Pick how you start it:</p>
+  <div class="run"><span class="lbl">Terminal 3</span><code>python demo_python/main.py --config dmnax-server/client-config.json --execute</code></div>
+  <div class="flow" data-flow="py"></div>
+</section>
+
+<!-- 04 -->
+<section class="chapter" id="mcp" style="--k: var(--c-mcp)">
+  <div class="kicker">Chapter 04</div>
+  <h2>MCP over stdio: the device as tools</h2>
+  <p class="lead">MCP (Model Context Protocol) lets a program, or an AI assistant such as Claude, list <b>tools</b> and call them with JSON-RPC. Both servers here offer the same 15 tools and approval rules from <code>demo_mcp/protocol.py</code>. <code>demo_mcp</code> reads and writes the JSON itself; <code>demo_mcp_sdk</code> hands that to the official MCP Python SDK. The JSON below is a real exchange with <code>demo_mcp/server.py</code>.</p>
+  <div class="run"><span class="lbl">Terminal 3</span><code>python demo_mcp/client.py --config dmnax-server/client-config.json</code><span class="lbl">or</span><code>python demo_mcp_sdk/client.py --config ...</code></div>
+  <div class="av"><b>In AV terms</b><span>The tools are a device driver's functions (play, set volume, route). The menu or the AI is the touch panel calling them, and every change except pause waits on a confirm button.</span></div>
+  <div class="flow" data-flow="mcp"></div>
+  <div class="tablewrap"><table>
+    <thead><tr><th>The 15 tools</th><th>Kind</th><th>Device calls underneath</th></tr></thead>
+    <tbody>
+      <tr><th scope="row"><code>list_profiles</code>, <code>list_services</code></th><td>read</td><td>MP2 <code>GetCresNextObject /Device/StreamingServices/UserProfiles</code></td></tr>
+      <tr><th scope="row"><code>browse</code>, <code>search</code>, <code>home_screen</code></th><td>read</td><td>MP2 <code>MediaNavigation</code> menus</td></tr>
+      <tr><th scope="row"><code>list_favorites</code></th><td>read</td><td>MP2 <code>MediaFavorites ListFavorites</code></td></tr>
+      <tr><th scope="row"><code>list_players</code></th><td>read</td><td>MP2 players, plus REST reads for which zones hear each one</td></tr>
+      <tr><th scope="row"><code>list_zones</code>, <code>list_inputs</code></th><td>read</td><td>REST <code>GET</code> ZoneOutputs, AvMatrixRouting, InputSources</td></tr>
+      <tr><th scope="row"><code>play_item</code>, <code>player_action</code></th><td>change, approved</td><td>MP2 <code>LoadSource</code> or an action, then wait for the push</td></tr>
+      <tr><th scope="row"><code>pause</code></th><td>change, no approval</td><td>MP2 <code>Pause</code>, then wait for <code>paused</code></td></tr>
+      <tr><th scope="row"><code>set_volume</code>, <code>set_mute</code>, <code>set_route</code></th><td>change, approved</td><td>REST <code>POST /Device</code>, then read back</td></tr>
+    </tbody>
+  </table></div>
+  <div class="tablewrap"><table>
+    <thead><tr><th></th><th>Hand-written: <code>demo_mcp</code></th><th>Official SDK: <code>demo_mcp_sdk</code></th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Who parses JSON-RPC</th><td>Its own loop: one JSON message per line</td><td>The SDK's <code>MCPServer</code></td></tr>
+      <tr><th scope="row">Protocol version</th><td><code>2025-11-25</code> only</td><td><code>2025-11-25</code> and newer</td></tr>
+      <tr><th scope="row">Unknown arguments</th><td>Rejected</td><td>Ignored</td></tr>
+      <tr><th scope="row">Approval</th><td>Always preview plus token</td><td>Asks you through the host (elicitation) when it can, otherwise preview plus token</td></tr>
+      <tr><th scope="row">Best for</th><td>Reading: every message is in plain code</td><td>Registering in an AI host such as Claude Code</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- 05 -->
+<section class="chapter" id="http" style="--k: var(--c-http)">
+  <div class="kicker">Chapter 05</div>
+  <h2>MCP over HTTP: start once, connect by URL</h2>
+  <p class="lead">Same tools, same approval; only the transport changes. With stdio the client starts the server. Here <b>you</b> start <code>demo_mcp_http/server.py</code> and any number of clients (up to 16) connect to <code>http://127.0.0.1:8000/mcp</code>, each in its own session. Headers and replies below are real.</p>
+  <div class="run"><span class="lbl">Terminal 2</span><code>python demo_mcp_http/server.py --config dmnax-server/client-config.json</code><span class="lbl">Terminal 3</span><code>python demo_mcp_http/client.py</code></div>
+  <div class="av"><b>In AV terms</b><span>Like moving from a serial cable to a control server on the network: the device logic stays put, clients connect when they need it, and the server keeps each connection's state apart.</span></div>
+  <div class="flow" data-flow="http"></div>
+  <div class="tablewrap"><table>
+    <thead><tr><th></th><th>stdio (<code>demo_mcp</code>, <code>demo_mcp_sdk</code>)</th><th>HTTP (<code>demo_mcp_http</code>)</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Who starts the server</th><td>The client or AI host, as a child process</td><td>You, before any client connects</td></tr>
+      <tr><th scope="row">How a client finds it</th><td>A command to run</td><td>A URL: <code>http://127.0.0.1:8000/mcp</code></td></tr>
+      <tr><th scope="row">Clients per server</th><td>One</td><td>Many, one session each (up to 16)</td></tr>
+      <tr><th scope="row">Messages</th><td>JSON lines over stdin and stdout</td><td>POST for calls, GET for an event stream, DELETE to leave</td></tr>
+      <tr><th scope="row">When it ends</th><td>The client closes the pipe; the server pauses what it started and exits</td><td>The session ends; the server keeps running for others</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- 06 -->
+<section class="chapter" id="faults" style="--k: var(--gold)">
+  <div class="kicker">Chapter 06</div>
+  <h2>When things go wrong</h2>
+  <p class="lead">dmnax-server can misbehave on purpose. Switch a fault on from the status page (<code>https://127.0.0.1:8443/</code>, under <b>Fault injection</b>), the API, or <code>--fault NAME</code> at start, then run any client. Pick a fault to trace it from the switch to the exact message you read. In an MCP menu the same text arrives as <code>Tool &lt;name&gt; failed: {'error': '...'}</code>, and a failed change adds <code>The change may or may not have applied; read the state back.</code></p>
+  <div class="flow" data-flow="faults"></div>
+</section>
+
+<!-- glossary -->
+<section class="chapter" id="words" style="--k: var(--c-file)">
+  <div class="kicker">Glossary</div>
+  <h2>Words used on this page</h2>
+  <dl class="gloss">
+    <dt>MP2</dt><dd>Media Player 2.0: the DM-NAX streaming player's API, JSON over a secure WebSocket (<code>wss://</code>). It pushes changes to subscribers.</dd>
+    <dt>CrestronAuth-SHA256</dt><dd>MP2's login: an HMAC signature of the client id, <code>GET</code>, the URL, a time stamp and a one-time nonce, made with the client secret. The secret itself is never sent.</dd>
+    <dt>RcSessionId</dt><dd>The id <code>RegisterClient</code> returns. Every later MP2 request carries it.</dd>
+    <dt>Subscribe</dt><dd><code>SubscribeToObject</code>: ask the device to push every change under a path, such as <code>/Device/MediaPlayerNeXt/Players/Player01</code>.</dd>
+    <dt>SignedData</dt><dd>A blob the device signs and attaches to every menu item. To open or play the item you send it back unchanged; an altered one is refused.</dd>
+    <dt>AvailableActions</dt><dd>The player actions allowed right now. Anything else is refused with a Notification.</dd>
+    <dt>Notification</dt><dd>How MP2 says no: a push with a <code>Msg</code> such as <code>Set Station Failed: ...</code>.</dd>
+    <dt>REST</dt><dd>The DM-NAX's HTTPS API for zones, volume, mute and routing. You ask (GET) or change (POST); nothing is pushed.</dd>
+    <dt>XSRF token</dt><dd><code>CREST-XSRF-TOKEN</code>, returned at login. Every REST write sends it back as <code>X-CREST-XSRF-TOKEN</code>.</dd>
+    <dt>ReservedPlayer</dt><dd>A zone's media-player input (Kitchen reserves <code>Input05</code>, which is Player01). That is how the demos find the zone for a player.</dd>
+    <dt>MCP</dt><dd>Model Context Protocol: a standard way for a program or AI assistant to list tools and call them.</dd>
+    <dt>JSON-RPC</dt><dd>MCP's message format: a request with a method and an id, and a reply with the same id. A message without an id is a notification and gets no reply.</dd>
+    <dt>stdio</dt><dd>Standard input and output: the two pipes between a program and the process that started it.</dd>
+    <dt>Approval token</dt><dd>One-time value from a change tool's preview call. Valid 120 seconds, for that tool and those exact arguments.</dd>
+    <dt>Elicitation</dt><dd>MCP feature where the server asks the user a question through the host, for example a yes or no form.</dd>
+    <dt>Mcp-Session-Id</dt><dd>HTTP header naming one client's session on the HTTP server.</dd>
+    <dt>SSE</dt><dd>Server-Sent Events: a long-lived HTTP reply the server keeps writing messages into.</dd>
+  </dl>
+</section>
+
+</main>
+
+<footer><div class="in">
+  Messages on this page were captured from a run against dmnax-server and shortened where marked <code>...</code>. Ids such as <code>RC57042fcbb3154da0</code>, tokens and signatures change on every run. To run it yourself, follow <a href="GETTING-STARTED.md">Getting started</a>. More request examples: <a href="../demo_python/README.md">demo_python/README.md</a>, <a href="../demo_mcp/README.md">demo_mcp/README.md</a>.
+</div></footer>
+
+<script>
+(function () {
+  "use strict";
+  var NS = "http://www.w3.org/2000/svg";
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+  var KINDS = ["mp2", "rest", "mcp", "http", "admin", "file"];
+  var SEE = { t1: "Terminal 1", t2: "Terminal 2", t3: "Terminal 3", menu: "Menu", ai: "AI host", page: "Status page", stderr: "Server stderr" };
+
+  /* ---------- theme ---------- */
+  var root = document.documentElement, themeBtn = document.getElementById("theme");
+  function isDark() {
+    var t = root.getAttribute("data-theme");
+    return t ? t === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+  }
+  function paintThemeBtn() { themeBtn.textContent = isDark() ? "Light" : "Dark"; }
+  try { var saved = localStorage.getItem("hiw-theme"); if (saved) root.setAttribute("data-theme", saved); } catch (e) {}
+  paintThemeBtn();
+  var darkQuery = window.matchMedia("(prefers-color-scheme: dark)");
+  if (darkQuery.addEventListener) darkQuery.addEventListener("change", paintThemeBtn);
+  themeBtn.addEventListener("click", function () {
+    var next = isDark() ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try { localStorage.setItem("hiw-theme", next); } catch (e) {}
+    paintThemeBtn();
+  });
+
+  function svg(tag, attrs, parent) {
+    var e = document.createElementNS(NS, tag);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  function el(tag, attrs, parent) {
+    var e = document.createElement(tag);
+    for (var k in attrs) { if (k === "text") e.textContent = attrs[k]; else e.setAttribute(k, attrs[k]); }
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  function kvar(kind) { return "var(--c-" + (KINDS.indexOf(kind) >= 0 ? kind : "file") + ")"; }
+
+  var FLOWS = {};
+
+  /* =====================================================================
+     00  dmnax-server starts
+     ===================================================================== */
+  FLOWS.start = {
+    desc: "Diagram: in terminal 1 you run server.py. main() parses options, builds the Device model, writes client-config.json and loads a TLS certificate. One TLS port at 127.0.0.1:8443 holds the MP2 hub, the REST API, the status page with fault switches, and a ticker. Clients connect to the hub and the REST API; your browser opens the status page.",
+    groups: [{ x: 470, y: 10, w: 290, h: 440, label: "one TLS port: 127.0.0.1:8443", top: true }],
+    nodes: [
+      { id: "term", x: 20, y: 30, w: 170, h: 80, t: "Terminal 1", s: "python server.py", k: "admin" },
+      { id: "main", x: 20, y: 190, w: 170, h: 90, t: "main()", s: "argparse options", k: "file" },
+      { id: "config", x: 240, y: 30, w: 190, h: 80, t: "client-config.json", s: "address + demo logins", k: "file" },
+      { id: "device", x: 240, y: 190, w: 190, h: 90, t: "Device model", s: "5 players, 5 zones", k: "file" },
+      { id: "tls", x: 240, y: 350, w: 190, h: 80, t: ".tls/cert.pem", s: "self-signed, made once", k: "file" },
+      { id: "hub", x: 490, y: 45, w: 220, h: 75, t: "Mp2Hub", s: "wss /subscriptionmgr", k: "mp2" },
+      { id: "rest", x: 490, y: 140, w: 220, h: 75, t: "RestApi", s: "/userlogin.html, /Device", k: "rest" },
+      { id: "admin", x: 490, y: 235, w: 220, h: 75, t: "Status + faults", s: "/ and /dmnax/api", k: "http" },
+      { id: "ticker", x: 490, y: 330, w: 220, h: 75, t: "Ticker", s: "every 0.25 s", k: "file" },
+      { id: "clients", x: 790, y: 80, w: 190, h: 100, t: "Clients", s: "demo_python, MCP", k: "mp2" },
+      { id: "browser", x: 790, y: 250, w: 190, h: 80, t: "Your browser", s: "status page", k: "http" }
+    ],
+    wires: [
+      { id: "tm", pts: [[105, 110], [105, 190]], k: "admin" },
+      { id: "mc", pts: [[190, 215], [215, 215], [215, 70], [240, 70]], k: "file" },
+      { id: "md", pts: [[190, 235], [240, 235]], k: "file" },
+      { id: "mt", pts: [[190, 255], [215, 255], [215, 390], [240, 390]], k: "file" },
+      { id: "dh", pts: [[430, 235], [450, 235], [450, 82], [490, 82]], k: "mp2" },
+      { id: "dr", pts: [[430, 235], [450, 235], [450, 177], [490, 177]], k: "rest" },
+      { id: "da", pts: [[430, 235], [450, 235], [450, 272], [490, 272]], k: "file" },
+      { id: "dt", pts: [[430, 235], [450, 235], [450, 367], [490, 367]], k: "file" },
+      { id: "tl", pts: [[430, 415], [470, 415]], k: "file" },
+      { id: "cc", pts: [[335, 30], [335, 4], [885, 4], [885, 80]], k: "file", label: "--config", lx: 893, ly: 62 },
+      { id: "ch", pts: [[790, 115], [750, 115], [750, 82], [710, 82]], k: "mp2", label: "wss", lx: 758, ly: 104 },
+      { id: "cr", pts: [[790, 150], [750, 150], [750, 177], [710, 177]], k: "rest", label: "https", lx: 756, ly: 168 },
+      { id: "ba", pts: [[790, 290], [750, 290], [750, 272], [710, 272]], k: "http" }
+    ],
+    steps: [
+      { nodes: ["term", "main"], hops: [["tm", 1, "argv", "admin"]],
+        title: "You run the server",
+        body: "<p>Nothing else needs to be running first. <code>main()</code> reads the options: port <code>8443</code>, <code>5</code> players, <code>5</code> zones, any <code>--fault</code> to start with, and <code>--quiet</code> to hide the request log.</p><p>It listens on <code>127.0.0.1</code> only by default, because the demo logins are public.</p>",
+        code: "python dmnax-server/server.py\npython dmnax-server/server.py --port 8444 --fault refuse_load",
+        see: [["t1", "(the banner follows in a moment)"]] },
+      { nodes: ["main", "device"], hops: [["md", 1, "Device(5, 5)", "file"]],
+        title: "Build the pretend device in memory",
+        body: "<p><code>Device()</code> in <code>device_model.py</code> lays out a DM-NAX-4ZSA: four physical inputs, then one input per media player, then one zone per player.</p><p>It also builds a fictional catalog (two profiles, Internet Radio and DemoStream) with a <b>new random signing key</b> each start. That is why <code>SignedData</code> from an earlier run stops working after a restart.</p>",
+        code: "Input01-04   Analog 1, Analog 2, Digital S/PDIF, AES67\nInput05      Media Player 1  = Player01\nInput06..09  Media Player 2..5 = Player02..05\n\nZone1 Kitchen       ReservedPlayer Input05, route Input05, Volume 250 (25%)\nZone2 Living Room   ReservedPlayer Input06 ...\nZone3 Patio, Zone4 Primary Bedroom, Zone5 Office\n\nProfile1 Main House: Provider1 Internet Radio, Provider2 DemoStream\nProfile2 Guest:      Provider1 Internet Radio" },
+      { nodes: ["main", "config", "clients"], hops: [["mc", 1, "write", "file"], ["cc", 1, "--config", "file"]],
+        title: "Write the file every client reads",
+        body: "<p>It writes <code>dmnax-server/client-config.json</code> on every start: the address and the demo logins. Every client gets it with <code>--config</code>, so there is nothing to fill in.</p><p>For a real DM-NAX you use <code>config/config.json</code> instead, with the same keys.</p>",
+        code: '{\n  "device_ip": "127.0.0.1:8443",\n  "client_id": "dmnax-demo-client",\n  "client_secret": "ZG1uYXgtc2VydmVyLWRlbW8tc2VjcmV0LTAwMDE=",\n  "admin_user": "admin",\n  "admin_password": "dmnax-demo",\n  "player": "Player01",\n  "service": "Internet Radio",\n  "folder": "Popular stations",\n  "verify_tls": false,\n  "initial_seconds": 5,\n  "resume_seconds": 3,\n  "timeout": 12\n}' },
+      { nodes: ["main", "tls"], hops: [["mt", 1, "tls_context()", "file"], ["tl", 1, "cert", "file"]],
+        title: "Load a TLS certificate",
+        body: "<p>A real DM-NAX only speaks <code>https</code> and <code>wss</code>, so this one does too. The first start creates a self-signed certificate in <code>dmnax-server/.tls/</code>; later starts reuse it.</p><p>Clients accept it because the config says <code>\"verify_tls\": false</code>. Your browser shows a warning once.</p>",
+        code: ".tls/cert.pem   CN=dmnax-server, valid for localhost and 127.0.0.1\n.tls/key.pem" },
+      { nodes: ["device", "hub", "rest", "admin", "ticker"], hops: [["dh", 1, "", "mp2"], ["dr", 1, "", "rest"], ["da", 1, "", "file"], ["dt", 1, "", "file"]],
+        title: "One port, every API",
+        body: "<p><code>create_app()</code> puts all routes on one aiohttp server, like a real device. MP2 and REST read and change the <b>same</b> Device object, so a volume set over REST and a track played over MP2 show up together.</p><p>A middleware refuses the status page and <code>/dmnax/api</code> to anyone but this computer.</p>",
+        code: "GET  /subscriptionmgr      Media Player 2.0 (WebSocket)\nGET  /userlogin.html       REST login page\nPOST /userlogin.html       REST login\nGET  /Device/...           REST read\nPOST /Device               REST write\nGET  /logout               REST logout\nGET  /                     status page        (loopback only)\nGET  /dmnax/api/state      status JSON        (loopback only)\nPOST /dmnax/api/faults     fault switches     (loopback only)" },
+      { nodes: ["term", "ticker", "hub"], hops: [["dt", 1, "tick()", "file"], ["dh", 1, "publish", "mp2"]],
+        title: "Running: the banner, and time moves on",
+        body: "<p>The banner appears and the server waits. A ticker runs every 0.25 s: a song that reaches its end moves to the next one in its queue, and a live station changes its \"now on air\" title every 40 s.</p><p>Each of those changes goes through <code>publish()</code> to the MP2 hub, which pushes it to every client subscribed to that player.</p>",
+        see: [["t1", "dmnax-server: DM-NAX-4ZSA demo, 5 players, 5 zones\n  status page   https://127.0.0.1:8443/   (self-signed certificate)\n  client config dmnax-server\\client-config.json\n  try           python demo_python/main.py --config dmnax-server\\client-config.json"]] },
+      { nodes: ["clients", "hub", "rest"], hops: [["ch", 1, "wss + signature", "mp2"], ["ch", -1, "101", "mp2"], ["cr", 1, "POST login", "rest"], ["cr", -1, "token", "rest"]],
+        title: "A client connects",
+        body: "<p>A client opens the WebSocket with a signed header (chapter 01) and logs in to REST (chapter 02). Each request prints one line in terminal 1: <code>[time] CHANNEL message</code>.</p>",
+        see: [["t1", "[11:11:41] MP2   WsConnection2 opened from 127.0.0.1\n[11:11:41] MP2   registered 'python-demo-9568df2a-...' as RCac63b870c0064e06\n[11:11:41] MP2   RCac63b870c0064e06 subscribed to 2 path(s)\n[11:11:41] REST  login 'admin' ok"]] },
+      { nodes: ["clients", "hub", "device"], hops: [["ch", 1, "LoadSource", "mp2"], ["dh", -1, "player_action()", "mp2"], ["dh", 1, "publish()", "mp2"], ["ch", -1, "push: playing", "mp2"]],
+        title: "A command becomes a push",
+        body: "<p>The hub hands the request to the Device (<code>player_action()</code>). The Device changes the player and publishes the new state. The hub sends it to every connection subscribed to that path, including the one that asked.</p><p>The command itself gets no reply; the push is the answer.</p>",
+        see: [["t1", "[11:11:42] MP2   Player01 <- LoadSource\n[11:11:42] MP2   Player01 LoadSource 'Harbor FM' (Internet Radio)"]] },
+      { nodes: ["browser", "admin", "device"], hops: [["ba", 1, "GET /dmnax/api/state", "http"], ["ba", -1, "players, zones, log", "http"], ["ba", 1, "POST faults", "http"], ["da", -1, "faults[...] = on", "file"]],
+        title: "The status page and the fault switches",
+        body: "<p>Open <code>https://127.0.0.1:8443/</code>. It polls <code>/dmnax/api/state</code> to show the players, zones, connected sessions and the request log.</p><p>The <b>Fault injection</b> switches post to <code>/dmnax/api/faults</code> and change how the Device answers from the next request on (chapter 06).</p>",
+        code: 'POST /dmnax/api/faults\n{"refuse_load": true}\n<- {"faults": {"refuse_load": true, "silent_player": false,\n              "reply_delay": 0.0, "reject_mp2_login": false,\n              "reject_rest_login": false}}',
+        see: [["t1", "[11:20:03] FAULT set {'refuse_load': True}"]] },
+      { nodes: ["term", "main", "hub", "ticker"], hops: [["tm", 1, "Ctrl+C", "admin"], ["dh", 1, "drop_all()", "mp2"]],
+        title: "Stop: everything resets",
+        body: "<p>Ctrl+C stops the ticker and closes every WebSocket. The device lives only in memory, so starting it again resets all players, zones (back to 25%) and faults.</p>",
+        see: [["t1", "^C"]] }
+    ]
+  };
+
+  /* =====================================================================
+     01  Media Player 2.0
+     ===================================================================== */
+  FLOWS.mp2 = {
+    desc: "Diagram: Mp2Client connects to /subscriptionmgr, which checks the HMAC login. Inside the DM-NAX four command sets, SubscriptionMgr, MediaNavigation, MediaPlayerNeXt and MediaFavorites, sit beside the catalog and Player01. Player changes are published back through SubscriptionMgr to the client.",
+    groups: [{ x: 450, y: 10, w: 532, h: 440, label: "DM-NAX: Media Player 2.0", top: true }],
+    nodes: [
+      { id: "client", x: 20, y: 180, w: 180, h: 100, t: "Mp2Client", s: "crestron/mp2.py", k: "mp2" },
+      { id: "gate", x: 240, y: 180, w: 170, h: 100, t: "/subscriptionmgr", s: "HMAC login check", k: "mp2" },
+      { id: "subs", x: 480, y: 45, w: 220, h: 72, t: "SubscriptionMgr", s: "register, read, subscribe", k: "mp2" },
+      { id: "nav", x: 480, y: 140, w: 220, h: 72, t: "MediaNavigation", s: "browse, search, home", k: "mp2" },
+      { id: "mpn", x: 480, y: 235, w: 220, h: 72, t: "MediaPlayerNeXt", s: "LoadSource, Play, Pause", k: "mp2" },
+      { id: "fav", x: 480, y: 330, w: 220, h: 72, t: "MediaFavorites", s: "ListFavorites", k: "mp2" },
+      { id: "cat", x: 750, y: 60, w: 210, h: 120, t: "Catalog", s: "menus + SignedData", k: "file" },
+      { id: "player", x: 750, y: 250, w: 210, h: 110, t: "Player01", s: "state, now playing", k: "mp2" }
+    ],
+    wires: [
+      { id: "cg", pts: [[200, 230], [240, 230]], k: "mp2", label: "wss", lx: 206, ly: 220 },
+      { id: "gs", pts: [[410, 230], [440, 230], [440, 81], [480, 81]], k: "mp2" },
+      { id: "gn", pts: [[410, 230], [440, 230], [440, 176], [480, 176]], k: "mp2" },
+      { id: "gp", pts: [[410, 230], [440, 230], [440, 271], [480, 271]], k: "mp2" },
+      { id: "gf", pts: [[410, 230], [440, 230], [440, 366], [480, 366]], k: "mp2" },
+      { id: "nc", pts: [[700, 176], [725, 176], [725, 140], [750, 140]], k: "file" },
+      { id: "fc", pts: [[700, 366], [725, 366], [725, 160], [750, 160]], k: "file" },
+      { id: "pp", pts: [[700, 285], [750, 285]], k: "mp2" },
+      { id: "ps", pts: [[960, 305], [972, 305], [972, 30], [590, 30], [590, 45]], k: "mp2", label: "publish", lx: 900, ly: 24 }
+    ],
+    steps: [
+      { nodes: ["client"], hops: [],
+        title: "Sign the login, never send the secret",
+        body: "<p>The client builds an <code>Authorization</code> header from its <code>client_id</code> and <code>client_secret</code> (both in the config). It signs the id, <code>GET</code>, the exact URL, the time and a fresh random nonce with HMAC-SHA256. Only the signature travels.</p>",
+        code: 'source    = client_id + "GET" + "wss://127.0.0.1:8443/subscriptionmgr"\n            + timestamp + nonce\nsignature = base64(HMAC_SHA256(base64decode(client_secret), source))\nheader    = "CrestronAuth-SHA256 " +\n            base64(client_id:signature:nonce:timestamp)' },
+      { nodes: ["client", "gate"], hops: [["cg", 1, "Upgrade + Authorization", "mp2"], ["cg", -1, "101 Switching", "mp2"]],
+        title: "The device checks it and opens the socket",
+        body: "<p>The device recomputes the signature and checks four things: known client id, clock within 300 s, matching signature, nonce not seen before. Pass: <code>101</code> and the WebSocket is open. Fail: <code>401</code>, and the client stops with a clear message.</p><p>If the device cannot be reached, the client waits 10 s and tries once more.</p>",
+        code: "GET wss://127.0.0.1:8443/subscriptionmgr\nAuthorization: CrestronAuth-SHA256 ZG1uYXgtZGVtby1jbGllbnQ6...\n<- 101 Switching Protocols\n\non failure:\n<- 401 Unauthorized: bad signature (wrong client_secret, ...)",
+        see: [["t1", "[11:11:39] MP2   WsConnection1 opened from 127.0.0.1"]] },
+      { nodes: ["client", "gate", "subs"], hops: [["cg", 1, "RegisterClient", "mp2"], ["gs", 1, "", "mp2"], ["gs", -1, "", "mp2"], ["cg", -1, "RcSessionId", "mp2"]],
+        title: "RegisterClient: get a session id",
+        body: "<p>The client registers under a unique label. The reply lists the sessions on this connection; the client finds its label and keeps the key next to it, the <b>RcSessionId</b>. Every later request carries it.</p>",
+        code: '-> {"Device": {"SubscriptionMgr": {"RequestAction": {\n     "RegistrationAction": "RegisterClient",\n     "RegistrationActionOptions": {"RegisteringClientIds":\n       ["python-demo-98bdc746-f00a-45f3-a23a-01ff95f180c5"]}}}}}\n\n<- {"Device": {"SubscriptionMgr": {"ConnectedClientWsCount": 1,\n     "WsConnectionsList": {"WsConnection3": {"RegisteredClientList": {\n       "RC57042fcbb3154da0": {"RegisteredClientId":\n         "python-demo-98bdc746-f00a-45f3-a23a-01ff95f180c5"}}}}}}}',
+        see: [["t1", "MP2   registered 'python-demo-98bdc746-...' as RC57042fcbb3154da0"]] },
+      { nodes: ["client", "gate", "subs", "player"], hops: [["cg", 1, "GetCresNextObject", "mp2"], ["gs", 1, "", "mp2"], ["gs", -1, "", "mp2"], ["cg", -1, "Players", "mp2"]],
+        title: "GetCresNextObject: read something once",
+        body: "<p>A one-time read of any path. Here: all players. <code>paused</code> or <code>stopped</code> means idle and usable; <code>ready</code> means an unused slot. Each player also lists the actions it offers now.</p><p>The same call on <code>/Device/StreamingServices/UserProfiles</code> returns the profiles and their services.</p>",
+        code: '-> {"Device": {"SubscriptionMgr": {"RequestAction": {\n     "RegistrationAction": "GetCresNextObject",\n     "RegistrationActionOptions": {"RcSessionId": "RC57042fcbb3154da0",\n       "CresNextObject": "/Device/MediaPlayerNeXt/Players"}}}}}\n\n<- {"Device": {"MediaPlayerNeXt": {"Players": {\n     "Player01": {"PlayerState": "stopped", "AvailableActions": [],\n       "Player": {"ProfileKey": "", "ProviderKey": "", "SignedData": {},\n         "NowPlayingData": {"TrackTitle": "", "StationName": "", ...}}},\n     "Player02": {...}, ...}}}}\n\n<- {"Device": {"StreamingServices": {"UserProfiles": {\n     "Profile1": {"Name": "Main House", "AssignedProviders": {\n       "Provider1": {"Name": "Internet Radio", "IsAuthenticated": true},\n       "Provider2": {"Name": "DemoStream", "IsAuthenticated": true}}},\n     "Profile2": {"Name": "Guest", ...}}}}}' },
+      { nodes: ["client", "gate", "subs"], hops: [["cg", 1, "SubscribeToObject", "mp2"], ["gs", 1, "", "mp2"], ["gs", -1, "", "mp2"], ["cg", -1, "SubscribedTo", "mp2"]],
+        title: "SubscribeToObject: pushes from now on",
+        body: "<p>The client asks for pushes on its own menu path (where browse replies arrive) and on Player01. The reply lists what it is subscribed to. From now on every change to Player01 arrives without asking.</p><p>The MCP servers subscribe to every active player and to favorites: <code>subscribed to 7 path(s)</code>.</p>",
+        code: '-> {"Device": {"SubscriptionMgr": {"RequestAction": {\n     "RegistrationAction": "SubscribeToObject",\n     "RegistrationActionOptions": {"RcSessionId": "RC57042fcbb3154da0",\n       "CresNextPath": [\n         "/Device/MediaNavigation/RegisteredClientMenus/RC57042fcbb3154da0",\n         "/Device/MediaPlayerNeXt/Players/Player01"]}}}}}\n\n<- {"Device": {"SubscriptionMgr": {"RegisteredClientList": {\n     "RC57042fcbb3154da0": {"SubscribedTo": {\n       "1": {"CresNextPath": "/Device/MediaNavigation/RegisteredClientMenus/RC57042fcbb3154da0"},\n       "2": {"CresNextPath": "/Device/MediaPlayerNeXt/Players/Player01"}}}}}}}',
+        see: [["t1", "MP2   RC57042fcbb3154da0 subscribed to 2 path(s)"]] },
+      { nodes: ["client", "gate", "nav", "cat"], hops: [["cg", 1, "ProviderBrowseMenu", "mp2"], ["gn", 1, "", "mp2"], ["nc", 1, "", "file"], ["nc", -1, "", "file"], ["gn", -1, "", "mp2"], ["cg", -1, "3 folders", "mp2"]],
+        title: "Browse a service: its top folders",
+        body: "<p><code>MediaNavigation</code> with <code>BrowseKey</code> set to the service itself lists its top level. The reply arrives on the client's menu path and echoes the request's <code>MsgId</code>, so the client knows which request it answers.</p><p>Every item carries <code>SignedData</code>.</p>",
+        code: '-> {"Device": {"MediaNavigation": {"RequestAction": {\n     "RcSessionId": "RC57042fcbb3154da0", "MsgId": "b44fdd4f-...",\n     "ProfileKey": "Profile1", "MenuCategory": "ProviderBrowseMenu",\n     "MenuCategoryOptions": {"ProviderKey": "Provider1", "BrowseKey": "Provider1",\n                             "ItemCount": 20, "ItemOffset": 0}}}}}\n\n<- {"Device": {"MediaNavigation": {"RegisteredClientMenus": {"RC57042fcbb3154da0": {\n     "LastRequestAction": {"MsgId": "b44fdd4f-...", "MenuCategory": "ProviderBrowseMenu"},\n     "MenuUpdates": {"ProviderBrowseMenu": {"Categories": {"Category1": {\n       "DisplayMenuName": "Internet Radio", "ItemCount": 3, "TotalItemCount": 3,\n       "MenuDataItems": [\n         {"BrowseKey": "ir:popular", "BrowseItemName": "Popular stations",\n          "StreamingMediaType": "dirmenu",\n          "SignedData": {"SourceData": {"Node": "ir:popular", ...},\n                         "Signature": "KjYziMhgvrtDGNt+p4kt5Y3b..."}},\n         {... "Jazz & Blues" ...}, {... "News & Talk" ...}]}}}}}}}}',
+        see: [["t1", "MP2   ProviderBrowseMenu Provider1 (offset 0)"]] },
+      { nodes: ["client", "gate", "nav", "cat"], hops: [["cg", 1, "open + SignedData", "mp2"], ["gn", 1, "", "mp2"], ["nc", 1, "verify", "file"], ["nc", -1, "", "file"], ["gn", -1, "", "mp2"], ["cg", -1, "Harbor FM, ...", "mp2"]],
+        title: "Open a folder: send its SignedData back unchanged",
+        body: "<p>To open <i>Popular stations</i>, the client sends that item's <code>BrowseKey</code> and its <code>SignedData</code> exactly as received. The device checks the signature; a changed one is refused.</p><p>The reply is 20 stations of 24 (one page). <code>Harbor FM</code> is a <code>station</code>, so it is playable.</p>",
+        code: '-> {"Device": {"MediaNavigation": {"RequestAction": {\n     "RcSessionId": "RC57042fcbb3154da0", "MsgId": "b44fdd51-...",\n     "ProfileKey": "Profile1", "MenuCategory": "ProviderBrowseMenu",\n     "MenuCategoryOptions": {"ProviderKey": "Provider1", "BrowseKey": "ir:popular",\n       "ItemCount": 20, "ItemOffset": 0,\n       "SignedData": {"SourceData": {"Node": "ir:popular", "ProviderKey": "Provider1",\n                                     "Page": {"limit": 20, "PageUrl": ""}},\n                      "Signature": "KjYziMhgvrtDGNt+p4kt5Y3bRtsR2cKRIBSYvq0JnT0="}}}}}}\n\n<- ... "DisplayMenuName": "Popular stations", "ItemCount": 20, "TotalItemCount": 24,\n     "MenuDataItems": [\n       {"BrowseKey": "ir:pop:01", "BrowseItemName": "Harbor FM",\n        "StreamingMediaType": "station",\n        "SignedData": {"SourceData": {"Node": "ir:pop:01", ...},\n                       "Signature": "XnkCImJLGuehetdlShVr8RH6..."}}, ...]',
+        see: [["t1", "MP2   ProviderBrowseMenu ir:popular (offset 0)"]] },
+      { nodes: ["client", "gate", "mpn", "player"], hops: [["cg", 1, "LoadSource", "mp2"], ["gp", 1, "", "mp2"], ["pp", 1, "load Harbor FM", "mp2"]],
+        title: "LoadSource: play the item",
+        body: "<p>The play command is a <code>MediaPlayerNeXt</code> action with the station's <code>SignedData</code> and the profile and service it came from. <code>AutoPlay: true</code> starts it at once.</p><p>Before sending, the client notes how many messages it has seen so far (its <b>baseline</b>). Only pushes after that baseline can prove this command.</p>",
+        code: '-> {"Device": {"MediaPlayerNeXt": {"RequestAction": {\n     "RcSessionId": "RC57042fcbb3154da0", "PlayerId": "Player01",\n     "ActionId": "LoadSource",\n     "ActionIdOptions": {"ProfileKey": "Profile1", "ProviderKey": "Provider1",\n       "AudioSourceUrl": "", "AutoPlay": true,\n       "SignedData": {"SourceData": {"Node": "ir:pop:01", ...},\n                      "Signature": "XnkCImJLGuehetdlShVr8RH6qaHKh6X5hUm1SNaETQM="}}}}}}',
+        see: [["t1", "MP2   Player01 <- LoadSource\nMP2   Player01 LoadSource 'Harbor FM' (Internet Radio)"]] },
+      { nodes: ["client", "gate", "subs", "player"], hops: [["ps", 1, "publish", "mp2"], ["gs", -1, "", "mp2"], ["cg", -1, "push: playing", "mp2"]],
+        title: "The push is the proof",
+        body: "<p>The command itself gets no reply. Player01 publishes its new state, and because the client subscribed, the push arrives. The client accepts it only if it came after the baseline, says <code>playing</code>, and names the station it asked for, within 15 s.</p><p>On a live station <code>TrackTitle</code> is the programme and <code>StationName</code> the station; either may match.</p>",
+        code: '<- {"Device": {"MediaPlayerNeXt": {"Players": {"Player01": {\n     "PlayerState": "playing", "AvailableActions": ["Pause", "Stop"],\n     "Player": {"ProfileKey": "Profile1", "ProviderKey": "Provider1",\n       "Shuffle": false, "Repeat": 0, "SignedData": {...},\n       "NowPlayingData": {"TrackTitle": "Burning Signal / Silas Grey Trio",\n         "StationName": "Harbor FM", "StreamingMediaType": "station",\n         "Duration": 0, "ElapsedSec": 0}}}}}}}' },
+      { nodes: ["client", "gate", "mpn", "player", "subs"], hops: [["cg", 1, "Pause", "mp2"], ["gp", 1, "", "mp2"], ["pp", 1, "", "mp2"], ["ps", 1, "", "mp2"], ["gs", -1, "", "mp2"], ["cg", -1, "push: paused", "mp2"]],
+        title: "Pause and Play: same message, other ActionId",
+        body: "<p>Transport commands are the same wrapper with another <code>ActionId</code> and empty options. Each is proven the same way: a later push with the expected state.</p>",
+        code: '-> {"Device": {"MediaPlayerNeXt": {"RequestAction": {\n     "RcSessionId": "RC57042fcbb3154da0", "PlayerId": "Player01",\n     "ActionId": "Pause", "ActionIdOptions": {}}}}}\n\n<- {"Device": {"MediaPlayerNeXt": {"Players": {"Player01": {\n     "PlayerState": "paused", "AvailableActions": ["Play", "Stop"], ...}}}}}',
+        see: [["t1", "MP2   Player01 <- Pause\nMP2   Player01 paused"]] },
+      { nodes: ["client", "gate", "mpn", "player", "subs"], hops: [["cg", 1, "NextTrack", "mp2"], ["gp", 1, "", "mp2"], ["pp", 1, "not offered", "mp2"], ["ps", 1, "", "mp2"], ["gs", -1, "", "mp2"], ["cg", -1, "Notification", "mp2"]],
+        title: "How the device says no: a Notification",
+        body: "<p>An action the player does not offer, a refused <code>LoadSource</code>, or bad <code>SignedData</code> comes back as a push carrying a <code>Notification</code>. The client turns it into an error at once, even if a later push looks fine.</p>",
+        code: '<- {"Device": {"MediaPlayerNeXt": {"Players": {"Player01": {\n     "Notification": {"NotiId": 1,\n       "Msg": "Requested action not supported for this service",\n       "UserInputReq": "None", "UserInputs": {"Input1": "OK"}}}}}}}\n\nother refusals:\n  "Set Station Failed: invalid SignedData"\n  "Set Station Failed: This item cannot be played directly; open it and play a track inside it."',
+        see: [["t1", "MP2   Player01 refused: Requested action not supported for this service"]] },
+      { nodes: ["client", "gate", "fav", "cat"], hops: [["cg", 1, "ListFavorites", "mp2"], ["gf", 1, "", "mp2"], ["fc", 1, "", "file"], ["fc", -1, "", "file"], ["gf", -1, "", "mp2"], ["cg", -1, "Favorites", "mp2"]],
+        title: "Favorites: one more command set",
+        body: "<p><code>MediaFavorites ListFavorites</code> returns a profile's favorites, each with its own <code>SignedData</code>, ready for <code>LoadSource</code>.</p><p>Gotcha handled in <code>mp2.py</code>: an empty list never answers. After 5 s the client reads <code>/Device/MediaFavorites</code> once to tell \"empty\" from \"lost\".</p>",
+        code: '-> {"Device": {"MediaFavorites": {"RequestAction": {\n     "RcSessionId": "RC57042fcbb3154da0", "ProfileKey": "Profile1",\n     "FavoritesAction": "ListFavorites", "FavoritesActionOptions": {}}}}}\n\n<- {"Device": {"MediaFavorites": {"Profiles": {"Profile1": {"Favorites": {\n     "...": {"MenuDataItems": {"BrowseItemName": "Harbor FM", "SignedData": {...}}}, ...}}}}}}',
+        see: [["t1", "MP2   ListFavorites Profile1: 4 item(s)"]] },
+      { nodes: ["player", "subs", "gate", "client"], hops: [["ps", 1, "TrackTitle", "mp2"], ["gs", -1, "", "mp2"], ["cg", -1, "push: retitle", "mp2"]],
+        title: "Changes nobody asked for still arrive",
+        body: "<p>Pushes are not only answers. A live station retitles every 40 s on dmnax-server; a song that ends moves to the next track. A subscribed client sees each change, which is how a UI stays current without polling.</p>",
+        code: '<- {"Device": {"MediaPlayerNeXt": {"Players": {"Player01": {\n     "Player": {"NowPlayingData": {"TrackTitle": "..."}}}}}}}' }
+    ]
+  };
+
+  /* =====================================================================
+     02  REST
+     ===================================================================== */
+  FLOWS.rest = {
+    desc: "Diagram: RestClient talks HTTPS to four endpoints on the DM-NAX: /userlogin.html, GET /Device, POST /Device and /logout. Login creates a session with an XSRF token. Reads and writes go to the device object holding ZoneOutputs, InputSources and AvMatrixRouting.",
+    groups: [{ x: 290, y: 10, w: 692, h: 440, label: "DM-NAX: REST over HTTPS", top: true }],
+    nodes: [
+      { id: "client", x: 20, y: 180, w: 180, h: 100, t: "RestClient", s: "crestron/rest.py", k: "rest" },
+      { id: "login", x: 320, y: 45, w: 230, h: 72, t: "/userlogin.html", s: "GET page, POST login", k: "rest" },
+      { id: "get", x: 320, y: 140, w: 230, h: 72, t: "GET /Device/...", s: "read any object", k: "rest" },
+      { id: "post", x: 320, y: 235, w: 230, h: 72, t: "POST /Device", s: "write, needs XSRF token", k: "rest" },
+      { id: "logout", x: 320, y: 330, w: 230, h: 72, t: "GET /logout", s: "end the session", k: "rest" },
+      { id: "sess", x: 640, y: 45, w: 320, h: 72, t: "Sessions", s: "cookie -> XSRF token, 20 min", k: "file" },
+      { id: "state", x: 640, y: 140, w: 320, h: 167, t: "Device object", s: "ZoneOutputs, InputSources, Routing", k: "file" }
+    ],
+    wires: [
+      { id: "cl", pts: [[200, 230], [260, 230], [260, 81], [320, 81]], k: "rest", label: "https", lx: 206, ly: 220 },
+      { id: "cg", pts: [[200, 230], [260, 230], [260, 176], [320, 176]], k: "rest" },
+      { id: "cp", pts: [[200, 230], [260, 230], [260, 271], [320, 271]], k: "rest" },
+      { id: "co", pts: [[200, 230], [260, 230], [260, 366], [320, 366]], k: "rest" },
+      { id: "ls", pts: [[550, 81], [640, 81]], k: "file" },
+      { id: "gs", pts: [[550, 176], [640, 176]], k: "file" },
+      { id: "ps", pts: [[550, 271], [640, 271]], k: "file" },
+      { id: "os", pts: [[550, 366], [610, 366], [610, 105], [640, 105]], k: "file" }
+    ],
+    steps: [
+      { nodes: ["client", "login"], hops: [["cl", 1, "GET /userlogin.html", "rest"], ["cl", -1, "TRACKID cookie", "rest"]],
+        title: "Login, part 1: fetch the login page",
+        body: "<p>Like a browser, the client first loads the login page. The device sets a <code>TRACKID</code> cookie. The client keeps every cookie in a jar and sends them back on every request.</p>",
+        code: "GET https://127.0.0.1:8443/userlogin.html\n<- 200   Set-Cookie: TRACKID=...; Secure; HttpOnly" },
+      { nodes: ["client", "login", "sess"], hops: [["cl", 1, "POST login", "rest"], ["ls", 1, "new session", "file"], ["cl", -1, "CREST-XSRF-TOKEN", "rest"]],
+        title: "Login, part 2: post the form, keep the token",
+        body: "<p>The client posts <code>admin_user</code> and <code>admin_password</code> as a form. The device answers with a session cookie (<code>AuthByPasswd</code>) and a <b>CREST-XSRF-TOKEN</b> header. Every write must send that token back.</p><p>A wrong login gets <code>403</code>.</p>",
+        code: "POST https://127.0.0.1:8443/userlogin.html\nContent-Type: application/x-www-form-urlencoded\n\nlogin=admin&passwd=dmnax-demo\n\n<- 200  CREST-XSRF-TOKEN: 6f1c...\n        Set-Cookie: AuthByPasswd=...; Secure; HttpOnly\n        Set-Cookie: userid=admin",
+        see: [["t1", "REST  login 'admin' ok"]] },
+      { nodes: ["client", "get", "state"], hops: [["cg", 1, "GET ZoneOutputs", "rest"], ["gs", 1, "", "file"], ["gs", -1, "", "file"], ["cg", -1, "Zones JSON", "rest"]],
+        title: "Read: GET any path under /Device",
+        body: "<p>A read is a plain <code>GET</code> with the cookies. The reply is the object at that path, wrapped in its parents.</p><p><b>Volume is in tenths of a percent</b>: <code>250</code> is 25%. The client checks <code>Version</code> is 2.0.15 or newer, where that unit applies.</p>",
+        code: 'GET https://127.0.0.1:8443/Device/ZoneOutputs\n\n<- {"Device": {"ZoneOutputs": {"Version": "2.1.0", "Zones": {\n     "Zone1": {"Name": "Kitchen", "IsBussed": false,\n       "IsSignalDetected": false,\n       "ZoneAudio": {"Volume": 250, "VolumedB": -60.0, "IsMuted": false,\n                     "MinVolume": 0, "MaxVolume": 1000},\n       "ZoneBasedProviders": {"ReservedPlayer": "Input05"}},\n     "Zone2": {"Name": "Living Room", ...}, ...}}}}' },
+      { nodes: ["client", "get", "state"], hops: [["cg", 1, "InputSources", "rest"], ["cg", -1, "", "rest"], ["cg", 1, "AvMatrixRouting", "rest"], ["cg", -1, "", "rest"]],
+        title: "Find the player's zone",
+        body: "<p>Two more reads tie MP2 and REST together. <code>InputSources</code> says which inputs are media players; <code>AvMatrixRouting</code> says which input each zone hears.</p><p>Player01 is the first <code>MediaPlayer</code> input, <code>Input05</code>. Kitchen's <code>ReservedPlayer</code> is <code>Input05</code>, so Kitchen is Player01's zone.</p>",
+        code: 'GET /Device/InputSources\n<- "Input05": {"Name": "Media Player 1", "AudioType": "MediaPlayer",\n              "IsSignalPresent": false}\n\nGET /Device/AvMatrixRouting\n<- "Routes": {"Zone1": {"AudioSource": "Input05"},\n             "Zone2": {"AudioSource": "Input06"}, ...}' },
+      { nodes: ["client", "post", "sess", "state"], hops: [["cp", 1, "POST Volume 100", "rest"], ["ps", 1, "Zone1 -> 100", "file"], ["cp", -1, "StatusId 0", "rest"]],
+        title: "Write: POST only what changes",
+        body: "<p>The body names just the one property. The header carries the XSRF token. Each changed leaf gets a <code>Results</code> entry; <code>StatusId 0</code> means <b>accepted</b>, not yet proven.</p><p>The client refuses to send an empty object: on a DM-NAX that can delete configuration.</p>",
+        code: 'POST https://127.0.0.1:8443/Device\nContent-Type: application/json\nX-CREST-XSRF-TOKEN: 6f1c...\n\n{"Device": {"ZoneOutputs": {"Zones": {"Zone1": {"ZoneAudio": {"Volume": 100}}}}}}\n\n<- {"Actions": [{"Operation": "SetPartial", "TargetObject": "Device",\n     "Results": [{"Path": "Device.ZoneOutputs.Zones.Zone1.ZoneAudio.Volume",\n                  "Property": "Volume", "StatusId": 0, "StatusInfo": "OK"}]}]}',
+        see: [["t1", "REST  Zone1 volume 25% -> 10%"]] },
+      { nodes: ["client", "get", "state"], hops: [["cg", 1, "GET Zone1", "rest"], ["gs", 1, "", "file"], ["gs", -1, "", "file"], ["cg", -1, "Volume 100", "rest"]],
+        title: "Read it back: the only real proof",
+        body: "<p>REST never pushes, so the client asks again and compares. Only <code>Volume: 100</code> passes. A device that says OK but does not move fails here with <code>REST read-back did not match Volume=100.</code></p><p>Mute and routing are written and checked the same way.</p>",
+        code: 'GET https://127.0.0.1:8443/Device/ZoneOutputs/Zones/Zone1\n<- {"Device": {"ZoneOutputs": {"Zones": {"Zone1": {\n     "ZoneAudio": {"Volume": 100, "VolumedB": -72.0, ...}, ...}}}}}' },
+      { nodes: ["client", "post", "state"], hops: [["cp", 1, "Volume 1500", "rest"], ["ps", 1, "", "file"], ["cp", -1, "StatusId -1", "rest"]],
+        title: "A refused write",
+        body: "<p>The device checks each leaf on its own. A value outside <code>MinVolume..MaxVolume</code>, an unknown zone or a read-only property comes back with a non-zero <code>StatusId</code>, and the client reports it instead of reading back.</p><p>(The class clients check the range before sending, so you see this only from your own code.)</p>",
+        code: '<- {"Actions": [{"Operation": "SetPartial", "TargetObject": "Device",\n     "Results": [{"Path": "Device.ZoneOutputs.Zones.Zone1.ZoneAudio.Volume",\n       "Property": "Volume", "StatusId": -1,\n       "StatusInfo": "Volume must be an integer within MinVolume..MaxVolume"}]}]}' },
+      { nodes: ["client", "get", "login", "sess"], hops: [["cg", 1, "GET", "rest"], ["cg", -1, "403", "rest"], ["cl", 1, "log in again", "rest"], ["ls", 1, "", "file"], ["cg", 1, "GET (retry)", "rest"], ["cg", -1, "200", "rest"]],
+        title: "Session expired: log in once, retry once",
+        body: "<p>Sessions end after 20 idle minutes, or when you press <b>Expire REST sessions</b> on the status page. The device then answers <code>403</code> (a real DM-NAX may return its HTML login page instead).</p><p>The client logs in again and retries <b>once</b>, never in a loop. A second failure becomes an error.</p>",
+        code: "GET /Device/ZoneOutputs/Zones/Zone1\n<- 403 Session expired or missing; log in again\nGET  /userlogin.html, POST /userlogin.html   -> new token\nGET /Device/ZoneOutputs/Zones/Zone1          -> 200",
+        see: [["t1", "FAULT expired 1 REST session(s)\nREST  login 'admin' ok"]] },
+      { nodes: ["client", "logout", "sess"], hops: [["co", 1, "GET /logout", "rest"], ["os", 1, "drop session", "file"], ["co", -1, "302", "rest"]],
+        title: "Log out",
+        body: "<p>On close the client calls <code>/logout</code>. The device ends the session and redirects to the login page; the client does not follow the redirect.</p>",
+        code: "GET https://127.0.0.1:8443/logout\n<- 302 Found   Location: /userlogin.html" }
+    ]
+  };
+
+  /* =====================================================================
+     03  demo_python
+     ===================================================================== */
+  FLOWS.py = {
+    desc: "Diagram: you start main.py in terminal 3. main.py uses the Controller, which uses Mp2Client over a WebSocket to Player01 and RestClient over HTTPS to Zone1 Kitchen, both on dmnax-server.",
+    variants: [{ id: "check", label: "--check (read only)" }, { id: "ask", label: "no flag (asks yes)" }, { id: "exec", label: "--execute" }],
+    variantLabel: "Start it with",
+    groups: [{ x: 670, y: 18, w: 312, h: 424, label: "dmnax-server :8443" }],
+    nodes: [
+      { id: "you", x: 20, y: 28, w: 180, h: 76, t: "You", s: "terminal 3", k: "admin" },
+      { id: "main", x: 20, y: 190, w: 180, h: 90, t: "main.py", s: "demo_python", k: "file" },
+      { id: "ctrl", x: 240, y: 190, w: 180, h: 90, t: "Controller", s: "controller, workflow", k: "file" },
+      { id: "mp2c", x: 460, y: 70, w: 170, h: 80, t: "Mp2Client", s: "crestron/mp2.py", k: "mp2" },
+      { id: "restc", x: 460, y: 310, w: 170, h: 80, t: "RestClient", s: "crestron/rest.py", k: "rest" },
+      { id: "player", x: 700, y: 70, w: 262, h: 80, t: "Player01", s: "MP2: play, pause, pushes", k: "mp2" },
+      { id: "zone", x: 700, y: 310, w: 262, h: 80, t: "Zone1: Kitchen", s: "REST: volume, read-back", k: "rest" }
+    ],
+    wires: [
+      { id: "ym", pts: [[110, 104], [110, 190]], k: "admin" },
+      { id: "mc", pts: [[200, 235], [240, 235]], k: "file" },
+      { id: "cm", pts: [[330, 190], [330, 110], [460, 110]], k: "mp2" },
+      { id: "cr", pts: [[330, 280], [330, 350], [460, 350]], k: "rest" },
+      { id: "mp", pts: [[630, 110], [700, 110]], k: "mp2", label: "wss", lx: 646, ly: 100 },
+      { id: "rz", pts: [[630, 350], [700, 350]], k: "rest", label: "https", lx: 642, ly: 340 }
+    ],
+    steps: [
+      { nodes: ["you", "main", "ctrl"], hops: [["ym", 1, "run", "admin"], ["mc", 1, "Controller(config)", "file"]],
+        title: "Start: load the config, nothing connected yet",
+        body: "<p><code>main.py</code> reads the config file and builds a <code>Controller</code>, which holds one <code>Mp2Client</code> and one <code>RestClient</code>. No connection is opened until <code>prepare()</code>.</p>",
+        code: "python demo_python/main.py --config dmnax-server/client-config.json --check",
+        check: { code: "python demo_python/main.py --config dmnax-server/client-config.json --check" },
+        ask: { code: "python demo_python/main.py --config dmnax-server/client-config.json" },
+        exec: { code: "python demo_python/main.py --config dmnax-server/client-config.json --execute" },
+        see: [["t3", "Connecting to MP2.0 and REST..."]] },
+      { nodes: ["ctrl", "mp2c", "player"], hops: [["cm", 1, "prepare()", "mp2"], ["mp", 1, "login, register", "mp2"], ["mp", 1, "GET Players", "mp2"], ["mp", -1, "Player01 idle", "mp2"], ["mp", 1, "subscribe", "mp2"], ["mp", 1, "GET profiles", "mp2"]],
+        title: "prepare(), MP2 side: is Player01 free?",
+        body: "<p>Read only. The client connects and registers (chapter 01), then reads the players. Player01 must be <code>paused</code> or <code>stopped</code>; if it is playing, the demo stops so it never takes over someone else's music.</p><p>It subscribes to Player01 and picks the first profile and the service named in the config, <i>Internet Radio</i>.</p>",
+        code: "Player01 must be paused or stopped, else:\n  \"Player01 is already in use; pause it before starting this demo.\"",
+        see: [["t1", "MP2   WsConnection1 opened from 127.0.0.1\nMP2   registered 'python-demo-b70741ab-...' as RC4d2c0b0b802b4c44\nMP2   RC4d2c0b0b802b4c44 subscribed to 2 path(s)"]] },
+      { nodes: ["ctrl", "restc", "zone"], hops: [["cr", 1, "prepare()", "rest"], ["rz", 1, "login", "rest"], ["rz", 1, "GET zones, routes", "rest"], ["rz", -1, "Kitchen 25%", "rest"]],
+        title: "prepare(), REST side: which zone, and is it safe?",
+        body: "<p>Logs in and reads <code>DeviceInfo</code>, <code>InputSources</code>, <code>ZoneOutputs</code> and <code>AvMatrixRouting</code>. Kitchen reserves Player01's input, so Kitchen is the zone. Then it refuses anything risky:</p><ul><li>more than one zone could be the player's</li><li>another zone also hears this player</li><li>the zone is muted (it will not unmute for you), bussed, or already has signal</li><li>10% is outside the zone's limits</li></ul>",
+        see: [["t1", "REST  login 'admin' ok"]] },
+      { nodes: ["ctrl", "mp2c", "player"], hops: [["cm", 1, "find a station", "mp2"], ["mp", 1, "browse root", "mp2"], ["mp", -1, "3 folders", "mp2"], ["mp", 1, "Popular stations", "mp2"], ["mp", -1, "Harbor FM, ...", "mp2"]],
+        title: "prepare(): find something to play, then show the plan",
+        body: "<p>It browses Internet Radio, opens the configured folder <i>Popular stations</i>, and takes the first playable item, <code>Harbor FM</code>. It never searches other services on its own.</p><p>Then it prints the plan: exactly what will change, where, and for how long.</p>",
+        see: [["t1", "MP2   ProviderBrowseMenu Provider1 (offset 0)\nMP2   ProviderBrowseMenu ir:popular (offset 0)"], ["t3", "Device:  DM-NAX-4ZSA (firmware 1.0.0 (dmnax-server demo))\nProfile: Profile1 | Main House\nService: Provider1 | Internet Radio\nPlayer:  Player01 / Input05\nZone:    Zone1 | Kitchen\nVolume:  25%\nBrowsing: Popular stations > Harbor FM\nSelected: Harbor FM\nSequence: play 5s -> pause -> volume 10% -> resume 3s -> pause"]] },
+      { only: ["check"], nodes: ["main", "ctrl"], hops: [["mc", -1, "plan", "file"]],
+        title: "--check stops here",
+        body: "<p>With <code>--check</code> the demo has only read. Playback and volume are exactly as they were. Use it first on a real device to see what would happen.</p>",
+        see: [["t3", "Read-only check complete; playback and volume were unchanged."]] },
+      { only: ["ask"], nodes: ["you", "main"], hops: [["ym", -1, "Type 'yes'", "admin"], ["ym", 1, "yes", "admin"]],
+        title: "You approve the whole plan",
+        body: "<p>Without a flag, the demo shows the plan and waits. Only the word <code>yes</code> continues; anything else prints <code>Demo cancelled.</code> and nothing changes.</p><p><code>--execute</code> skips this question: the flag is your yes.</p>",
+        see: [["t3", "Run this exact sequence? Type 'yes': yes"]] },
+      { only: ["exec"], nodes: ["you", "main"], hops: [["ym", 1, "--execute", "admin"]],
+        title: "--execute: the flag is your yes",
+        body: "<p>The plan is still printed, but the demo goes straight on. Without a flag it would ask <code>Run this exact sequence? Type 'yes':</code> first.</p>" },
+      { only: ["ask", "exec"], nodes: ["ctrl", "mp2c", "restc", "player", "zone"], hops: [["rz", 1, "re-read zone", "rest"], ["mp", 1, "re-read Player01", "mp2"], ["mp", 1, "LoadSource", "mp2"], ["mp", -1, "push: playing", "mp2"], ["cm", -1, "proof", "mp2"]],
+        title: "Play: re-check, LoadSource, wait for the push",
+        body: "<p>Before every change the demo re-reads the zone, routes and player, in case anyone touched them since the plan. Then <code>LoadSource</code> with Harbor FM's <code>SignedData</code>, and it waits up to 15 s for a push saying <code>playing</code> with that station.</p>",
+        see: [["t1", "MP2   Player01 <- LoadSource\nMP2   Player01 LoadSource 'Harbor FM' (Internet Radio)"], ["t3", "Playback confirmed\nTitle:    Burning Signal / Silas Grey Trio\nDuration: live"]] },
+      { only: ["ask", "exec"], nodes: ["ctrl", "mp2c", "player"], hops: [["mp", -1, "pushes", "mp2"], ["cm", -1, "snapshot", "mp2"]],
+        title: "Play for 5 seconds, watching every second",
+        body: "<p>Once a second it checks the player's latest state (kept up to date by pushes). If it stops playing during the run, the demo stops with an error.</p>",
+        see: [["t3", "PLAYING ~00:00 / --:-- [--------------------] demo 00/05s | volume 25%\nPLAYING ~00:01 / --:-- [--------------------] demo 01/05s | volume 25%\n...\nPLAYING ~00:05 / --:-- [--------------------] demo 05/05s | volume 25%"]] },
+      { only: ["ask", "exec"], nodes: ["ctrl", "mp2c", "player"], hops: [["cm", 1, "pause", "mp2"], ["mp", 1, "Pause", "mp2"], ["mp", -1, "push: paused", "mp2"], ["cm", -1, "proof", "mp2"]],
+        title: "Pause, proven by a push",
+        body: "<p>It first checks the player is still playing <i>its</i> station (not something someone else started), and that <code>Pause</code> is offered. Then it sends it and waits for <code>paused</code>.</p>",
+        see: [["t1", "MP2   Player01 <- Pause\nMP2   Player01 paused"], ["t3", "Pausing...\nVerified: paused"]] },
+      { only: ["ask", "exec"], nodes: ["ctrl", "restc", "zone"], hops: [["cr", 1, "set 10%", "rest"], ["rz", 1, "POST Volume 100", "rest"], ["rz", -1, "StatusId 0", "rest"]],
+        title: "Volume 10%: write it",
+        body: "<p>Only while paused. 10% is <code>100</code> in REST units. <code>StatusId 0</code> means accepted, not proven yet.</p>",
+        code: 'POST /Device   X-CREST-XSRF-TOKEN: ...\n{"Device": {"ZoneOutputs": {"Zones": {"Zone1": {"ZoneAudio": {"Volume": 100}}}}}}\n<- "StatusId": 0, "StatusInfo": "OK"',
+        see: [["t1", "REST  Zone1 volume 25% -> 10%"], ["t3", "Setting zone volume to 10%..."]] },
+      { only: ["ask", "exec"], nodes: ["ctrl", "restc", "zone"], hops: [["rz", 1, "GET Zone1", "rest"], ["rz", -1, "Volume 100", "rest"], ["cr", -1, "proof", "rest"]],
+        title: "Volume 10%: read it back",
+        body: "<p>Only a matching read-back passes. That is how a device answering OK without changing is caught.</p>",
+        see: [["t3", "Verified: volume 10%"]] },
+      { only: ["ask", "exec"], nodes: ["ctrl", "mp2c", "restc", "player", "zone"], hops: [["rz", 1, "still 10%?", "rest"], ["mp", 1, "Play", "mp2"], ["mp", -1, "push: playing", "mp2"]],
+        title: "Resume 3 s, at the new level",
+        body: "<p>Before resuming it checks the zone is still at 10%, so it never resumes at a level you did not approve. Then <code>Play</code>, proven by a push, and 3 s of progress.</p>",
+        see: [["t1", "MP2   Player01 <- Play\nMP2   Player01 playing"], ["t3", "Resuming...\nVerified: playing\nPLAYING ~00:05 / --:-- [...] demo 00/03s | volume 10%\n...\nPLAYING ~00:08 / --:-- [...] demo 03/03s | volume 10%"]] },
+      { only: ["ask", "exec"], nodes: ["ctrl", "mp2c", "player"], hops: [["mp", 1, "Pause", "mp2"], ["mp", -1, "push: paused", "mp2"], ["cm", -1, "proof", "mp2"]],
+        title: "Pause again: finished",
+        body: "<p>The last check: paused, and the zone still at 10%.</p>",
+        see: [["t1", "MP2   Player01 <- Pause\nMP2   Player01 paused"], ["t3", "Pausing...\nFinished: player paused, zone volume 10%"]] },
+      { nodes: ["main", "ctrl", "mp2c", "restc"], hops: [["rz", 1, "GET /logout", "rest"], ["mp", 1, "close", "mp2"], ["mc", -1, "done", "file"]],
+        title: "Close both connections",
+        body: "<p>Always runs, even after an error. If the demo started playback and the player is still playing, it pauses first. Then it logs out of REST and closes the WebSocket.</p><p>If anything failed, you see <code>Demo error: &lt;message&gt;</code> and exit code 1 (chapter 06). Ctrl+C pauses and exits with 130.</p>",
+        see: [["t1", "MP2   WsConnection2 closed"], ["t3", "Connections closed"]] }
+    ]
+  };
+
+  /* =====================================================================
+     04  MCP over stdio
+     ===================================================================== */
+  FLOWS.mcp = {
+    desc: "Diagram: you approve in the menu or AI host. The host talks over stdio to one server process it started, holding the server wrapper (hand-written or SDK), protocol.py with the 15 tools and the approval gate, and crestron/device.py. The device layer talks to the DM-NAX over MP2 and REST.",
+    variants: [{ id: "custom", label: "Hand-written (demo_mcp)" }, { id: "sdk", label: "Official SDK (demo_mcp_sdk)" }],
+    variantLabel: "Server",
+    groups: [{ x: 228, y: 18, w: 762, h: 300, label: "one process, started by the client" }],
+    nodes: [
+      { id: "user", x: 20, y: 340, w: 180, h: 84, t: "You", s: "approve or decline", k: "admin" },
+      { id: "host", x: 20, y: 110, w: 180, h: 110, t: "Menu or AI host", s: "client.py, Claude", k: "mcp" },
+      { id: "wrap", x: 245, y: 110, w: 235, h: 110, t: "demo_mcp/server.py", s: "own JSON-RPC loop", k: "mcp",
+        sdk: { t: "demo_mcp_sdk/server.py", s: "MCPServer (official SDK)" } },
+      { id: "proto", x: 515, y: 110, w: 215, h: 110, t: "protocol.py", s: "15 tools + approval gate", k: "file" },
+      { id: "dev", x: 775, y: 110, w: 195, h: 110, t: "crestron/device.py", s: "ids, preview, change", k: "file" },
+      { id: "nax", x: 775, y: 340, w: 195, h: 84, t: "DM-NAX", s: "player and zones", k: "mp2" }
+    ],
+    wires: [
+      { id: "uh", pts: [[110, 340], [110, 220]], k: "admin" },
+      { id: "hw", pts: [[200, 165], [245, 165]], k: "mcp", label: "stdio", lx: 204, ly: 155 },
+      { id: "wp", pts: [[480, 165], [515, 165]], k: "file" },
+      { id: "pd", pts: [[730, 165], [775, 165]], k: "file" },
+      { id: "ds", pts: [[872, 220], [872, 340]], k: "mp2", label: "wss + https", lx: 880, ly: 300 }
+    ],
+    steps: [
+      { nodes: ["host", "wrap"], hops: [["hw", 1, "start process", "mcp"]],
+        title: "The client starts the server",
+        body: "<p>With stdio, the client launches the server as a child process and talks through its stdin and stdout. No port, no network. stdout carries only protocol; log lines go to stderr, which you see in the same terminal.</p><p>The server runs in its own process group so your Ctrl+C reaches only the menu, which then closes the pipe and lets the server clean up.</p>",
+        code: "python demo_mcp/server.py --config <abs path>/client-config.json\n  stdin  <- one JSON-RPC message per line\n  stdout -> one JSON-RPC message per line",
+        sdk: { body: "<p>Same idea: <code>demo_mcp_sdk/client.py</code> is the same menu, started against <code>demo_mcp_sdk/server.py</code>. An AI host such as Claude Code does the same from the command you register.</p>",
+          code: "python demo_mcp_sdk/server.py --config <abs path>/client-config.json\n\nclaude mcp add crestron-demo -- <python> <repo>/demo_mcp_sdk/server.py --config <repo>/dmnax-server/client-config.json" } },
+      { nodes: ["host", "wrap", "proto"], hops: [["hw", 1, "initialize", "mcp"], ["wp", 1, "", "file"], ["hw", -1, "2025-11-25", "mcp"], ["hw", 1, "initialized", "mcp"]],
+        title: "Handshake: initialize",
+        body: "<p>The client offers protocol <code>2025-11-25</code>; the server agrees and says it has tools whose list can change. The client confirms with a notification, which has no <code>id</code> and gets no reply.</p><p>No device connection yet.</p>",
+        code: '-> {"jsonrpc": "2.0", "id": 1, "method": "initialize",\n    "params": {"protocolVersion": "2025-11-25", "capabilities": {},\n               "clientInfo": {"name": "crestron-demo-client", "version": "0.1.0"}}}\n<- {"jsonrpc":"2.0","id":1,"result":{"protocolVersion":"2025-11-25",\n    "capabilities":{"tools":{"listChanged":true}},\n    "serverInfo":{"name":"crestron-demo","version":"0.2.0"}}}\n-> {"jsonrpc": "2.0", "method": "notifications/initialized"}',
+        sdk: { body: "<p>The same handshake, parsed by the SDK. The menu asks for <code>2025-11-25</code>; the SDK server also accepts newer versions, and an elicitation-capable host says so in <code>capabilities</code> here.</p>" } },
+      { nodes: ["host", "wrap", "proto", "dev", "nax"], hops: [["hw", 1, "tools/list", "mcp"], ["wp", 1, "", "file"], ["pd", 1, "valid ids?", "file"], ["ds", 1, "connect, read", "mp2"], ["ds", -1, "", "mp2"], ["hw", -1, "15 tools", "mcp"]],
+        title: "tools/list: the first device connection",
+        body: "<p>Before answering, the server reads the device's profiles, players, zones and inputs, so each tool's arguments list the <b>valid ids as choices</b>. An AI then cannot invent a zone that does not exist. This is the first MP2 connection and REST login.</p><p>If the device does not answer within 10 s, the list goes out without ids, not as an error.</p>",
+        code: '-> {"jsonrpc": "2.0", "id": 2, "method": "tools/list"}\n<- {"jsonrpc":"2.0","id":2,"result":{"tools":[\n    {"name":"list_profiles","description":"List the device\'s user profiles. Start here.", ...},\n    {"name":"list_services", ...,\n     "inputSchema":{"type":"object","properties":{"profile":{"type":"string",\n       "enum":["Profile1","Profile2"],\n       "description":"Profile1 = Main House; Profile2 = Guest"}},\n       "required":["profile"],"additionalProperties":false},\n     "annotations":{"readOnlyHint":true, ...}},\n    ... 15 tools]}}',
+        see: [["t1", "MP2   WsConnection4 opened from 127.0.0.1\nMP2   registered 'python-demo-...' as RC...\nMP2   RC... subscribed to 7 path(s)\nREST  login 'admin' ok"]] },
+      { nodes: ["host", "wrap", "proto", "dev", "nax"], hops: [["hw", 1, "browse", "mcp"], ["wp", 1, "", "file"], ["pd", 1, "", "file"], ["ds", 1, "MediaNavigation", "mp2"], ["ds", -1, "menu", "mp2"], ["hw", -1, "items i1, i2, ...", "mcp"]],
+        title: "Read tools run at once, and hand out short ids",
+        body: "<p>Read tools only ask the device. Results are flattened for humans and AIs: each playable item or folder gets a short id such as <code>i4</code>, while the long <code>SignedData</code> stays inside the server. Later calls use the id.</p><p>The result comes twice: as JSON text and as <code>structuredContent</code>.</p>",
+        code: '-> {"jsonrpc":"2.0","id":6,"method":"tools/call","params":{"name":"browse",\n    "arguments":{"profile":"Profile1","service":"Provider1","folder":"i1"}}}\n<- {"jsonrpc":"2.0","id":6,"result":{"structuredContent":{\n    "profile":"Profile1","service":"Provider1","items":[\n      {"id":"i4","name":"Harbor FM","kind":"station","playable":true, ...},\n      {"id":"i5","name":"Northline FM","kind":"station","playable":true, ...},\n      ...]},\n    "content":[{"type":"text","text":"{...same as JSON text...}"}],\n    "isError":false}}',
+        see: [["menu", "Popular stations:\n   1) [station] Harbor FM\n   2) [station] Northline FM\n  ..."]] },
+      { nodes: ["host", "wrap", "proto", "dev"], hops: [["hw", 1, "play_item", "mcp"], ["wp", 1, "", "file"], ["pd", 1, "preview (read)", "file"], ["hw", -1, "preview + token", "mcp"]],
+        title: "A change, call 1: preview only",
+        body: "<p>Every change tool except <code>pause</code> takes two calls. Without <code>confirm</code> it changes nothing: it reads the device and returns a preview, which zones would hear it, and a one-time token valid for 120 s for exactly these arguments.</p>",
+        code: '-> {"jsonrpc":"2.0","id":7,"method":"tools/call","params":{"name":"play_item",\n    "arguments":{"player":"Player01","item":"i4"}}}\n<- {"structuredContent":{\n    "preview":{"change":"play \'Harbor FM\' on Player01",\n      "heard_in":[{"zone":"Zone1","name":"Kitchen","volume":10.0,"muted":false, ...}],\n      "player":{"state":"paused", ...}},\n    "token":"e3YGC2bFswZscNL3ViieBw","expires_in_seconds":120,\n    "next":"Show this preview to the user. Only after they approve, call play_item\n            again with the same arguments plus confirm=true and this token."}}',
+        sdk: { title: "A change, call 1: ask the user directly", nodes: ["user", "host", "wrap", "proto", "dev"], hops: [["hw", 1, "play_item", "mcp"], ["wp", 1, "", "file"], ["pd", 1, "preview (read)", "file"], ["hw", -1, "elicit: Go ahead?", "admin"], ["uh", -1, "yes / no form", "admin"]],
+          body: "<p>If the host supports MCP form elicitation, the SDK server reads the preview and asks you itself, through the host, with one checkbox. No token needed, and the device is not locked while you think.</p><p>A host that cannot be asked gets the preview and token instead. The class menu is such a host, so with the menu you still see the token flow.</p>",
+          code: "elicitation/create\n  message: \"play 'Harbor FM' on Player01. Go ahead?\"\n  schema:  {confirm: boolean, \"Tick to go ahead with this change\"}" } },
+      { nodes: ["user", "host"], hops: [["uh", -1, "Do it? [y/N]", "admin"], ["uh", 1, "y", "admin"]],
+        title: "You approve",
+        body: "<p>The menu prints the preview and waits. Anything but <code>y</code> prints <code>Cancelled; nothing changed.</code>, and call 2 is never sent. An AI host is told by the tool description to show the preview and ask you first; keep its own tool-approval prompts on too.</p>",
+        see: [["menu", "Preview: play 'Harbor FM' on Player01\n  Heard in: Kitchen 10%\nDo it? [y/N]: y"]],
+        sdk: { nodes: ["user", "host", "wrap"], hops: [["uh", 1, "tick + accept", "admin"], ["hw", 1, "accepted", "admin"]],
+          body: "<p>Your answer goes straight back to the waiting server. Decline, or no answer within 120 s, returns <code>Not changed: the user declined.</code> or <code>Not changed: no answer within 120 seconds.</code></p>",
+          see: [["ai", "play 'Harbor FM' on Player01. Go ahead?\n[x] Tick to go ahead with this change   [Accept] [Decline]"]] } },
+      { nodes: ["host", "wrap", "proto", "dev", "nax"], hops: [["hw", 1, "confirm + token", "mcp"], ["wp", 1, "", "file"], ["pd", 1, "same as preview?", "file"], ["ds", 1, "LoadSource", "mp2"], ["ds", -1, "push: playing", "mp2"], ["hw", -1, "verified", "mcp"]],
+        title: "Call 2: the gate, the change, the proof",
+        body: "<p>Call 2 repeats the arguments plus <code>confirm: true</code> and the token. The gate checks the token is unused, unexpired, for this tool and these arguments. Then it previews <b>again</b> and compares: if the device changed since you looked, it refuses.</p><p>Only then the change runs, with the same push or read-back proof as chapter 03.</p>",
+        code: '-> {"jsonrpc":"2.0","id":9,"method":"tools/call","params":{"name":"play_item",\n    "arguments":{"player":"Player01","item":"i4",\n                 "confirm":true,"token":"e3YGC2bFswZscNL3ViieBw"}}}\n<- {"structuredContent":{"verified":true,\n    "player":{"player":"Player01","state":"playing","station":"Harbor FM",\n              "title":"Burning Signal / Silas Grey Trio", ...}},"isError":false}',
+        see: [["t1", "MP2   Player01 <- LoadSource\nMP2   Player01 LoadSource 'Harbor FM' (Internet Radio)"], ["menu", "Done and verified by the device."]],
+        sdk: { title: "After yes: the gate, the change, the proof", hops: [["wp", 1, "", "file"], ["pd", 1, "same as preview?", "file"], ["ds", 1, "LoadSource", "mp2"], ["ds", -1, "push: playing", "mp2"], ["hw", -1, "verified", "mcp"]],
+          body: "<p>After yes, the server previews again and compares with what you were shown, then makes the change and waits for proof. Same gate code, same device code as the hand-written server.</p>",
+          code: '<- tool result: {"verified": true, "player": {"state": "playing", "station": "Harbor FM", ...}}' } },
+      { nodes: ["host", "wrap", "proto"], hops: [["hw", 1, "bad token", "mcp"], ["wp", 1, "", "file"], ["hw", -1, "isError: true", "mcp"]],
+        title: "What the gate refuses",
+        body: "<p>A refusal is a normal tool result with <code>isError: true</code>, so the menu or AI can read it. Nothing is changed in any of these cases:</p><ul><li>wrong, reused or expired token, or other arguments</li><li>device changed since the preview (it returns the new preview)</li><li>action the player does not offer right now</li></ul>",
+        code: '<- {"structuredContent":{"error":"Missing, expired or mismatched approval token;\n      call without confirm to preview again.","tool":"play_item"},"isError":true}\n\n<- {"structuredContent":{"error":"The device changed since the preview; show the\n      new preview and ask again.","details":{"preview":{...}}},"isError":true}',
+        see: [["menu", "Tool play_item failed: {'error': 'Missing, expired or mismatched approval token; ...'}"]] },
+      { nodes: ["host", "wrap", "proto", "dev", "nax"], hops: [["hw", 1, "pause", "mcp"], ["wp", 1, "", "file"], ["pd", 1, "", "file"], ["ds", 1, "Pause", "mp2"], ["ds", -1, "push: paused", "mp2"], ["hw", -1, "verified", "mcp"]],
+        title: "pause: the one change without approval",
+        body: "<p>Stopping sound is always allowed, so <code>pause</code> runs in one call. It is still proven by a push.</p>",
+        code: '-> {"jsonrpc":"2.0","id":10,"method":"tools/call","params":{"name":"pause",\n    "arguments":{"player":"Player01"}}}\n<- {"structuredContent":{"verified":true,"player":{"state":"paused", ...}}}',
+        see: [["menu", "Verified: Player01 paused: Burning Signal / Silas Grey Trio"]] },
+      { nodes: ["host", "wrap", "proto"], hops: [["hw", 1, "list_zones", "mcp"], ["hw", -1, "result", "mcp"], ["hw", -1, "list_changed", "mcp"], ["hw", 1, "tools/list", "mcp"]],
+        title: "When valid ids change, the server says so",
+        body: "<p>If a <code>list_*</code> result shows different ids than the last <code>tools/list</code> (a player became active, say), the server sends <code>notifications/tools/list_changed</code> right after the reply. The client reads <code>tools/list</code> again to get the new choices.</p>",
+        code: '<- {"jsonrpc":"2.0","id":13,"result":{...}}\n<- {"jsonrpc":"2.0","method":"notifications/tools/list_changed"}' },
+      { nodes: ["host", "wrap", "dev", "nax"], hops: [["hw", 1, "stdin closed", "mcp"], ["ds", 1, "Pause (if ours)", "mp2"], ["ds", -1, "push: paused", "mp2"]],
+        title: "Quit: the server cleans up after itself",
+        body: "<p>Quitting sends no message: the menu closes the pipe and the server reads end-of-input. It pauses only players it started that are <b>still playing what it started</b>, closes its connections and exits.</p>",
+        see: [["stderr", "Cleanup: Player01 paused"], ["t3", "Connections closed"]],
+        sdk: { body: "<p>The SDK server does the same in its lifespan hook when the host disconnects: pause only what it started and still plays, then close.</p>" } }
+    ]
+  };
+
+  /* =====================================================================
+     05  MCP over HTTP
+     ===================================================================== */
+  FLOWS.http = {
+    desc: "Diagram: a menu client and an AI host each connect over HTTP to one server process you start at 127.0.0.1:8000. Every request passes the local-only check. Each client has its own session with its own device connections to the DM-NAX.",
+    groups: [{ x: 250, y: 18, w: 470, h: 430, label: "server you start: 127.0.0.1:8000" }],
+    nodes: [
+      { id: "ca", x: 20, y: 60, w: 190, h: 90, t: "Menu client", s: "demo_mcp_http/client.py", k: "http" },
+      { id: "cb", x: 20, y: 300, w: 190, h: 90, t: "AI host", s: "Streamable HTTP", k: "http" },
+      { id: "bridge", x: 275, y: 165, w: 190, h: 120, t: "server.py /mcp", s: "checks Host, Origin", k: "http" },
+      { id: "sa", x: 510, y: 60, w: 190, h: 90, t: "Session A", s: "own tokens, ids, device", k: "mcp" },
+      { id: "sb", x: 510, y: 300, w: 190, h: 90, t: "Session B", s: "own tokens, ids, device", k: "mcp" },
+      { id: "nax", x: 770, y: 165, w: 210, h: 120, t: "DM-NAX", s: "player and zones", k: "mp2" }
+    ],
+    wires: [
+      { id: "ab", pts: [[210, 105], [240, 105], [240, 205], [275, 205]], k: "http" },
+      { id: "bb", pts: [[210, 345], [240, 345], [240, 250], [275, 250]], k: "http" },
+      { id: "ba", pts: [[465, 205], [490, 205], [490, 105], [510, 105]], k: "file" },
+      { id: "bs", pts: [[465, 250], [490, 250], [490, 345], [510, 345]], k: "file" },
+      { id: "an", pts: [[700, 105], [735, 105], [735, 205], [770, 205]], k: "mp2" },
+      { id: "bn", pts: [[700, 345], [735, 345], [735, 250], [770, 250]], k: "mp2" }
+    ],
+    steps: [
+      { nodes: ["bridge"], hops: [],
+        title: "You start the server first",
+        body: "<p>Nobody launches this server for you. It refuses any <code>--host</code> that is not a loopback address (remote use would need real authentication) and serves one URL, <code>/mcp</code>, with three methods.</p><p>No device connection yet: each session opens its own later.</p>",
+        code: "POST   /mcp   JSON-RPC requests and notifications\nGET    /mcp   event stream for server messages (SSE)\nDELETE /mcp   end a session\n\noptions: --port 8000  --session-timeout 900  --max-sessions 16",
+        see: [["t2", "======== Running on http://127.0.0.1:8000 ========\n(Press CTRL+C to quit)"]] },
+      { nodes: ["ca", "bridge"], hops: [["ab", 1, "any request", "http"], ["ab", -1, "403", "http"]],
+        title: "Every request: is it really local?",
+        body: "<p>Before anything else, a middleware checks three things: the caller is on this computer, the <code>Host</code> header names this loopback server and port, and any <code>Origin</code> header matches it. That stops a web page in your browser from calling the tools.</p>",
+        code: 'POST /mcp   Origin: http://evil.example\n<- 403 Invalid Origin header\n\nPOST /mcp   Host: attacker.example:8000\n<- 403 Invalid Host header' },
+      { nodes: ["ca", "bridge", "sa"], hops: [["ab", 1, "POST initialize", "http"], ["ba", 1, "new session", "file"], ["ab", -1, "Mcp-Session-Id", "http"], ["ab", 1, "initialized", "http"], ["ab", -1, "202", "http"]],
+        title: "initialize opens a session",
+        body: "<p>The client POSTs <code>initialize</code> without a session id. The reply carries an <code>Mcp-Session-Id</code> header: a long random value that names this client's session. The follow-up notification gets an empty <code>202</code>.</p><p>At 16 sessions the server answers <code>503 MCP session limit reached</code>.</p>",
+        code: 'POST /mcp\nAccept: application/json, text/event-stream\nContent-Type: application/json\n{"jsonrpc":"2.0","id":1,"method":"initialize",\n "params":{"protocolVersion":"2025-11-25", ...}}\n\n<- 200  Mcp-Session-Id: lB_FX_GZcI5iWNbyd4G8vHv6dU-dFWtTCfdL2c9wSfU\n{"jsonrpc":"2.0","id":1,"result":{"protocolVersion":"2025-11-25",\n "capabilities":{"tools":{"listChanged":true}}, ...}}\n\nPOST /mcp  {"jsonrpc":"2.0","method":"notifications/initialized"}\n<- 202' },
+      { nodes: ["ca", "bridge", "sa", "nax"], hops: [["ab", 1, "POST tools/list", "http"], ["ba", 1, "", "file"], ["an", 1, "connect (paced)", "mp2"], ["an", -1, "", "mp2"], ["ab", -1, "15 tools", "http"]],
+        title: "Later requests carry two headers",
+        body: "<p>Every request after <code>initialize</code> sends <code>Mcp-Session-Id</code> and <code>MCP-Protocol-Version</code>. Without the id: <code>400</code>. With an unknown or closed id: <code>404</code>.</p><p>As over stdio, <code>tools/list</code> reads the device for valid ids, so this session's device connection opens here.</p>",
+        code: 'POST /mcp\nMcp-Session-Id: lB_FX_GZcI5iWNbyd4G8vHv6dU-dFWtTCfdL2c9wSfU\nMCP-Protocol-Version: 2025-11-25\n{"jsonrpc":"2.0","id":2,"method":"tools/list"}\n\nwithout the session id:\n<- 400 Mcp-Session-Id is required',
+        see: [["t1", "MP2   WsConnection5 opened from 127.0.0.1\nMP2   RC41b3b2be91464363 subscribed to 7 path(s)\nREST  login 'admin' ok"]] },
+      { nodes: ["ca", "bridge", "sa", "nax"], hops: [["ab", 1, "POST tools/call", "http"], ["ba", 1, "", "file"], ["an", 1, "REST GET", "rest"], ["an", -1, "", "rest"], ["ab", -1, "JSON result", "http"]],
+        title: "Tool calls: same JSON as stdio",
+        body: "<p>The body and reply are the same JSON-RPC as chapter 04, one POST each. Approval is the same two calls with a token. A dropped HTTP connection does <b>not</b> cancel a change that is already running.</p>",
+        code: 'POST /mcp   (same two headers)\n{"jsonrpc":"2.0","id":3,"method":"tools/call",\n "params":{"name":"list_zones","arguments":{}}}\n\n<- 200 {"jsonrpc":"2.0","id":3,"result":{"content":[{"type":"text","text":\n   "{\\"zones\\": [{\\"name\\": \\"Kitchen\\", \\"zone\\": \\"Zone1\\", \\"volume\\": 30.0,\n     \\"source_player\\": \\"Player01\\", ...}, ...]}"}], ...}}' },
+      { nodes: ["cb", "bridge", "sb", "nax"], hops: [["bb", 1, "POST initialize", "http"], ["bs", 1, "new session", "file"], ["bb", 1, "POST tools/list", "http"], ["bs", 1, "", "file"], ["bn", 1, "connect (paced)", "mp2"]],
+        title: "A second client gets its own session",
+        body: "<p>Each session has its own approval tokens, item ids and device connections, so clients cannot use each other's tokens. To spare the device, the server opens at most one new player connection and one new REST login every 10 s across all sessions. A client that comes too soon is told how long to wait.</p>",
+        see: [["t3", "MCP client error: MP2 connection admission is cooling down; retry in 7 seconds."]] },
+      { nodes: ["cb", "bridge", "sb"], hops: [["bb", 1, "GET (event stream)", "http"], ["bs", 1, "", "file"], ["bs", -1, "", "file"], ["bb", -1, "list_changed", "http"]],
+        title: "GET: a channel for the server to talk",
+        body: "<p>A host can open one <code>GET</code> per session. It stays open as Server-Sent Events, so the server can send <code>notifications/tools/list_changed</code> unasked. A comment line every 15 s keeps it alive. A second GET on the same session gets <code>409</code>.</p>",
+        code: 'GET /mcp\nAccept: text/event-stream\nMcp-Session-Id: 9fk-...\nMCP-Protocol-Version: 2025-11-25\n\n<- : connected\n\n<- event: message\n   data: {"jsonrpc":"2.0","method":"notifications/tools/list_changed"}\n\n<- : keepalive' },
+      { nodes: ["cb", "bridge", "sb"], hops: [["bb", 1, "cancelled", "http"], ["bs", 1, "cancel id 7", "file"], ["bb", -1, "202", "http"]],
+        title: "Cancel a slow request",
+        body: "<p>A notification <code>notifications/cancelled</code> names a request id; the server cancels it if it has not started writing to the device. Notifications skip the device queue, so a cancel is never stuck behind the request it cancels.</p>",
+        code: 'POST /mcp\n{"jsonrpc":"2.0","method":"notifications/cancelled","params":{"requestId":7}}\n<- 202' },
+      { nodes: ["ca", "bridge", "sa", "nax"], hops: [["ab", 1, "DELETE", "http"], ["ba", 1, "close", "file"], ["an", 1, "Pause (if ours)", "mp2"], ["ab", -1, "200", "http"]],
+        title: "Leave: DELETE ends the session",
+        body: "<p>When the menu quits it sends <code>DELETE</code>. The server pauses what that session started and still plays, closes its connections, and forgets the id. Session B keeps running.</p>",
+        code: 'DELETE /mcp\nMcp-Session-Id: lB_FX_GZcI5iWNbyd4G8vHv6dU-dFWtTCfdL2c9wSfU\nMCP-Protocol-Version: 2025-11-25\n<- 200\n\nPOST /mcp  (same id, afterwards)\n<- 404 Unknown or expired MCP session',
+        see: [["t1", "MP2   Player01 paused\nMP2   WsConnection5 closed"], ["t3", "Connections closed"]] },
+      { nodes: ["bridge", "sa", "sb", "nax"], hops: [["bs", 1, "idle 900 s", "file"], ["bn", 1, "Pause (if ours)", "mp2"], ["an", 1, "Ctrl+C: all", "mp2"]],
+        title: "Idle sessions expire; Ctrl+C cleans up all",
+        body: "<p>A session nobody uses for 900 s is closed by a reaper that checks every 5 s, with the same cleanup. Ctrl+C on the server cleans up every session, pausing what each one started, before it exits.</p>",
+        see: [["t1", "MP2   Player01 paused"]] }
+    ]
+  };
+
+  /* =====================================================================
+     06  Faults
+     ===================================================================== */
+  var FAULTS = [
+    { id: "refuse", label: "refuse LoadSource", kind: "mp2", req: "LoadSource", reply: "Notification",
+      set: '{"refuse_load": true}', setLog: "FAULT set {'refuse_load': True}",
+      tryBody: "<p>Run <code>--execute</code>, or play any item in a menu. The device does not play: <code>_do_LoadSource</code> pushes a Notification instead, like a real DM-NAX when a station is unavailable.</p>",
+      tryCode: '<- {"Device": {"MediaPlayerNeXt": {"Players": {"Player01": {"Notification": {\n     "Msg": "Set Station Failed: This track is not currently available."}}}}}}',
+      log: "MP2   Player01 refused: Set Station Failed: This track is not currently available.",
+      msg: "Player refused the command: Set Station Failed: This track is not currently available.",
+      why: "<p><code>wait_player()</code> sees the Notification in a push after its baseline and stops at once, without waiting for a timeout. Nothing played.</p>" },
+    { id: "silent", label: "silent player", kind: "mp2", req: "LoadSource", reply: "(nothing)",
+      set: '{"silent_player": true}', setLog: "FAULT set {'silent_player': True}",
+      tryBody: "<p>Run <code>--execute</code>, or play an item. The device accepts the command but never acts and never pushes, the hardest failure to spot.</p>",
+      tryCode: "-> LoadSource ...\n<- (no push, ever)",
+      log: "FAULT silent_player: ignored LoadSource on Player01",
+      msg: "Player did not verify 'playing' after the command; it may or may not have applied.",
+      why: "<p>After 15 s without proof, the client gives up and says so honestly: it cannot know whether the command applied. This is why every change waits for proof.</p>" },
+    { id: "delay", label: "reply delay 15 s", kind: "mp2", req: "RegisterClient", reply: "(15 s late)",
+      set: '{"reply_delay": 15}', setLog: "FAULT set {'reply_delay': 15.0}",
+      tryBody: "<p>Run <code>--check</code>, or start a new menu. The server opens and registers at once, but every reply and push leaves 15 s late. The client's <code>timeout</code> is 12 s.</p>",
+      tryCode: "-> RegisterClient\n   ... 12 s, no reply ...",
+      log: "MP2   WsConnection1 opened from 127.0.0.1\nMP2   registered 'python-demo-...' as RC...\n(the replies leave 15 s later)",
+      msg: "MP2 timed out waiting for RegisterClient. Check device mode and subscriptions.",
+      why: "<p>Every request has a deadline. A slow or overloaded device shows up as a named timeout, not a hang.</p>" },
+    { id: "mp2login", label: "reject MP2 login", kind: "mp2", req: "wss + signature", reply: "401",
+      set: '{"reject_mp2_login": true}', setLog: "FAULT set {'reject_mp2_login': True}",
+      tryBody: "<p>Run <code>--check</code>, or start a new menu. The WebSocket upgrade is refused with <code>401</code>, as with a wrong <code>client_secret</code> or a device not in MP2 mode.</p>",
+      tryCode: "GET wss://127.0.0.1:8443/subscriptionmgr   Authorization: CrestronAuth-SHA256 ...\n<- 401 Unauthorized: reject_mp2_login fault is on",
+      log: "MP2   login refused from 127.0.0.1: reject_mp2_login fault is on",
+      msg: "MP2 login/handshake refused: check client_id, client_secret, and MP2 mode.",
+      why: "<p>A refused handshake is reported at once with what to check, without retrying.</p>" },
+    { id: "restlogin", label: "reject REST login", kind: "rest", req: "POST login", reply: "403",
+      set: '{"reject_rest_login": true}', setLog: "FAULT set {'reject_rest_login': True}",
+      tryBody: "<p>Run <code>--check</code>. Or, in an open menu, press <b>Expire REST sessions</b> and then <code>v</code>, so the menu has to log in again.</p>",
+      tryCode: "POST /userlogin.html   login=admin&passwd=...\n<- 403 Forbidden",
+      log: "REST  login refused for 'admin'",
+      msg: "REST login refused: check admin_user and admin_password.",
+      why: "<p>The same message appears for a wrong <code>admin_password</code> in the config.</p>" },
+    { id: "drop", label: "drop connections", kind: "mp2", req: "(playing)", reply: "close 1001",
+      set: '{"action": "drop_connections"}', setLog: "FAULT dropping 1 WebSocket connection(s)",
+      tryBody: "<p>Press it while <code>--execute</code> plays. The server closes every WebSocket, like a reboot or a network drop. The player keeps playing, as a real one would.</p>",
+      tryCode: "<- WebSocket close 1001: dmnax-server dropped the connection",
+      log: "FAULT dropping 1 WebSocket connection(s)\nMP2   WsConnection2 closed",
+      msg: "MP2 connection lost: MP2 connection closed; playback may still be active. Read device state before retrying playback.",
+      why: "<p>The client cannot pause without a connection, so it says playback may continue. The next <code>--check</code> reports <code>Player01 is already in use</code>: pause it in a menu or restart the server. A menu just reconnects on its next action.</p>" },
+    { id: "expire", label: "expire REST sessions", kind: "rest", req: "GET (old cookie)", reply: "403, then 200",
+      set: '{"action": "expire_rest_sessions"}', setLog: "FAULT expired 1 REST session(s)",
+      tryBody: "<p>Press it, then <code>v</code> in an open menu. The old cookie is now unknown, so the next request gets <code>403</code>.</p>",
+      tryCode: "GET /Device/ZoneOutputs\n<- 403 Session expired or missing; log in again\nPOST /userlogin.html -> new token\nGET /Device/ZoneOutputs -> 200",
+      log: "FAULT expired 1 REST session(s)\nREST  login 'admin' ok",
+      msg: "(nothing: the menu carries on)",
+      why: "<p>Expected and harmless: the client logs in once and retries once (chapter 02). You only notice it in terminal 1.</p>" },
+    { id: "down", label: "server stopped", kind: "mp2", req: "connect", reply: "refused",
+      set: null, setLog: "^C",
+      tryBody: "<p>Stop dmnax-server, then run <code>--check</code>. Nothing answers on port 8443.</p>",
+      tryCode: "connect 127.0.0.1:8443  -> refused\n(wait 10 s, try once more)\nconnect 127.0.0.1:8443  -> refused",
+      log: "(nothing: the server is stopped)",
+      msg: "MP2 device unreachable: check the address, network, and MP2 mode.",
+      why: "<p>One retry after 10 s covers a device that is just reconnecting; a second failure is reported. An MCP menu prints the same text after <code>MCP client error:</code> and exits.</p>" }
+  ];
+
+  FLOWS.faults = {
+    desc: "Diagram: you switch a fault on through the status page, the API or --fault. The fault switches change how dmnax-server answers. A client sends its request to the server, the server misbehaves, terminal 1 logs it, and the client prints a message you read.",
+    variants: FAULTS.map(function (f) { return { id: f.id, label: f.label }; }),
+    variantLabel: "Fault",
+    nodes: [
+      { id: "you", x: 20, y: 30, w: 200, h: 80, t: "You", s: "status page, API, --fault", k: "admin" },
+      { id: "sw", x: 280, y: 30, w: 220, h: 80, t: "Fault switches", s: "POST /dmnax/api/faults", k: "file" },
+      { id: "client", x: 20, y: 300, w: 200, h: 90, t: "Client", s: "demo_python or a menu", k: "mp2" },
+      { id: "dev", x: 400, y: 180, w: 240, h: 110, t: "dmnax-server", s: "MP2 hub, REST, players", k: "mp2" },
+      { id: "log", x: 720, y: 30, w: 260, h: 80, t: "Terminal 1", s: "server log", k: "file" },
+      { id: "out", x: 720, y: 300, w: 260, h: 90, t: "Client terminal", s: "the message you read", k: "admin" }
+    ],
+    wires: [
+      { id: "ys", pts: [[220, 70], [280, 70]], k: "admin" },
+      { id: "sd", pts: [[500, 70], [520, 70], [520, 180]], k: "file" },
+      { id: "cd", pts: [[220, 345], [300, 345], [300, 235], [400, 235]], k: "mp2" },
+      { id: "dl", pts: [[640, 210], [680, 210], [680, 70], [720, 70]], k: "file" },
+      { id: "co", pts: [[120, 390], [120, 432], [850, 432], [850, 390]], k: "admin" }
+    ],
+    steps: []
+  };
+  FAULTS.forEach(function (f) {
+    FLOWS.faults.steps.push(
+      { only: [f.id], nodes: f.set ? ["you", "sw", "dev", "log"] : ["you", "dev", "log"],
+        hops: f.set ? [["ys", 1, "switch on", "admin"], ["sd", 1, "faults", "file"], ["dl", 1, "log", "file"]] : [["dl", 1, "^C", "file"]],
+        title: f.set ? "Switch it on: " + f.label : "Stop the server",
+        body: f.set ? "<p>Tick it on the status page, or post it to the API. Faults apply from the next request on; restarting the server clears them.</p>" : "<p>Press Ctrl+C in terminal 1, or close its window.</p>",
+        code: f.set ? "Invoke-RestMethod https://127.0.0.1:8443/dmnax/api/faults -Method Post `\n  -SkipCertificateCheck -ContentType 'application/json' -Body '" + f.set + "'\n\ncurl -k https://127.0.0.1:8443/dmnax/api/faults \\\n  -H 'Content-Type: application/json' -d '" + f.set + "'" : "",
+        see: [["t1", f.setLog]] },
+      { only: [f.id], nodes: ["client", "dev"], hops: [["cd", 1, f.req, f.kind], ["cd", -1, f.reply, f.kind]],
+        title: "Run a client", body: f.tryBody, code: f.tryCode },
+      { only: [f.id], nodes: ["client", "dev", "log", "out"], hops: [["dl", 1, "log", "file"], ["co", 1, "message", "admin"]],
+        title: "What you read", body: f.why,
+        see: [["t1", f.log], ["t3", f.id === "expire" ? f.msg : "Demo error: " + f.msg]] }
+    );
+  });
+
+  /* ---------- the stepper ---------- */
+  function Flow(root, def) {
+    this.root = root;
+    this.def = def;
+    this.variant = def.variants ? def.variants[0].id : null;
+    this.i = 0;
+    this.run = 0;
+    this.playing = false;
+    this.timer = null;
+    this.build();
+    this.show(0);
+  }
+
+  Flow.prototype.visible = function () {
+    var v = this.variant;
+    return this.def.steps.filter(function (s) { return !s.only || s.only.indexOf(v) >= 0; });
+  };
+
+  Flow.prototype.build = function () {
+    var self = this, def = this.def;
+    var chapter = this.root.closest("section").querySelector("h2").textContent;
+    el("p", { class: "sr-only", text: def.desc }, this.root);
+    if (def.variants) {
+      el("div", { class: "seg-label", text: def.variantLabel || "Variant" }, this.root);
+      var seg = el("div", { class: "seg", role: "group", "aria-label": def.variantLabel || "Variant" }, this.root);
+      this.segBtns = def.variants.map(function (v, j) {
+        var b = el("button", { type: "button", "aria-pressed": String(j === 0), text: v.label }, seg);
+        b.addEventListener("click", function () { self.setVariant(v.id); });
+        return b;
+      });
+    }
+    var stage = this.stage = el("div", { class: "stage", tabindex: "0", role: "region", "aria-label": chapter + ": step-by-step walk-through. Left and right arrow keys change the step." }, this.root);
+    el("div", { class: "swipe", text: "Swipe the diagram sideways to see all of it." }, stage);
+    var box = el("div", { class: "diagram", tabindex: "0", role: "group", "aria-label": "Diagram (scroll sideways if it is cut off)" }, stage);
+    var s = svg("svg", { viewBox: "0 0 1000 460", "aria-hidden": "true" }, box);
+    (def.groups || []).forEach(function (g) {
+      svg("rect", { class: "grp", x: g.x, y: g.y, width: g.w, height: g.h, rx: 12 }, s);
+      var t = svg("text", { class: "grp-label", x: g.x + 14, y: g.top ? g.y + 22 : g.y + g.h - 12 }, s);
+      t.textContent = g.label;
+    });
+    this.wireEls = {};
+    def.wires.forEach(function (w) {
+      var d = "M" + w.pts.map(function (p) { return p[0] + " " + p[1]; }).join(" L");
+      self.wireEls[w.id] = svg("path", { class: "wire k-" + w.k, d: d, style: "--k:" + kvar(w.k) }, s);
+      if (w.label) { var t = svg("text", { class: "wire-label", x: w.lx, y: w.ly }, s); t.textContent = w.label; }
+    });
+    this.nodeEls = {};
+    def.nodes.forEach(function (n) {
+      var g = svg("g", { class: "node", style: "--k:" + kvar(n.k) }, s);
+      svg("rect", { class: "box", x: n.x, y: n.y, width: n.w, height: n.h, rx: 8 }, g);
+      svg("rect", { class: "bar", x: n.x, y: n.y, width: 4, height: n.h, rx: 2 }, g);
+      var cy = n.y + n.h / 2;
+      var t = svg("text", { class: "t", x: n.x + 16, y: cy - 3 }, g);
+      var st = svg("text", { class: "s", x: n.x + 16, y: cy + 16 }, g);
+      t.textContent = n.t; st.textContent = n.s;
+      self.nodeEls[n.id] = { g: g, t: t, s: st, def: n };
+    });
+    this.layer = svg("g", {}, s);
+
+    var narr = el("div", { class: "narr" }, stage);
+    var live = el("div", { "aria-live": "polite" }, narr);
+    this.countEl = el("div", { class: "count" }, live);
+    this.titleEl = el("h3", {}, live);
+    this.bodyEl = el("div", { class: "body" }, live);
+    this.codeLbl = el("div", { class: "box-label", text: "On the wire" }, live);
+    this.codeEl = el("pre", {}, live);
+    this.seeLbl = el("div", { class: "box-label", text: "What you see" }, live);
+    this.seeEl = el("div", { class: "see" }, live);
+
+    var c = el("div", { class: "controls" }, stage);
+    this.backBtn = el("button", { type: "button", text: "Back" }, c);
+    this.playBtn = el("button", { type: "button", class: "play", text: "Play" }, c);
+    this.nextBtn = el("button", { type: "button", text: "Next" }, c);
+    this.replayBtn = el("button", { type: "button", text: "Replay step" }, c);
+    this.dots = el("div", { class: "dots", role: "group", "aria-label": "Steps" }, c);
+    this.backBtn.addEventListener("click", function () { self.go(self.i - 1); });
+    this.nextBtn.addEventListener("click", function () { self.go(self.i + 1); });
+    this.replayBtn.addEventListener("click", function () { self.go(self.i); });
+    this.playBtn.addEventListener("click", function () { self.playing ? self.pause() : self.start(); });
+    stage.addEventListener("keydown", function (e) {
+      if (e.target.closest(".diagram") || e.target.closest(".narr pre")) return;
+      if (e.key === "ArrowRight") { e.preventDefault(); self.go(self.i + 1); }
+      else if (e.key === "ArrowLeft") { e.preventDefault(); self.go(self.i - 1); }
+    });
+    this.renderDots();
+  };
+
+  Flow.prototype.renderDots = function () {
+    var self = this;
+    while (this.dots.firstChild) this.dots.removeChild(this.dots.firstChild);
+    this.dotEls = this.visible().map(function (_, k) {
+      var b = el("button", { type: "button", "aria-label": "Step " + (k + 1), text: String(k + 1) }, self.dots);
+      b.addEventListener("click", function () { self.go(k); });
+      return b;
+    });
+  };
+
+  Flow.prototype.step = function (k) {
+    var base = this.visible()[k];
+    var over = this.variant && base[this.variant];
+    if (!over) return base;
+    var merged = {};
+    for (var a in base) merged[a] = base[a];
+    for (var b in over) merged[b] = over[b];
+    return merged;
+  };
+
+  Flow.prototype.setVariant = function (v) {
+    var self = this;
+    this.variant = v;
+    this.def.variants.forEach(function (o, j) { self.segBtns[j].setAttribute("aria-pressed", String(o.id === v)); });
+    for (var id in this.nodeEls) {
+      var n = this.nodeEls[id], d = n.def, alt = d[v] || d;
+      n.t.textContent = alt.t || d.t; n.s.textContent = alt.s || d.s;
+    }
+    this.stop();
+    this.renderDots();
+    this.show(Math.min(this.i, this.visible().length - 1));
+  };
+
+  Flow.prototype.go = function (k) {
+    if (k < 0 || k >= this.visible().length) return;
+    this.stop();
+    this.show(k);
+  };
+
+  Flow.prototype.show = function (k) {
+    var steps = this.visible();
+    if (k < 0 || k >= steps.length) return;
+    this.i = k;
+    var st = this.step(k), on = {};
+    (st.nodes || []).forEach(function (id) { on[id] = true; });
+    for (var id in this.nodeEls) {
+      this.nodeEls[id].g.classList.toggle("on", !!on[id]);
+      this.nodeEls[id].g.classList.toggle("dim", !on[id]);
+    }
+    for (var w in this.wireEls) { this.wireEls[w].classList.remove("on"); this.wireEls[w].style.removeProperty("stroke"); }
+    this.countEl.textContent = "Step " + (k + 1) + " of " + steps.length;
+    this.titleEl.textContent = st.title;
+    this.bodyEl.innerHTML = st.body;
+    this.codeEl.textContent = st.code || "";
+    this.codeEl.classList.toggle("hidden", !st.code);
+    this.codeLbl.classList.toggle("hidden", !st.code);
+    while (this.seeEl.firstChild) this.seeEl.removeChild(this.seeEl.firstChild);
+    var self = this;
+    (st.see || []).forEach(function (row) {
+      var r = el("div", {}, self.seeEl);
+      el("i", { text: SEE[row[0]] || row[0] }, r);
+      el("span", { text: row[1] }, r);
+    });
+    this.seeEl.classList.toggle("hidden", !st.see);
+    this.seeLbl.classList.toggle("hidden", !st.see);
+    this.backBtn.disabled = k === 0;
+    this.nextBtn.disabled = k === steps.length - 1;
+    this.dotEls.forEach(function (b, j) { if (j === k) b.setAttribute("aria-current", "step"); else b.removeAttribute("aria-current"); });
+    this.animate(st.hops || []);
+  };
+
+  Flow.prototype.animate = function (hops) {
+    var self = this, run = ++this.run;
+    while (this.layer.firstChild) this.layer.removeChild(this.layer.firstChild);
+    var j = 0;
+    function next() {
+      if (run !== self.run) return;
+      if (j >= hops.length) { self.done(run); return; }
+      var h = hops[j++], path = self.wireEls[h[0]];
+      path.classList.add("on");
+      path.style.setProperty("--k", kvar(h[3]));
+      Array.prototype.forEach.call(self.layer.childNodes, function (p) { p.classList.add("old"); });
+      var pkt = self.packet(h[2], h[3]);
+      var len = path.getTotalLength();
+      function place(t) {
+        var at = path.getPointAtLength(h[1] > 0 ? len * t : len * (1 - t));
+        pkt.g.setAttribute("transform", "translate(" + at.x + " " + at.y + ")");
+        if (pkt.w) {
+          var dx = Math.min(Math.max(at.x, pkt.w / 2 + 4), 996 - pkt.w / 2) - at.x;
+          var up = at.y > 44;
+          pkt.r.setAttribute("x", -pkt.w / 2 + dx); pkt.r.setAttribute("y", up ? -33 : 11);
+          pkt.t.setAttribute("x", dx); pkt.t.setAttribute("y", up ? -18 : 26);
+        }
+      }
+      if (reduce.matches) { place(1); setTimeout(function () { if (run === self.run) next(); }, 300); return; }
+      var dur = Math.max(650, Math.min(1300, len * 4)), t0 = null;
+      function frame(ts) {
+        if (run !== self.run) return;
+        if (t0 === null) t0 = ts;
+        var t = Math.min(1, (ts - t0) / dur);
+        place(t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2);
+        if (t < 1) requestAnimationFrame(frame); else setTimeout(function () { if (run === self.run) next(); }, 180);
+      }
+      requestAnimationFrame(frame);
+    }
+    next();
+  };
+
+  Flow.prototype.packet = function (label, kind) {
+    var g = svg("g", { class: "pkt", style: "--k:" + kvar(kind) }, this.layer);
+    svg("circle", { r: 6.5 }, g);
+    var out = { g: g };
+    if (label) {
+      out.w = label.length * 7 + 18;
+      out.r = svg("rect", { x: -out.w / 2, y: -33, width: out.w, height: 22, rx: 11 }, g);
+      out.t = svg("text", { x: 0, y: -18, "text-anchor": "middle" }, g);
+      out.t.textContent = label;
+    }
+    return out;
+  };
+
+  Flow.prototype.done = function (run) {
+    var self = this;
+    if (!this.playing) return;
+    if (this.i >= this.visible().length - 1) { this.stop(); return; }
+    this.timer = setTimeout(function () { if (run === self.run && self.playing) self.show(self.i + 1); }, reduce.matches ? 6000 : 4200);
+  };
+
+  Flow.prototype.start = function () {
+    this.playing = true;
+    this.playBtn.textContent = "Pause";
+    this.show(this.i >= this.visible().length - 1 ? 0 : this.i);
+  };
+
+  Flow.prototype.stop = function () {
+    this.playing = false;
+    clearTimeout(this.timer);
+    this.playBtn.textContent = "Play";
+  };
+
+  Flow.prototype.pause = function () { this.stop(); this.run++; };
+
+  Array.prototype.forEach.call(document.querySelectorAll("[data-flow]"), function (node) {
+    new Flow(node, FLOWS[node.getAttribute("data-flow")]);
+  });
+})();
+</script>
+</body>
+</html>

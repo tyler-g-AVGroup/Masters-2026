@@ -1,0 +1,171 @@
+<!doctype html>
+<!-- Design mock for review: static sample data, not wired to the server. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dmnax-server status (mock)</title>
+<style>
+  :root {
+    --bg: #f5f7fb; --card: #ffffff; --ink: #1f2937; --muted: #6b7280; --line: #e5e7eb;
+    --brand: #2563eb; --play: #16a34a; --pause: #d97706; --stop: #9ca3af; --bad: #dc2626;
+    --mp2: #7c3aed; --rest: #0891b2; --fault: #dc2626;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; background: var(--bg); color: var(--ink); }
+  header { background: #111827; color: #fff; padding: 14px 24px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  header h1 { font-size: 18px; margin: 0; }
+  .pill { padding: 3px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; }
+  .pill.ok { background: #dcfce7; color: #166534; }
+  .pill.warn { background: #fee2e2; color: #991b1b; }
+  header .meta { color: #9ca3af; font-size: 13px; margin-left: auto; }
+  main { max-width: 1200px; margin: 0 auto; padding: 20px 24px 40px; display: grid; gap: 20px; }
+  .banner { background: #fef2f2; border: 1px solid #fecaca; color: #991b1b; border-radius: 10px; padding: 10px 14px; display: flex; align-items: center; gap: 12px; }
+  .banner button { margin-left: auto; }
+  h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 0 0 10px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 12px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px; border-left: 4px solid var(--stop); }
+  .card.playing { border-left-color: var(--play); }
+  .card.paused { border-left-color: var(--pause); }
+  .card .top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .card strong { font-size: 15px; }
+  .state { font-size: 11px; font-weight: 700; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; color: #fff; background: var(--stop); }
+  .playing .state { background: var(--play); }
+  .paused .state { background: var(--pause); }
+  .title { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .sub { color: var(--muted); font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .bar { height: 6px; background: var(--line); border-radius: 3px; margin: 10px 0 4px; overflow: hidden; }
+  .bar > span { display: block; height: 100%; background: var(--brand); }
+  .zone .vol { display: flex; align-items: center; gap: 8px; margin: 10px 0 6px; }
+  .zone .vol .bar { flex: 1; margin: 0; }
+  .zone .vol b { width: 40px; text-align: right; }
+  .zone.muted .bar > span { background: var(--stop); }
+  .muted-tag { font-size: 11px; font-weight: 700; color: var(--bad); }
+  .faults { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 6px 14px; }
+  .fault { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+  .fault:last-child { border-bottom: 0; }
+  .fault .what { flex: 1; }
+  .fault .what small { display: block; color: var(--muted); }
+  .switch { position: relative; width: 40px; height: 22px; flex: none; }
+  .switch input { opacity: 0; width: 0; height: 0; }
+  .switch span { position: absolute; inset: 0; background: #d1d5db; border-radius: 999px; transition: .2s; cursor: pointer; }
+  .switch span::before { content: ""; position: absolute; width: 16px; height: 16px; left: 3px; top: 3px; background: #fff; border-radius: 50%; transition: .2s; }
+  .switch input:checked + span { background: var(--bad); }
+  .switch input:checked + span::before { transform: translateX(18px); }
+  .fault input[type=number] { width: 64px; padding: 4px 6px; border: 1px solid var(--line); border-radius: 6px; }
+  .actions { display: flex; gap: 10px; flex-wrap: wrap; padding: 10px 0; }
+  button { font: inherit; border: 1px solid var(--line); background: #fff; border-radius: 8px; padding: 6px 12px; cursor: pointer; }
+  button:hover { border-color: var(--brand); color: var(--brand); }
+  button.danger { color: var(--bad); border-color: #fecaca; }
+  .two { display: grid; grid-template-columns: 1fr 1.4fr; gap: 20px; }
+  @media (max-width: 860px) { .two { grid-template-columns: 1fr; } }
+  .log { background: #0f172a; color: #e2e8f0; border-radius: 12px; padding: 10px 0; font: 12px/1.6 ui-monospace, Consolas, monospace; max-height: 340px; overflow: auto; }
+  .log div { padding: 0 14px; }
+  .log time { color: #64748b; margin-right: 8px; }
+  .tag { display: inline-block; width: 46px; font-weight: 700; }
+  .tag.MP2 { color: #c4b5fd; } .tag.REST { color: #67e8f9; } .tag.FAULT { color: #fca5a5; }
+  .filters { display: flex; gap: 6px; margin-bottom: 8px; }
+  .filters button.on { background: var(--brand); color: #fff; border-color: var(--brand); }
+</style>
+</head>
+<body>
+<header>
+  <h1>DM-NAX-4ZSA demo</h1>
+  <span class="pill ok">Online</span>
+  <span class="pill warn" id="faultPill">1 fault on</span>
+  <span class="meta">up 12:04 · 1 MP2 session · 1 REST session · refreshes every second</span>
+</header>
+
+<main>
+  <div class="banner" id="banner">
+    <b>Fault active:</b> refuse LoadSource. Play requests will be refused.
+    <button onclick="resetAll()">Turn all faults off</button>
+  </div>
+
+  <section>
+    <h2>Players</h2>
+    <div class="grid">
+      <div class="card playing">
+        <div class="top"><strong>Player01</strong><span class="state">Playing</span></div>
+        <div class="title">Paper Morning</div>
+        <div class="bar"><span style="width:42%"></span></div>
+        <div class="sub">2:02 / 4:50</div>
+      </div>
+      <div class="card paused">
+        <div class="top"><strong>Player02</strong><span class="state">Paused</span></div>
+        <div class="title">Silver Harbor</div>
+        <div class="bar"><span style="width:20%"></span></div>
+        <div class="sub">0:30 / 2:30</div>
+      </div>
+      <div class="card"><div class="top"><strong>Player03</strong><span class="state">Stopped</span></div><div class="sub">Nothing playing</div></div>
+      <div class="card"><div class="top"><strong>Player04</strong><span class="state">Stopped</span></div><div class="sub">Nothing playing</div></div>
+      <div class="card"><div class="top"><strong>Player05</strong><span class="state">Stopped</span></div><div class="sub">Nothing playing</div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Zones</h2>
+    <div class="grid">
+      <div class="card zone playing"><div class="top"><strong>Kitchen</strong><span class="sub">Player01</span></div><div class="vol"><div class="bar"><span style="width:30%"></span></div><b>30%</b></div></div>
+      <div class="card zone paused"><div class="top"><strong>Living Room</strong><span class="sub">Player02</span></div><div class="vol"><div class="bar"><span style="width:25%"></span></div><b>25%</b></div></div>
+      <div class="card zone muted"><div class="top"><strong>Patio</strong><span class="sub">Player03</span></div><div class="vol"><div class="bar"><span style="width:25%"></span></div><b>25%</b></div><div class="muted-tag">MUTED</div></div>
+      <div class="card zone"><div class="top"><strong>Primary Bedroom</strong><span class="sub">Player04</span></div><div class="vol"><div class="bar"><span style="width:25%"></span></div><b>25%</b></div></div>
+      <div class="card zone"><div class="top"><strong>Office</strong><span class="sub">Player05</span></div><div class="vol"><div class="bar"><span style="width:25%"></span></div><b>25%</b></div></div>
+    </div>
+  </section>
+
+  <div class="two">
+    <section>
+      <h2>Fault injection</h2>
+      <div class="faults">
+        <div class="fault"><div class="what">Refuse LoadSource<small>Play requests are refused</small></div><label class="switch"><input type="checkbox" checked onchange="count()"><span></span></label></div>
+        <div class="fault"><div class="what">Silent player<small>Player ignores commands, no reply</small></div><label class="switch"><input type="checkbox" onchange="count()"><span></span></label></div>
+        <div class="fault"><div class="what">Reject MP2 login<small>New player connections fail</small></div><label class="switch"><input type="checkbox" onchange="count()"><span></span></label></div>
+        <div class="fault"><div class="what">Reject REST login<small>Zone logins fail</small></div><label class="switch"><input type="checkbox" onchange="count()"><span></span></label></div>
+        <div class="fault"><div class="what">Reply delay<small>Seconds added to every reply (client waits 12 s)</small></div><input type="number" min="0" max="30" step="0.5" value="0" onchange="count()"> s</div>
+        <div class="actions">
+          <button class="danger">Drop WebSocket connections</button>
+          <button class="danger">Expire REST sessions</button>
+          <button onclick="resetAll()">Turn all faults off</button>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Request log</h2>
+      <div class="filters">
+        <button class="on" data-f="ALL">All</button><button data-f="MP2">MP2</button><button data-f="REST">REST</button><button data-f="FAULT">Faults</button>
+      </div>
+      <div class="log" id="log">
+        <div data-c="FAULT"><time>23:43:28</time><span class="tag FAULT">FAULT</span>set {'refuse_load': True}</div>
+        <div data-c="MP2"><time>23:43:28</time><span class="tag MP2">MP2</span>Player01 refused: Set Station Failed</div>
+        <div data-c="MP2"><time>23:43:28</time><span class="tag MP2">MP2</span>Player01 &lt;- LoadSource</div>
+        <div data-c="REST"><time>23:41:10</time><span class="tag REST">REST</span>Zone3 source -&gt; Input01</div>
+        <div data-c="REST"><time>23:40:52</time><span class="tag REST">REST</span>Zone1 volume 10% -&gt; 30%</div>
+        <div data-c="MP2"><time>23:39:44</time><span class="tag MP2">MP2</span>Player01 paused</div>
+        <div data-c="MP2"><time>23:37:50</time><span class="tag MP2">MP2</span>Player01 LoadSource 'Paper Morning' (DemoStream), queue of 45</div>
+        <div data-c="REST"><time>23:37:38</time><span class="tag REST">REST</span>login 'admin' ok</div>
+        <div data-c="MP2"><time>23:36:54</time><span class="tag MP2">MP2</span>WsConnection3 opened from 127.0.0.1</div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<script>
+  function count() {
+    const on = [...document.querySelectorAll('.fault input')].filter(i => i.type === 'checkbox' ? i.checked : Number(i.value) > 0).length;
+    document.getElementById('faultPill').style.display = on ? '' : 'none';
+    document.getElementById('faultPill').textContent = on + ' fault' + (on > 1 ? 's' : '') + ' on';
+    document.getElementById('banner').style.display = on ? '' : 'none';
+  }
+  function resetAll() {
+    document.querySelectorAll('.fault input').forEach(i => i.type === 'checkbox' ? (i.checked = false) : (i.value = 0));
+    count();
+  }
+  document.querySelectorAll('.filters button').forEach(b => b.onclick = () => {
+    document.querySelectorAll('.filters button').forEach(x => x.classList.toggle('on', x === b));
+    document.querySelectorAll('#log div').forEach(d => d.style.display = b.dataset.f === 'ALL' || d.dataset.c === b.dataset.f ? '' : 'none');
+  });
+</script>
+</body>
+</html>

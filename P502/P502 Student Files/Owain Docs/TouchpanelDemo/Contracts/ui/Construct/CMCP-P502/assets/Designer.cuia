@@ -1,0 +1,22 @@
+{FileMetadata}
+Schema = "1.0.0.0"
+CreatedByAppHost = "2.901.21.0"
+Created = 2026-08-14 11:36:06.870619-07:00
+LastModifiedByAppHost = "2.901.21.0"
+Modified = 2026-08-14 11:36:06.870615-07:00
+CreatedByProjectApp = "1.4501.42.0"
+LastModifiedByProjectApp = "1.4501.42.0"
+MinimumProjectApp = ""
+MinimumAppHost = "2.901.0"
+
+{AssetAttributes}
+
+[Attributes]
+Id = "4116aa38-2402-4034-b4be-7061cf5d46dc"
+Name = "Designer"
+SourceUri = "Designer.png"
+AspectRatio = "1.5"
+AssetSourceType = "File"
+Username = ""
+Password = ""
+

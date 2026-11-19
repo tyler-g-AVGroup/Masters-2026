@@ -1,0 +1,6 @@
+.venv/
+__pycache__/
+*.pyc
+# Real device settings and keys stay local (config/config.example.json is the template)
+config/config.json
+*.pem

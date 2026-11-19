@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>CMCP_P502_InClassExercise</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Crestron.SimplSharp.SDK.Library" Version="2.22.40" />
+    <PackageReference Include="Crestron.SimplSharp.SDK.Program" Version="2.22.40" />
+    <PackageReference Include="Crestron.SimplSharp.SDK.ProgramLibrary" Version="2.22.40" />
+  </ItemGroup>
+
+</Project>

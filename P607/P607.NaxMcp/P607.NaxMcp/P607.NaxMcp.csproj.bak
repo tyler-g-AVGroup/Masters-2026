@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{89769641-304A-40CD-BC60-39E43A83AFB4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>P607.NaxMcp</RootNamespace>
+    <AssemblyName>P607.NaxMcp</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Crestron.SimplSharpPro.AudioDistribution, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1099c178b3b54c3b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Crestron.SimplSharp.SDK.ProgramLibrary.2.22.40\lib\net47\Crestron.SimplSharpPro.AudioDistribution.dll</HintPath>
+    </Reference>
+    <Reference Include="Crestron.SimplSharpPro.CrestronConnected, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1099c178b3b54c3b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Crestron.SimplSharp.SDK.ProgramLibrary.2.22.40\lib\net47\Crestron.SimplSharpPro.CrestronConnected.dll</HintPath>
+    </Reference>
+    <Reference Include="Crestron.SimplSharpPro.DeviceSupport, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1099c178b3b54c3b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Crestron.SimplSharp.SDK.ProgramLibrary.2.22.40\lib\net47\Crestron.SimplSharpPro.DeviceSupport.dll</HintPath>
+    </Reference>
+    <Reference Include="Crestron.SimplSharpPro.DM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1099c178b3b54c3b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Crestron.SimplSharp.SDK.ProgramLibrary.2.22.40\lib\net47\Crestron.SimplSharpPro.DM.dll</HintPath>
+    </Reference>
+    <Reference Include="Crestron.SimplSharpPro.EthernetCommunications, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1099c178b3b54c3b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Crestron.SimplSharp.SDK.ProgramLibrary.2.22.40\lib\net47\Crestron.SimplSharpPro.EthernetCommunications.dll</HintPath>
+    </Reference>
+    <Reference Include="Crestron.SimplSharpPro.Fusion, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1099c178b3b54c3b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Crestron.SimplSharp.SDK.ProgramLibrary.2.22.40\lib\net47\Crestron.SimplSharpPro.Fusion.dll</HintPath>
+    </Reference>
+    <Reference Include="Crestron.SimplSharpPro.Gateways, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1099c178b3b54c3b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Crestron.SimplSharp.SDK.ProgramLibrary.2.22.40\lib\net47\Crestron.SimplSharpPro.Gateways.dll</HintPath>
+    </Reference>
+    <Reference Include="Crestron.SimplSharpPro.GeneralIO, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1099c178b3b54c3b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Crestron.SimplSharp.SDK.ProgramLibrary.2.22.40\lib\net47\Crestron.SimplSharpPro.GeneralIO.dll</HintPath>
+    </Reference>
+    <Reference Include="Crestron.SimplSharpPro.Keypads, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1099c178b3b54c3b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Crestron.SimplSharp.SDK.ProgramLibrary.2.22.40\lib\net47\Crestron.SimplSharpPro.Keypads.dll</HintPath>
+    </Reference>
+    <Reference Include="Crestron.SimplSharpPro.Lighting, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1099c178b3b54c3b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Crestron.SimplSharp.SDK.ProgramLibrary.2.22.40\lib\net47\Crestron.SimplSharpPro.Lighting.dll</HintPath>
+    </Reference>
+    <Reference Include="Crestron.SimplSharpPro.Media, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1099c178b3b54c3b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Crestron.SimplSharp.SDK.ProgramLibrary.2.22.40\lib\net47\Crestron.SimplSharpPro.Media.dll</HintPath>
+    </Reference>
+    <Reference Include="Crestron.SimplSharpPro.Remotes, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1099c178b3b54c3b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Crestron.SimplSharp.SDK.ProgramLibrary.2.22.40\lib\net47\Crestron.SimplSharpPro.Remotes.dll</HintPath>
+    </Reference>
+    <Reference Include="Crestron.SimplSharpPro.Shades, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1099c178b3b54c3b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Crestron.SimplSharp.SDK.ProgramLibrary.2.22.40\lib\net47\Crestron.SimplSharpPro.Shades.dll</HintPath>
+    </Reference>
+    <Reference Include="Crestron.SimplSharpPro.Thermostats, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1099c178b3b54c3b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Crestron.SimplSharp.SDK.ProgramLibrary.2.22.40\lib\net47\Crestron.SimplSharpPro.Thermostats.dll</HintPath>
+    </Reference>
+    <Reference Include="Crestron.SimplSharpPro.ThreeSeriesCards, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1099c178b3b54c3b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Crestron.SimplSharp.SDK.ProgramLibrary.2.22.40\lib\net47\Crestron.SimplSharpPro.ThreeSeriesCards.dll</HintPath>
+    </Reference>
+    <Reference Include="Crestron.SimplSharpPro.UC, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1099c178b3b54c3b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Crestron.SimplSharp.SDK.ProgramLibrary.2.22.40\lib\net47\Crestron.SimplSharpPro.UC.dll</HintPath>
+    </Reference>
+    <Reference Include="Crestron.SimplSharpPro.UI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1099c178b3b54c3b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Crestron.SimplSharp.SDK.ProgramLibrary.2.22.40\lib\net47\Crestron.SimplSharpPro.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="SimplSharpAutoUpdateInterface, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1099c178b3b54c3b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Crestron.SimplSharp.SDK.Library.2.22.40\lib\net47\SimplSharpAutoUpdateInterface.dll</HintPath>
+    </Reference>
+    <Reference Include="SimplSharpCloudClientInterface, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1099c178b3b54c3b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Crestron.SimplSharp.SDK.Library.2.22.40\lib\net47\SimplSharpCloudClientInterface.dll</HintPath>
+    </Reference>
+    <Reference Include="SimplSharpCryptographyInterface, Version=1.0.6197.21123, Culture=neutral, PublicKeyToken=1099c178b3b54c3b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Crestron.SimplSharp.SDK.Library.2.22.40\lib\net47\SimplSharpCryptographyInterface.dll</HintPath>
+    </Reference>
+    <Reference Include="SimplSharpCustomAttributesInterface, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1099c178b3b54c3b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Crestron.SimplSharp.SDK.Library.2.22.40\lib\net47\SimplSharpCustomAttributesInterface.dll</HintPath>
+    </Reference>
+    <Reference Include="SimplSharpCWSHelperInterface, Version=2.0.0.0, Culture=neutral, PublicKeyToken=1099c178b3b54c3b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Crestron.SimplSharp.SDK.Library.2.22.40\lib\net47\SimplSharpCWSHelperInterface.dll</HintPath>
+    </Reference>
+    <Reference Include="SimplSharpExchangeWebServices, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1099c178b3b54c3b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Crestron.SimplSharp.SDK.Library.2.22.40\lib\net47\SimplSharpExchangeWebServices.dll</HintPath>
+    </Reference>
+    <Reference Include="SimplSharpHelperInterface, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1099c178b3b54c3b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Crestron.SimplSharp.SDK.Library.2.22.40\lib\net47\SimplSharpHelperInterface.dll</HintPath>
+    </Reference>
+    <Reference Include="SimplSharpNewtonsoft, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1099c178b3b54c3b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Crestron.SimplSharp.SDK.Library.2.22.40\lib\net47\SimplSharpNewtonsoft.dll</HintPath>
+    </Reference>
+    <Reference Include="SimplSharpOnvifInterface, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1099c178b3b54c3b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Crestron.SimplSharp.SDK.Library.2.22.40\lib\net47\SimplSharpOnvifInterface.dll</HintPath>
+    </Reference>
+    <Reference Include="SimplSharpPro, Version=1.5.3.17, Culture=neutral, PublicKeyToken=1099c178b3b54c3b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Crestron.SimplSharp.SDK.ProgramLibrary.2.22.40\lib\net47\SimplSharpPro.exe</HintPath>
+    </Reference>
+    <Reference Include="SimplSharpProgrammingInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1099c178b3b54c3b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Crestron.SimplSharp.SDK.Library.2.22.40\lib\net47\SimplSharpProgrammingInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="SimplSharpReflectionInterface, Version=1.0.5583.25238, Culture=neutral, PublicKeyToken=1099c178b3b54c3b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Crestron.SimplSharp.SDK.Library.2.22.40\lib\net47\SimplSharpReflectionInterface.dll</HintPath>
+    </Reference>
+    <Reference Include="SimplSharpSQLHelperInterface, Version=1.0.92.0, Culture=neutral, PublicKeyToken=1099c178b3b54c3b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Crestron.SimplSharp.SDK.Library.2.22.40\lib\net47\SimplSharpSQLHelperInterface.dll</HintPath>
+    </Reference>
+    <Reference Include="SimplSharpTimerEventInterface, Version=1.0.6197.20052, Culture=neutral, PublicKeyToken=1099c178b3b54c3b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Crestron.SimplSharp.SDK.Library.2.22.40\lib\net47\SimplSharpTimerEventInterface.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ControlSystem.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="config.json" />
+    <None Include="packages.config" />
+    <None Include="python\crestron\README.md" />
+    <None Include="python\lib\aiohappyeyeballs-2.4.4.dist-info\LICENSE" />
+    <None Include="python\lib\aiohappyeyeballs-2.4.4.dist-info\METADATA" />
+    <None Include="python\lib\aiohappyeyeballs-2.4.4.dist-info\RECORD" />
+    <None Include="python\lib\aiohappyeyeballs-2.4.4.dist-info\WHEEL" />
+    <None Include="python\lib\aiohappyeyeballs\py.typed" />
+    <None Include="python\lib\aiohttp-3.10.11.dist-info\METADATA" />
+    <None Include="python\lib\aiohttp-3.10.11.dist-info\RECORD" />
+    <None Include="python\lib\aiohttp-3.10.11.dist-info\WHEEL" />
+    <None Include="python\lib\aiohttp\.hash\hdrs.py.hash" />
+    <None Include="python\lib\aiohttp\.hash\_cparser.pxd.hash" />
+    <None Include="python\lib\aiohttp\.hash\_find_header.pxd.hash" />
+    <None Include="python\lib\aiohttp\.hash\_helpers.pyi.hash" />
+    <None Include="python\lib\aiohttp\.hash\_helpers.pyx.hash" />
+    <None Include="python\lib\aiohttp\.hash\_http_parser.pyx.hash" />
+    <None Include="python\lib\aiohttp\.hash\_http_writer.pyx.hash" />
+    <None Include="python\lib\aiohttp\.hash\_websocket.pyx.hash" />
+    <None Include="python\lib\aiohttp\py.typed" />
+    <None Include="python\lib\aiohttp\_cparser.pxd" />
+    <None Include="python\lib\aiohttp\_find_header.pxd" />
+    <None Include="python\lib\aiohttp\_headers.pxi" />
+    <None Include="python\lib\aiohttp\_helpers.pyi" />
+    <None Include="python\lib\aiohttp\_helpers.pyx" />
+    <None Include="python\lib\aiohttp\_http_parser.pyx" />
+    <None Include="python\lib\aiohttp\_http_writer.pyx" />
+    <None Include="python\lib\aiohttp\_websocket.pyx" />
+    <None Include="python\lib\aiosignal-1.3.1.dist-info\LICENSE" />
+    <None Include="python\lib\aiosignal-1.3.1.dist-info\METADATA" />
+    <None Include="python\lib\aiosignal-1.3.1.dist-info\RECORD" />
+    <None Include="python\lib\aiosignal-1.3.1.dist-info\WHEEL" />
+    <None Include="python\lib\aiosignal\py.typed" />
+    <None Include="python\lib\aiosignal\__init__.pyi" />
+    <None Include="python\lib\async_timeout-5.0.1.dist-info\LICENSE" />
+    <None Include="python\lib\async_timeout-5.0.1.dist-info\METADATA" />
+    <None Include="python\lib\async_timeout-5.0.1.dist-info\RECORD" />
+    <None Include="python\lib\async_timeout-5.0.1.dist-info\WHEEL" />
+    <None Include="python\lib\async_timeout-5.0.1.dist-info\zip-safe" />
+    <None Include="python\lib\async_timeout\py.typed" />
+    <None Include="python\lib\attrs-25.3.0.dist-info\licenses\LICENSE" />
+    <None Include="python\lib\attrs-25.3.0.dist-info\METADATA" />
+    <None Include="python\lib\attrs-25.3.0.dist-info\RECORD" />
+    <None Include="python\lib\attrs-25.3.0.dist-info\WHEEL" />
+    <None Include="python\lib\attrs\py.typed" />
+    <None Include="python\lib\attrs\__init__.pyi" />
+    <None Include="python\lib\attr\converters.pyi" />
+    <None Include="python\lib\attr\exceptions.pyi" />
+    <None Include="python\lib\attr\filters.pyi" />
+    <None Include="python\lib\attr\py.typed" />
+    <None Include="python\lib\attr\setters.pyi" />
+    <None Include="python\lib\attr\validators.pyi" />
+    <None Include="python\lib\attr\_cmp.pyi" />
+    <None Include="python\lib\attr\_typing_compat.pyi" />
+    <None Include="python\lib\attr\_version_info.pyi" />
+    <None Include="python\lib\attr\__init__.pyi" />
+    <None Include="python\lib\frozenlist-1.5.0.dist-info\LICENSE" />
+    <None Include="python\lib\frozenlist-1.5.0.dist-info\METADATA" />
+    <None Include="python\lib\frozenlist-1.5.0.dist-info\RECORD" />
+    <None Include="python\lib\frozenlist-1.5.0.dist-info\WHEEL" />
+    <None Include="python\lib\frozenlist\py.typed" />
+    <None Include="python\lib\frozenlist\_frozenlist.pyx" />
+    <None Include="python\lib\frozenlist\__init__.pyi" />
+    <None Include="python\lib\frozenlist\__pycache__\__init__.cpython-314.pyc" />
+    <None Include="python\lib\idna-3.15.dist-info\licenses\LICENSE.md" />
+    <None Include="python\lib\idna-3.15.dist-info\METADATA" />
+    <None Include="python\lib\idna-3.15.dist-info\RECORD" />
+    <None Include="python\lib\idna-3.15.dist-info\WHEEL" />
+    <None Include="python\lib\idna\py.typed" />
+    <None Include="python\lib\idna\__pycache__\core.cpython-314.pyc" />
+    <None Include="python\lib\idna\__pycache__\idnadata.cpython-314.pyc" />
+    <None Include="python\lib\idna\__pycache__\intranges.cpython-314.pyc" />
+    <None Include="python\lib\idna\__pycache__\package_data.cpython-314.pyc" />
+    <None Include="python\lib\idna\__pycache__\__init__.cpython-314.pyc" />
+    <None Include="python\lib\multidict-6.1.0.dist-info\LICENSE" />
+    <None Include="python\lib\multidict-6.1.0.dist-info\METADATA" />
+    <None Include="python\lib\multidict-6.1.0.dist-info\RECORD" />
+    <None Include="python\lib\multidict-6.1.0.dist-info\WHEEL" />
+    <None Include="python\lib\multidict\py.typed" />
+    <None Include="python\lib\multidict\__init__.pyi" />
+    <None Include="python\lib\multidict\__pycache__\_abc.cpython-314.pyc" />
+    <None Include="python\lib\multidict\__pycache__\_compat.cpython-314.pyc" />
+    <None Include="python\lib\multidict\__pycache__\_multidict_py.cpython-314.pyc" />
+    <None Include="python\lib\multidict\__pycache__\__init__.cpython-314.pyc" />
+    <None Include="python\lib\propcache-0.2.0.dist-info\LICENSE" />
+    <None Include="python\lib\propcache-0.2.0.dist-info\METADATA" />
+    <None Include="python\lib\propcache-0.2.0.dist-info\NOTICE" />
+    <None Include="python\lib\propcache-0.2.0.dist-info\RECORD" />
+    <None Include="python\lib\propcache-0.2.0.dist-info\WHEEL" />
+    <None Include="python\lib\propcache\py.typed" />
+    <None Include="python\lib\propcache\_helpers_c.pyx" />
+    <None Include="python\lib\propcache\__pycache__\api.cpython-314.pyc" />
+    <None Include="python\lib\propcache\__pycache__\_helpers.cpython-314.pyc" />
+    <None Include="python\lib\propcache\__pycache__\_helpers_py.cpython-314.pyc" />
+    <None Include="python\lib\propcache\__pycache__\__init__.cpython-314.pyc" />
+    <None Include="python\lib\typing_extensions-4.13.2.dist-info\licenses\LICENSE" />
+    <None Include="python\lib\typing_extensions-4.13.2.dist-info\METADATA" />
+    <None Include="python\lib\typing_extensions-4.13.2.dist-info\RECORD" />
+    <None Include="python\lib\typing_extensions-4.13.2.dist-info\WHEEL" />
+    <None Include="python\lib\websockets-13.1.dist-info\LICENSE" />
+    <None Include="python\lib\websockets-13.1.dist-info\METADATA" />
+    <None Include="python\lib\websockets-13.1.dist-info\RECORD" />
+    <None Include="python\lib\websockets-13.1.dist-info\WHEEL" />
+    <None Include="python\lib\websockets\py.typed" />
+    <None Include="python\lib\websockets\speedups.pyi" />
+    <None Include="python\lib\websockets\__pycache__\imports.cpython-314.pyc" />
+    <None Include="python\lib\websockets\__pycache__\version.cpython-314.pyc" />
+    <None Include="python\lib\websockets\__pycache__\__init__.cpython-314.pyc" />
+    <None Include="python\lib\yarl-1.15.2.dist-info\LICENSE" />
+    <None Include="python\lib\yarl-1.15.2.dist-info\METADATA" />
+    <None Include="python\lib\yarl-1.15.2.dist-info\NOTICE" />
+    <None Include="python\lib\yarl-1.15.2.dist-info\RECORD" />
+    <None Include="python\lib\yarl-1.15.2.dist-info\WHEEL" />
+    <None Include="python\lib\yarl\py.typed" />
+    <None Include="python\lib\yarl\_quoting_c.pyi" />
+    <None Include="python\lib\yarl\_quoting_c.pyx" />
+    <None Include="python\lib\yarl\__pycache__\_quoting.cpython-314.pyc" />
+    <None Include="python\lib\yarl\__pycache__\_quoting_py.cpython-314.pyc" />
+    <None Include="python\lib\yarl\__pycache__\_url.cpython-314.pyc" />
+    <None Include="python\lib\yarl\__pycache__\__init__.cpython-314.pyc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="python\cbridge.py" />
+    <Content Include="python\crestron\config.py" />
+    <Content Include="python\crestron\console.py" />
+    <Content Include="python\crestron\controller.py" />
+    <Content Include="python\crestron\device.py" />
+    <Content Include="python\crestron\errors.py" />
+    <Content Include="python\crestron\mp2.py" />
+    <Content Include="python\crestron\rest.py" />
+    <Content Include="python\crestron\state.py" />
+    <Content Include="python\crestron\workflow.py" />
+    <Content Include="python\crestron\__init__.py" />
+    <Content Include="python\lib\aiohappyeyeballs\impl.py" />
+    <Content Include="python\lib\aiohappyeyeballs\types.py" />
+    <Content Include="python\lib\aiohappyeyeballs\utils.py" />
+    <Content Include="python\lib\aiohappyeyeballs\_staggered.py" />
+    <Content Include="python\lib\aiohappyeyeballs\__init__.py" />
+    <Content Include="python\lib\aiohttp-3.10.11.dist-info\LICENSE.txt" />
+    <Content Include="python\lib\aiohttp-3.10.11.dist-info\top_level.txt" />
+    <Content Include="python\lib\aiohttp\abc.py" />
+    <Content Include="python\lib\aiohttp\base_protocol.py" />
+    <Content Include="python\lib\aiohttp\client.py" />
+    <Content Include="python\lib\aiohttp\client_exceptions.py" />
+    <Content Include="python\lib\aiohttp\client_proto.py" />
+    <Content Include="python\lib\aiohttp\client_reqrep.py" />
+    <Content Include="python\lib\aiohttp\client_ws.py" />
+    <Content Include="python\lib\aiohttp\compression_utils.py" />
+    <Content Include="python\lib\aiohttp\connector.py" />
+    <Content Include="python\lib\aiohttp\cookiejar.py" />
+    <Content Include="python\lib\aiohttp\formdata.py" />
+    <Content Include="python\lib\aiohttp\hdrs.py" />
+    <Content Include="python\lib\aiohttp\helpers.py" />
+    <Content Include="python\lib\aiohttp\http.py" />
+    <Content Include="python\lib\aiohttp\http_exceptions.py" />
+    <Content Include="python\lib\aiohttp\http_parser.py" />
+    <Content Include="python\lib\aiohttp\http_websocket.py" />
+    <Content Include="python\lib\aiohttp\http_writer.py" />
+    <Content Include="python\lib\aiohttp\log.py" />
+    <Content Include="python\lib\aiohttp\multipart.py" />
+    <Content Include="python\lib\aiohttp\payload.py" />
+    <Content Include="python\lib\aiohttp\payload_streamer.py" />
+    <Content Include="python\lib\aiohttp\pytest_plugin.py" />
+    <Content Include="python\lib\aiohttp\resolver.py" />
+    <Content Include="python\lib\aiohttp\streams.py" />
+    <Content Include="python\lib\aiohttp\tcp_helpers.py" />
+    <Content Include="python\lib\aiohttp\test_utils.py" />
+    <Content Include="python\lib\aiohttp\tracing.py" />
+    <Content Include="python\lib\aiohttp\typedefs.py" />
+    <Content Include="python\lib\aiohttp\web.py" />
+    <Content Include="python\lib\aiohttp\web_app.py" />
+    <Content Include="python\lib\aiohttp\web_exceptions.py" />
+    <Content Include="python\lib\aiohttp\web_fileresponse.py" />
+    <Content Include="python\lib\aiohttp\web_log.py" />
+    <Content Include="python\lib\aiohttp\web_middlewares.py" />
+    <Content Include="python\lib\aiohttp\web_protocol.py" />
+    <Content Include="python\lib\aiohttp\web_request.py" />
+    <Content Include="python\lib\aiohttp\web_response.py" />
+    <Content Include="python\lib\aiohttp\web_routedef.py" />
+    <Content Include="python\lib\aiohttp\web_runner.py" />
+    <Content Include="python\lib\aiohttp\web_server.py" />
+    <Content Include="python\lib\aiohttp\web_urldispatcher.py" />
+    <Content Include="python\lib\aiohttp\web_ws.py" />
+    <Content Include="python\lib\aiohttp\worker.py" />
+    <Content Include="python\lib\aiohttp\__init__.py" />
+    <Content Include="python\lib\aiosignal-1.3.1.dist-info\top_level.txt" />
+    <Content Include="python\lib\aiosignal\__init__.py" />
+    <Content Include="python\lib\async_timeout-5.0.1.dist-info\top_level.txt" />
+    <Content Include="python\lib\async_timeout\__init__.py" />
+    <Content Include="python\lib\attrs\converters.py" />
+    <Content Include="python\lib\attrs\exceptions.py" />
+    <Content Include="python\lib\attrs\filters.py" />
+    <Content Include="python\lib\attrs\setters.py" />
+    <Content Include="python\lib\attrs\validators.py" />
+    <Content Include="python\lib\attrs\__init__.py" />
+    <Content Include="python\lib\attr\converters.py" />
+    <Content Include="python\lib\attr\exceptions.py" />
+    <Content Include="python\lib\attr\filters.py" />
+    <Content Include="python\lib\attr\setters.py" />
+    <Content Include="python\lib\attr\validators.py" />
+    <Content Include="python\lib\attr\_cmp.py" />
+    <Content Include="python\lib\attr\_compat.py" />
+    <Content Include="python\lib\attr\_config.py" />
+    <Content Include="python\lib\attr\_funcs.py" />
+    <Content Include="python\lib\attr\_make.py" />
+    <Content Include="python\lib\attr\_next_gen.py" />
+    <Content Include="python\lib\attr\_version_info.py" />
+    <Content Include="python\lib\attr\__init__.py" />
+    <Content Include="python\lib\frozenlist-1.5.0.dist-info\top_level.txt" />
+    <Content Include="python\lib\frozenlist\__init__.py" />
+    <Content Include="python\lib\idna\codec.py" />
+    <Content Include="python\lib\idna\compat.py" />
+    <Content Include="python\lib\idna\core.py" />
+    <Content Include="python\lib\idna\idnadata.py" />
+    <Content Include="python\lib\idna\intranges.py" />
+    <Content Include="python\lib\idna\package_data.py" />
+    <Content Include="python\lib\idna\uts46data.py" />
+    <Content Include="python\lib\idna\__init__.py" />
+    <Content Include="python\lib\multidict-6.1.0.dist-info\top_level.txt" />
+    <Content Include="python\lib\multidict\_abc.py" />
+    <Content Include="python\lib\multidict\_compat.py" />
+    <Content Include="python\lib\multidict\_multidict_base.py" />
+    <Content Include="python\lib\multidict\_multidict_py.py" />
+    <Content Include="python\lib\multidict\__init__.py" />
+    <Content Include="python\lib\propcache-0.2.0.dist-info\top_level.txt" />
+    <Content Include="python\lib\propcache\api.py" />
+    <Content Include="python\lib\propcache\_helpers.py" />
+    <Content Include="python\lib\propcache\_helpers_py.py" />
+    <Content Include="python\lib\propcache\__init__.py" />
+    <Content Include="python\lib\typing_extensions.py" />
+    <Content Include="python\lib\websockets-13.1.dist-info\top_level.txt" />
+    <Content Include="python\lib\websockets\asyncio\async_timeout.py" />
+    <Content Include="python\lib\websockets\asyncio\client.py" />
+    <Content Include="python\lib\websockets\asyncio\compatibility.py" />
+    <Content Include="python\lib\websockets\asyncio\connection.py" />
+    <Content Include="python\lib\websockets\asyncio\messages.py" />
+    <Content Include="python\lib\websockets\asyncio\server.py" />
+    <Content Include="python\lib\websockets\asyncio\__init__.py" />
+    <Content Include="python\lib\websockets\auth.py" />
+    <Content Include="python\lib\websockets\client.py" />
+    <Content Include="python\lib\websockets\connection.py" />
+    <Content Include="python\lib\websockets\datastructures.py" />
+    <Content Include="python\lib\websockets\exceptions.py" />
+    <Content Include="python\lib\websockets\extensions\base.py" />
+    <Content Include="python\lib\websockets\extensions\permessage_deflate.py" />
+    <Content Include="python\lib\websockets\extensions\__init__.py" />
+    <Content Include="python\lib\websockets\frames.py" />
+    <Content Include="python\lib\websockets\headers.py" />
+    <Content Include="python\lib\websockets\http.py" />
+    <Content Include="python\lib\websockets\http11.py" />
+    <Content Include="python\lib\websockets\imports.py" />
+    <Content Include="python\lib\websockets\legacy\auth.py" />
+    <Content Include="python\lib\websockets\legacy\client.py" />
+    <Content Include="python\lib\websockets\legacy\exceptions.py" />
+    <Content Include="python\lib\websockets\legacy\framing.py" />
+    <Content Include="python\lib\websockets\legacy\handshake.py" />
+    <Content Include="python\lib\websockets\legacy\http.py" />
+    <Content Include="python\lib\websockets\legacy\protocol.py" />
+    <Content Include="python\lib\websockets\legacy\server.py" />
+    <Content Include="python\lib\websockets\legacy\__init__.py" />
+    <Content Include="python\lib\websockets\protocol.py" />
+    <Content Include="python\lib\websockets\server.py" />
+    <Content Include="python\lib\websockets\speedups.c" />
+    <Content Include="python\lib\websockets\streams.py" />
+    <Content Include="python\lib\websockets\sync\client.py" />
+    <Content Include="python\lib\websockets\sync\connection.py" />
+    <Content Include="python\lib\websockets\sync\messages.py" />
+    <Content Include="python\lib\websockets\sync\server.py" />
+    <Content Include="python\lib\websockets\sync\utils.py" />
+    <Content Include="python\lib\websockets\sync\__init__.py" />
+    <Content Include="python\lib\websockets\typing.py" />
+    <Content Include="python\lib\websockets\uri.py" />
+    <Content Include="python\lib\websockets\utils.py" />
+    <Content Include="python\lib\websockets\version.py" />
+    <Content Include="python\lib\websockets\__init__.py" />
+    <Content Include="python\lib\websockets\__main__.py" />
+    <Content Include="python\lib\yarl-1.15.2.dist-info\top_level.txt" />
+    <Content Include="python\lib\yarl\_quoting.py" />
+    <Content Include="python\lib\yarl\_quoting_py.py" />
+    <Content Include="python\lib\yarl\_url.py" />
+    <Content Include="python\lib\yarl\__init__.py" />
+    <Content Include="python\protocol.py" />
+    <Content Include="python\runtime.py" />
+    <Content Include="python\server.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="python\lib\aiohttp.libs\" />
+    <Folder Include="python\lib\multidict.libs\" />
+    <Folder Include="python\lib\websockets.libs\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\Crestron.SimplSharp.SDK.Library.2.22.40\build\Crestron.SimplSharp.SDK.Library.targets" Condition="Exists('..\packages\Crestron.SimplSharp.SDK.Library.2.22.40\build\Crestron.SimplSharp.SDK.Library.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Crestron.SimplSharp.SDK.Library.2.22.40\build\Crestron.SimplSharp.SDK.Library.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Crestron.SimplSharp.SDK.Library.2.22.40\build\Crestron.SimplSharp.SDK.Library.targets'))" />
+    <Error Condition="!Exists('..\packages\Crestron.SimplSharp.SDK.ProgramLibrary.2.22.40\build\Crestron.SimplSharp.SDK.ProgramLibrary.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Crestron.SimplSharp.SDK.ProgramLibrary.2.22.40\build\Crestron.SimplSharp.SDK.ProgramLibrary.targets'))" />
+    <Error Condition="!Exists('..\packages\Crestron.SimplSharp.SDK.Program.2.22.40\build\Crestron.SimplSharp.SDK.Program.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Crestron.SimplSharp.SDK.Program.2.22.40\build\Crestron.SimplSharp.SDK.Program.targets'))" />
+  </Target>
+  <Import Project="..\packages\Crestron.SimplSharp.SDK.ProgramLibrary.2.22.40\build\Crestron.SimplSharp.SDK.ProgramLibrary.targets" Condition="Exists('..\packages\Crestron.SimplSharp.SDK.ProgramLibrary.2.22.40\build\Crestron.SimplSharp.SDK.ProgramLibrary.targets')" />
+  <Import Project="..\packages\Crestron.SimplSharp.SDK.Program.2.22.40\build\Crestron.SimplSharp.SDK.Program.targets" Condition="Exists('..\packages\Crestron.SimplSharp.SDK.Program.2.22.40\build\Crestron.SimplSharp.SDK.Program.targets')" />
+</Project>

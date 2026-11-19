@@ -1,0 +1,83 @@
+C:\Users\dave\Development\Masters\Masters2026-CMCP-P502\InClassStudentExercise\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\SimplSharpPro.deps.json
+C:\Users\dave\Development\Masters\Masters2026-CMCP-P502\InClassStudentExercise\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\SimplSharpPro.runtimeconfig.json
+C:\Users\dave\Development\Masters\Masters2026-CMCP-P502\InClassStudentExercise\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\CMCP-P502_InClassExercise.deps.json
+C:\Users\dave\Development\Masters\Masters2026-CMCP-P502\InClassStudentExercise\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\CMCP-P502_InClassExercise.dll
+C:\Users\dave\Development\Masters\Masters2026-CMCP-P502\InClassStudentExercise\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\CMCP-P502_InClassExercise.pdb
+C:\Users\dave\Development\Masters\Masters2026-CMCP-P502\InClassStudentExercise\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\SimplSharpAutoUpdateInterface.dll
+C:\Users\dave\Development\Masters\Masters2026-CMCP-P502\InClassStudentExercise\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\SimplSharpCWSHelperInterface.dll
+C:\Users\dave\Development\Masters\Masters2026-CMCP-P502\InClassStudentExercise\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\SimplSharpCloudClientInterface.dll
+C:\Users\dave\Development\Masters\Masters2026-CMCP-P502\InClassStudentExercise\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\SimplSharpCryptographyInterface.dll
+C:\Users\dave\Development\Masters\Masters2026-CMCP-P502\InClassStudentExercise\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\SimplSharpCustomAttributesInterface.dll
+C:\Users\dave\Development\Masters\Masters2026-CMCP-P502\InClassStudentExercise\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\SimplSharpHelperInterface.dll
+C:\Users\dave\Development\Masters\Masters2026-CMCP-P502\InClassStudentExercise\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\SimplSharpOnvifInterface.dll
+C:\Users\dave\Development\Masters\Masters2026-CMCP-P502\InClassStudentExercise\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\SimplSharpProgrammingInterfaces.dll
+C:\Users\dave\Development\Masters\Masters2026-CMCP-P502\InClassStudentExercise\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\SimplSharpSQLHelperInterface.dll
+C:\Users\dave\Development\Masters\Masters2026-CMCP-P502\InClassStudentExercise\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\SimplSharpTimerEventInterface.dll
+C:\Users\dave\Development\Masters\Masters2026-CMCP-P502\InClassStudentExercise\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\Crestron.SimplSharpPro.AudioDistribution.dll
+C:\Users\dave\Development\Masters\Masters2026-CMCP-P502\InClassStudentExercise\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\Crestron.SimplSharpPro.CrestronConnected.dll
+C:\Users\dave\Development\Masters\Masters2026-CMCP-P502\InClassStudentExercise\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\Crestron.SimplSharpPro.DM.dll
+C:\Users\dave\Development\Masters\Masters2026-CMCP-P502\InClassStudentExercise\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\Crestron.SimplSharpPro.DeviceSupport.dll
+C:\Users\dave\Development\Masters\Masters2026-CMCP-P502\InClassStudentExercise\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\Crestron.SimplSharpPro.EthernetCommunications.dll
+C:\Users\dave\Development\Masters\Masters2026-CMCP-P502\InClassStudentExercise\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\Crestron.SimplSharpPro.Fusion.dll
+C:\Users\dave\Development\Masters\Masters2026-CMCP-P502\InClassStudentExercise\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\Crestron.SimplSharpPro.Gateways.dll
+C:\Users\dave\Development\Masters\Masters2026-CMCP-P502\InClassStudentExercise\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\Crestron.SimplSharpPro.GeneralIO.dll
+C:\Users\dave\Development\Masters\Masters2026-CMCP-P502\InClassStudentExercise\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\Crestron.SimplSharpPro.Keypads.dll
+C:\Users\dave\Development\Masters\Masters2026-CMCP-P502\InClassStudentExercise\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\Crestron.SimplSharpPro.Lighting.dll
+C:\Users\dave\Development\Masters\Masters2026-CMCP-P502\InClassStudentExercise\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\Crestron.SimplSharpPro.Media.dll
+C:\Users\dave\Development\Masters\Masters2026-CMCP-P502\InClassStudentExercise\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\Crestron.SimplSharpPro.Remotes.dll
+C:\Users\dave\Development\Masters\Masters2026-CMCP-P502\InClassStudentExercise\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\Crestron.SimplSharpPro.Shades.dll
+C:\Users\dave\Development\Masters\Masters2026-CMCP-P502\InClassStudentExercise\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\Crestron.SimplSharpPro.Thermostats.dll
+C:\Users\dave\Development\Masters\Masters2026-CMCP-P502\InClassStudentExercise\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\Crestron.SimplSharpPro.ThreeSeriesCards.dll
+C:\Users\dave\Development\Masters\Masters2026-CMCP-P502\InClassStudentExercise\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\Crestron.SimplSharpPro.UC.dll
+C:\Users\dave\Development\Masters\Masters2026-CMCP-P502\InClassStudentExercise\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\Crestron.SimplSharpPro.UI.dll
+C:\Users\dave\Development\Masters\Masters2026-CMCP-P502\InClassStudentExercise\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\SimplSharpPro.dll
+C:\Users\dave\Development\Masters\Masters2026-CMCP-P502\InClassStudentExercise\CMCP-P502 InClass\CMCP-P502_InClassExercise\obj\Debug\net8.0\CMCP-P502_InClassExercise.csproj.AssemblyReference.cache
+C:\Users\dave\Development\Masters\Masters2026-CMCP-P502\InClassStudentExercise\CMCP-P502 InClass\CMCP-P502_InClassExercise\obj\Debug\net8.0\CMCP-P502_InClassExercise.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\dave\Development\Masters\Masters2026-CMCP-P502\InClassStudentExercise\CMCP-P502 InClass\CMCP-P502_InClassExercise\obj\Debug\net8.0\CMCP-P502_InClassExercise.AssemblyInfoInputs.cache
+C:\Users\dave\Development\Masters\Masters2026-CMCP-P502\InClassStudentExercise\CMCP-P502 InClass\CMCP-P502_InClassExercise\obj\Debug\net8.0\CMCP-P502_InClassExercise.AssemblyInfo.cs
+C:\Users\dave\Development\Masters\Masters2026-CMCP-P502\InClassStudentExercise\CMCP-P502 InClass\CMCP-P502_InClassExercise\obj\Debug\net8.0\CMCP-P502_InClassExercise.csproj.CoreCompileInputs.cache
+C:\Users\dave\Development\Masters\Masters2026-CMCP-P502\InClassStudentExercise\CMCP-P502 InClass\CMCP-P502_InClassExercise\obj\Debug\net8.0\CMCP-P502_InClassExercise.sourcelink.json
+C:\Users\dave\Development\Masters\Masters2026-CMCP-P502\InClassStudentExercise\CMCP-P502 InClass\CMCP-P502_InClassExercise\obj\Debug\net8.0\CMCP-P50.66DF6483.Up2Date
+C:\Users\dave\Development\Masters\Masters2026-CMCP-P502\InClassStudentExercise\CMCP-P502 InClass\CMCP-P502_InClassExercise\obj\Debug\net8.0\CMCP-P502_InClassExercise.dll
+C:\Users\dave\Development\Masters\Masters2026-CMCP-P502\InClassStudentExercise\CMCP-P502 InClass\CMCP-P502_InClassExercise\obj\Debug\net8.0\CMCP-P502_InClassExercise.pdb
+C:\GIT\Masters-2026\P502\P502 Student Files\David Docs\CMCP-P502 InClassExercises\CMCP-P502 InClassExercises\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\SimplSharpPro.deps.json
+C:\GIT\Masters-2026\P502\P502 Student Files\David Docs\CMCP-P502 InClassExercises\CMCP-P502 InClassExercises\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\SimplSharpPro.runtimeconfig.json
+C:\GIT\Masters-2026\P502\P502 Student Files\David Docs\CMCP-P502 InClassExercises\CMCP-P502 InClassExercises\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\CMCP-P502_InClassExercise.deps.json
+C:\GIT\Masters-2026\P502\P502 Student Files\David Docs\CMCP-P502 InClassExercises\CMCP-P502 InClassExercises\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\CMCP-P502_InClassExercise.dll
+C:\GIT\Masters-2026\P502\P502 Student Files\David Docs\CMCP-P502 InClassExercises\CMCP-P502 InClassExercises\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\CMCP-P502_InClassExercise.pdb
+C:\GIT\Masters-2026\P502\P502 Student Files\David Docs\CMCP-P502 InClassExercises\CMCP-P502 InClassExercises\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\SimplSharpAutoUpdateInterface.dll
+C:\GIT\Masters-2026\P502\P502 Student Files\David Docs\CMCP-P502 InClassExercises\CMCP-P502 InClassExercises\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\SimplSharpCWSHelperInterface.dll
+C:\GIT\Masters-2026\P502\P502 Student Files\David Docs\CMCP-P502 InClassExercises\CMCP-P502 InClassExercises\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\SimplSharpCloudClientInterface.dll
+C:\GIT\Masters-2026\P502\P502 Student Files\David Docs\CMCP-P502 InClassExercises\CMCP-P502 InClassExercises\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\SimplSharpCryptographyInterface.dll
+C:\GIT\Masters-2026\P502\P502 Student Files\David Docs\CMCP-P502 InClassExercises\CMCP-P502 InClassExercises\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\SimplSharpCustomAttributesInterface.dll
+C:\GIT\Masters-2026\P502\P502 Student Files\David Docs\CMCP-P502 InClassExercises\CMCP-P502 InClassExercises\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\SimplSharpHelperInterface.dll
+C:\GIT\Masters-2026\P502\P502 Student Files\David Docs\CMCP-P502 InClassExercises\CMCP-P502 InClassExercises\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\SimplSharpOnvifInterface.dll
+C:\GIT\Masters-2026\P502\P502 Student Files\David Docs\CMCP-P502 InClassExercises\CMCP-P502 InClassExercises\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\SimplSharpProgrammingInterfaces.dll
+C:\GIT\Masters-2026\P502\P502 Student Files\David Docs\CMCP-P502 InClassExercises\CMCP-P502 InClassExercises\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\SimplSharpSQLHelperInterface.dll
+C:\GIT\Masters-2026\P502\P502 Student Files\David Docs\CMCP-P502 InClassExercises\CMCP-P502 InClassExercises\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\SimplSharpTimerEventInterface.dll
+C:\GIT\Masters-2026\P502\P502 Student Files\David Docs\CMCP-P502 InClassExercises\CMCP-P502 InClassExercises\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\Crestron.SimplSharpPro.AudioDistribution.dll
+C:\GIT\Masters-2026\P502\P502 Student Files\David Docs\CMCP-P502 InClassExercises\CMCP-P502 InClassExercises\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\Crestron.SimplSharpPro.CrestronConnected.dll
+C:\GIT\Masters-2026\P502\P502 Student Files\David Docs\CMCP-P502 InClassExercises\CMCP-P502 InClassExercises\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\Crestron.SimplSharpPro.DM.dll
+C:\GIT\Masters-2026\P502\P502 Student Files\David Docs\CMCP-P502 InClassExercises\CMCP-P502 InClassExercises\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\Crestron.SimplSharpPro.DeviceSupport.dll
+C:\GIT\Masters-2026\P502\P502 Student Files\David Docs\CMCP-P502 InClassExercises\CMCP-P502 InClassExercises\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\Crestron.SimplSharpPro.EthernetCommunications.dll
+C:\GIT\Masters-2026\P502\P502 Student Files\David Docs\CMCP-P502 InClassExercises\CMCP-P502 InClassExercises\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\Crestron.SimplSharpPro.Fusion.dll
+C:\GIT\Masters-2026\P502\P502 Student Files\David Docs\CMCP-P502 InClassExercises\CMCP-P502 InClassExercises\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\Crestron.SimplSharpPro.Gateways.dll
+C:\GIT\Masters-2026\P502\P502 Student Files\David Docs\CMCP-P502 InClassExercises\CMCP-P502 InClassExercises\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\Crestron.SimplSharpPro.GeneralIO.dll
+C:\GIT\Masters-2026\P502\P502 Student Files\David Docs\CMCP-P502 InClassExercises\CMCP-P502 InClassExercises\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\Crestron.SimplSharpPro.Keypads.dll
+C:\GIT\Masters-2026\P502\P502 Student Files\David Docs\CMCP-P502 InClassExercises\CMCP-P502 InClassExercises\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\Crestron.SimplSharpPro.Lighting.dll
+C:\GIT\Masters-2026\P502\P502 Student Files\David Docs\CMCP-P502 InClassExercises\CMCP-P502 InClassExercises\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\Crestron.SimplSharpPro.Media.dll
+C:\GIT\Masters-2026\P502\P502 Student Files\David Docs\CMCP-P502 InClassExercises\CMCP-P502 InClassExercises\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\Crestron.SimplSharpPro.Remotes.dll
+C:\GIT\Masters-2026\P502\P502 Student Files\David Docs\CMCP-P502 InClassExercises\CMCP-P502 InClassExercises\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\Crestron.SimplSharpPro.Shades.dll
+C:\GIT\Masters-2026\P502\P502 Student Files\David Docs\CMCP-P502 InClassExercises\CMCP-P502 InClassExercises\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\Crestron.SimplSharpPro.Thermostats.dll
+C:\GIT\Masters-2026\P502\P502 Student Files\David Docs\CMCP-P502 InClassExercises\CMCP-P502 InClassExercises\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\Crestron.SimplSharpPro.ThreeSeriesCards.dll
+C:\GIT\Masters-2026\P502\P502 Student Files\David Docs\CMCP-P502 InClassExercises\CMCP-P502 InClassExercises\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\Crestron.SimplSharpPro.UC.dll
+C:\GIT\Masters-2026\P502\P502 Student Files\David Docs\CMCP-P502 InClassExercises\CMCP-P502 InClassExercises\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\Crestron.SimplSharpPro.UI.dll
+C:\GIT\Masters-2026\P502\P502 Student Files\David Docs\CMCP-P502 InClassExercises\CMCP-P502 InClassExercises\CMCP-P502 InClass\CMCP-P502_InClassExercise\bin\Debug\net8.0\SimplSharpPro.dll
+C:\GIT\Masters-2026\P502\P502 Student Files\David Docs\CMCP-P502 InClassExercises\CMCP-P502 InClassExercises\CMCP-P502 InClass\CMCP-P502_InClassExercise\obj\Debug\net8.0\CMCP-P502_InClassExercise.csproj.AssemblyReference.cache
+C:\GIT\Masters-2026\P502\P502 Student Files\David Docs\CMCP-P502 InClassExercises\CMCP-P502 InClassExercises\CMCP-P502 InClass\CMCP-P502_InClassExercise\obj\Debug\net8.0\CMCP-P502_InClassExercise.GeneratedMSBuildEditorConfig.editorconfig
+C:\GIT\Masters-2026\P502\P502 Student Files\David Docs\CMCP-P502 InClassExercises\CMCP-P502 InClassExercises\CMCP-P502 InClass\CMCP-P502_InClassExercise\obj\Debug\net8.0\CMCP-P502_InClassExercise.AssemblyInfoInputs.cache
+C:\GIT\Masters-2026\P502\P502 Student Files\David Docs\CMCP-P502 InClassExercises\CMCP-P502 InClassExercises\CMCP-P502 InClass\CMCP-P502_InClassExercise\obj\Debug\net8.0\CMCP-P502_InClassExercise.AssemblyInfo.cs
+C:\GIT\Masters-2026\P502\P502 Student Files\David Docs\CMCP-P502 InClassExercises\CMCP-P502 InClassExercises\CMCP-P502 InClass\CMCP-P502_InClassExercise\obj\Debug\net8.0\CMCP-P502_InClassExercise.csproj.CoreCompileInputs.cache
+C:\GIT\Masters-2026\P502\P502 Student Files\David Docs\CMCP-P502 InClassExercises\CMCP-P502 InClassExercises\CMCP-P502 InClass\CMCP-P502_InClassExercise\obj\Debug\net8.0\CMCP-P50.66DF6483.Up2Date
+C:\GIT\Masters-2026\P502\P502 Student Files\David Docs\CMCP-P502 InClassExercises\CMCP-P502 InClassExercises\CMCP-P502 InClass\CMCP-P502_InClassExercise\obj\Debug\net8.0\CMCP-P502_InClassExercise.dll
+C:\GIT\Masters-2026\P502\P502 Student Files\David Docs\CMCP-P502 InClassExercises\CMCP-P502 InClassExercises\CMCP-P502 InClass\CMCP-P502_InClassExercise\obj\Debug\net8.0\CMCP-P502_InClassExercise.pdb

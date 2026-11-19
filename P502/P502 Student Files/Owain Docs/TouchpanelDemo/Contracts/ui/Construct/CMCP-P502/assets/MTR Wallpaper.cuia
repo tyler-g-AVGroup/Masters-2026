@@ -1,0 +1,22 @@
+{FileMetadata}
+Schema = "1.0.0.0"
+CreatedByAppHost = "2.901.21.0"
+Created = 2026-08-14 11:36:06.885359-07:00
+LastModifiedByAppHost = "2.901.21.0"
+Modified = 2026-08-14 11:36:06.885353-07:00
+CreatedByProjectApp = "1.4501.42.0"
+LastModifiedByProjectApp = "1.4501.42.0"
+MinimumProjectApp = ""
+MinimumAppHost = "2.901.0"
+
+{AssetAttributes}
+
+[Attributes]
+Id = "978d7cb7-7f29-4d14-addb-f52506f4762d"
+Name = "MTR Wallpaper"
+SourceUri = "MTR Wallpaper.png"
+AspectRatio = "1.5"
+AssetSourceType = "File"
+Username = ""
+Password = ""
+
